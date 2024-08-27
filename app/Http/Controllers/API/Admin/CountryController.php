@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class CountryController extends Controller
 {
@@ -17,18 +18,29 @@ class CountryController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:countries,slug',
             'status' => 'required|integer',
         ]);
 
-        // Generate slug if not provided
-        if (empty($validatedData['slug'])) {
-            $validatedData['slug'] = Str::slug($validatedData['name']);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $validator->errors()
+            ], 422);
         }
 
-        $country = Country::create($validatedData);
+        // Ensure slug is generated if not provided
+        $slug = $request->input('slug') ?: Str::slug($request->input('name'));
+
+        // Create and save the new country
+        $country = Country::create([
+            'name' => $request->input('name'),
+            'slug' => $slug,
+            'status' => $request->input('status') ? 1 : 0,
+        ]);
+
         return response()->json($country, 201);
     }
 
@@ -41,18 +53,19 @@ class CountryController extends Controller
     public function update(Request $request, $id)
     {
         $country = Country::findOrFail($id);
-    
+
         $validatedData = $request->validate([
             'name' => 'sometimes|required|string|max:255',
             'slug' => 'sometimes|nullable|string|max:255|unique:countries,slug,' . $country->id,
             'status' => 'sometimes|required|integer',
         ]);
-    
+
         // Generate slug if not provided
         if (empty($validatedData['slug']) && isset($validatedData['name'])) {
             $validatedData['slug'] = Str::slug($validatedData['name']);
         }
-    
+
+        // Update the country with the validated data
         $country->update($validatedData);
         return response()->json($country);
     }

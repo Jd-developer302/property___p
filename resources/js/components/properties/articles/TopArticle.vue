@@ -1,50 +1,44 @@
 <template>
-    <div class="widget-boxed-header">
-      <h4>Top Articles</h4>
+  <div class="widget-boxed-header">
+    <h4>Top Articles</h4>
+  </div>
+  <div class="widget-boxed-body">
+    <div class="side-list">
+      <ul id="topArticles" class="category-list top-articles">
+        <li v-for="article in topArticles" :key="article.slug">
+          <i class="fa fa-arrow-right mr-2"></i>
+          <a :href="`/news-articles/${article.slug}`">{{ article.title }}</a>
+        </li>
+      </ul>
     </div>
-    <div class="widget-boxed-body">
-      <div class="side-list">
-        <ul id="TopArticles" class="category-list top-articles">
-          <li v-for="article in topArticles" :key="article.slug">
-            <i class="fa fa-arrow-right mr-2"></i>
-            <a :href="`/news-articles/${article.slug}`">{{ article.title }}</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        topArticles: []
-      };
-    },
-    mounted() {
-      this.fetchTopArticles();
-    },
-    methods: {
-      fetchTopArticles() {
-        fetch('/api/articles/top')
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(data => {
-            console.log('Fetched top articles:', data); // Debugging
-            this.topArticles = data;
-          })
-          .catch(error => {
-            console.error('Error fetching top articles:', error);
-          });
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      topArticles: []
+    };
+  },
+  mounted() {
+    this.fetchtopArticles();
+  },
+  methods: {
+    async fetchtopArticles() {
+      try {
+        const response = await fetch('/api/articles/top');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        this.topArticles = await response.json();
+      } catch (error) {
+        console.error('Error fetching top articles:', error);
       }
     }
-  };
-  </script>
-  
+  }
+};
+</script>  
   <style scoped>
   .form-group,p,ul {
   margin-bottom: 1rem

@@ -1,124 +1,121 @@
 <template>
-    <section class="tr-single-detail gray-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-9 col-sm-12">
-
-                    <div class="sec-heading mx-auto">
-                        <h2>POPULAR CITIES WORTH INVESTING IN THE UAE</h2>
-                        <p>Know More about the popular and investment-friendly residential properties in and around Dubai.</p>
-                    </div>
-                    
-                    <div class="row">
-                        <!-- Loop through the cities and display each city -->
-                        <div v-for="city in cities.data" :key="city.id" class="col-sm-6 mb-4">
-                            <div class="event-grid-wrap">
-                                <a :href="`/cities?city=${city.name}`">
-                                    <div class="event-grid-header offes">
-                                        <img width="358" height="287"
-                                            :src="city.image ? '/storage/cities/' + city.image : 'default-image.jpg'"
-                                            class="img-fluid mx-auto" :alt="city.name">
-                                        <span class="event-grid-cat">{{ city.name }}</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pagination -->
-                    <nav aria-label="Page navigation" v-if="cities.last_page > 1">
-                        <ul class="pagination">
-                            <li class="page-item" :class="{ disabled: !cities.prev_page_url }">
-                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(cities.prev_page_url)">«</a>
-                            </li>
-                            <li v-for="page in cities.last_page" :key="page" class="page-item" :class="{ active: page === cities.current_page }">
-                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(`/api/cities?page=${page}`)">{{ page }}</a>
-                            </li>
-                            <li class="page-item" :class="{ disabled: !cities.next_page_url }">
-                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(cities.next_page_url)">»</a>
-                            </li>
-                        </ul>
-                    </nav>
-
+    <div class="widget-boxed-header">
+        <h4>Get in touch</h4>
+    </div>
+    <div class="widget-boxed-body">
+        <div class="booking-form">
+            <form @submit.prevent="submitForm">
+                <div class="form-group">
+                    <label for="txtName"></label>
+                    <input v-model="form.name" type="text" id="name" class="form-control" placeholder="Name" />
+                    <span v-if="errors.name">{{ errors.name }}</span>
                 </div>
 
-                <div class="col-lg-4 col-md-3 col-sm-12">
-                    <div class="widget-boxed">
-                        <ContactArticle />
-                    </div>
-                    <div class="widget-boxed d-none d-xl-block">
-                        <div class="widget-boxed-header">
-                            <h4>Top Communities</h4>
+                <div class="form-group">
+                    <label for="txtEmail"></label>
+                    <input v-model="form.email" type="email" id="email" class="form-control" placeholder="Email Id *" />
+                    <span v-if="errors.email">{{ errors.email }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="ddlQueryType"></label>
+                    <select v-model="form.type" id="type" class="form-control">
+                        <option value="individual">Individual</option>
+                        <option value="agent">Agent</option>
+                        <option value="investor">Investor</option>
+                    </select>
+                    <span v-if="errors.type">{{ errors.type }}</span>
+                </div>
+
+                <div class="row no-gutters">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="form-group">
+                            <label for="ddlCountryCode"></label>
+                            <input v-model="form.country_code" type="text" id="country_code" class="form-control" />
+                            <span v-if="errors.country_code">{{ errors.country_code }}</span>
                         </div>
-                        <div class="widget-boxed-body">
-                            <div class="side-list">
-                                <ul id="ContentPlaceHolder1_TopCommunityId" class="category-list">
-                                    <li><a href="/properties-for-sale-at-jvc">JVC<span>101 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-business-bay">Business Bay<span>62 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-dubailand">Dubailand<span>44 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-downtown-dubai">Downtown Dubai<span>43 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-dubai-hills-estate">Dubai Hills Estate<span>38 <small>Projects</small></span></a></li>
-                                </ul>
-                            </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <div class="form-group">
+
+                            <label for="message-field" class="label pb-2"></label>
+                            <input v-model="form.phone" type="text" id="phone" class="form-control"
+                                placeholder="Contact No *" />
+                            <span v-if="errors.phone">{{ errors.phone }}</span>
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="txtMessage"></label>
+                    <textarea v-model="form.message" id="message" rows="10" class="form-control"
+                        placeholder="Message"></textarea>
+                    <span v-if="errors.message">{{ errors.message }}</span>
+                </div>
 
-            </div>
+                <div>
+                    <button type="submit" class="btn btn-success full-width">Send Message</button>
+                    <p v-if="responseMessage">{{ responseMessage }}</p>
+                </div>
+            </form>
         </div>
-    </section>
+    </div>
 </template>
-
 <script>
-import axios from 'axios';
-import ContactArticle from '../articles/ContactArticle.vue';
+    import axios from 'axios';
 
-export default {
-    components: {
-        ContactArticle,
-    },
-    data() {
-        return {
-            cities: {
-                data: [],
-                current_page: 1,
-                last_page: 1,
-                next_page_url: null,
-                prev_page_url: null,
+    export default {
+        data() {
+            return {
+                form: {
+                    name: '',
+                    email: '',
+                    type: 'individual',
+                    country_code: '',
+                    phone: '',
+                    message: '',
+                },
+                errors: {},
+                responseMessage: '',
+            };
+        },
+        methods: {
+            async submitForm() {
+                try {
+                    this.errors = {};
+                    this.responseMessage = '';
+
+                    const response = await axios.post('/api/contact', this.form);
+
+                    // Display the response message
+                    this.responseMessage = response.data.message;
+
+                    // Clear the form fields
+                    this.form = {
+                        name: '',
+                        email: '',
+                        type: 'individual',
+                        country_code: '',
+                        phone: '',
+                        message: '',
+                    };
+
+                    // Clear the response message after 5 seconds
+                    setTimeout(() => {
+                        this.responseMessage = '';
+                    }, 5000);
+
+                } catch (error) {
+                    if (error.response && error.response.status === 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        this.responseMessage = 'An error occurred while sending your message.';
+                    }
+                }
             },
-        };
-    },
-    created() {
-        this.fetchCities('/api/cities');  
-    },
-    methods: {
-        async fetchCities(url) {
-            try {
-                const response = await axios.get(url); 
-                this.cities = response.data; 
-            } catch (error) {
-                console.error('Error fetching city data:', error);
-            }
-        }
-    }
-};
+        },
+    };
 </script>
-
-
 <style scoped>
-    h2,
-    h4,
-    p,
-    ul {
-        margin-top: 0
-    }
-
-    h2,
-    h4,
-    label {
-        margin-bottom: .5rem
-    }
-
     .form-group,
     p,
     ul {
@@ -130,37 +127,28 @@ export default {
         background-image: none
     }
 
-    .btn,
-    .navbar-brand {
-        white-space: nowrap
-    }
-
     .navbar,
-    .page-link,
-    html {
+    html,
+    sup {
         position: relative
     }
 
-    .btn,
-    .menuBox .content li i {
-        text-align: center;
-        vertical-align: middle
-    }
-
-    .btn,
-    img {
-        vertical-align: middle
-    }
-
+    .topbar.fixed-header .act-buttons .login,
     .topbar.fixed-header .act-buttons a.login,
     a {
         color: #546e7a
     }
 
-    .default-btn,
-    .loader span,
-    .send span {
-        letter-spacing: 1px
+    .card {
+        word-wrap: break-word
+    }
+
+    .dropzone .dz-preview .dz-details .dz-filename:not(:hover),
+    .side-list .top-articles li,
+    .side-proj .proj-dtls h2,
+    .walkthrough h3 {
+        overflow: hidden;
+        text-overflow: ellipsis
     }
 
     @media print {
@@ -182,12 +170,14 @@ export default {
         }
 
         h2,
+        h3,
         p {
             orphans: 3;
             widows: 3
         }
 
-        h2 {
+        h2,
+        h3 {
             page-break-after: avoid
         }
 
@@ -201,9 +191,6 @@ export default {
     .menuBox .content li a,
     .navbar-brand:focus,
     .navbar-brand:hover,
-    .page-link:focus,
-    .page-link:hover,
-    .pagination>li>a,
     a,
     a:focus,
     a:hover {
@@ -216,7 +203,6 @@ export default {
         line-height: 1.15;
         -webkit-text-size-adjust: 100%;
         -ms-text-size-adjust: 100%;
-        -ms-overflow-style: scrollbar;
         -webkit-tap-highlight-color: transparent;
         scroll-behavior: smooth;
         min-height: 100%;
@@ -229,8 +215,8 @@ export default {
         box-sizing: inherit
     }
 
-    .fixed-header .header.exchange-logo .default-logo,
     aside,
+    figure,
     footer,
     nav,
     section {
@@ -241,8 +227,21 @@ export default {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
     }
 
-    strong {
-        font-weight: bolder
+    p,
+    ul {
+        margin-top: 0
+    }
+
+    sup {
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+        top: -.5em
+    }
+
+    .btn,
+    img {
+        vertical-align: middle
     }
 
     a {
@@ -267,6 +266,10 @@ export default {
         outline: 0
     }
 
+    figure {
+        margin: 0 0 1rem
+    }
+
     img {
         border-style: none
     }
@@ -281,7 +284,8 @@ export default {
     }
 
     label {
-        display: inline-block
+        display: inline-block;
+        margin-bottom: .5rem
     }
 
     button:focus {
@@ -316,20 +320,18 @@ export default {
         border-style: none
     }
 
-    fieldset {
-        min-width: 0;
-        padding: 0;
-        margin: 0;
-        border: 0
-    }
-
     ::-webkit-file-upload-button {
         font: inherit;
         -webkit-appearance: button
     }
 
+    h1,
     h2,
-    h4 {
+    h3,
+    h4,
+    h5 {
+        margin-top: 0;
+        margin-bottom: .5rem;
         line-height: 1.1
     }
 
@@ -339,9 +341,22 @@ export default {
         font-weight: 400
     }
 
+    .list-unstyled {
+        padding-left: 0;
+        list-style: none
+    }
+
     .img-fluid {
         max-width: 100%;
         height: auto
+    }
+
+    .menuBox,
+    .menuBox .overlay {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0
     }
 
     .container {
@@ -399,10 +414,10 @@ export default {
             max-width: 33.333333%
         }
 
-        .col-md-5 {
-            -ms-flex: 0 0 41.666667%;
-            flex: 0 0 41.666667%;
-            max-width: 41.666667%
+        .col-md-6 {
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%
         }
 
         .col-md-8 {
@@ -429,12 +444,6 @@ export default {
             max-width: 960px
         }
 
-        .col-lg-2 {
-            -ms-flex: 0 0 16.666667%;
-            flex: 0 0 16.666667%;
-            max-width: 16.666667%
-        }
-
         .col-lg-3 {
             -ms-flex: 0 0 25%;
             flex: 0 0 25%;
@@ -447,12 +456,6 @@ export default {
             max-width: 33.333333%
         }
 
-        .col-lg-7 {
-            -ms-flex: 0 0 58.333333%;
-            flex: 0 0 58.333333%;
-            max-width: 58.333333%
-        }
-
         .col-lg-8 {
             -ms-flex: 0 0 66.666667%;
             flex: 0 0 66.666667%;
@@ -463,12 +466,6 @@ export default {
             -ms-flex: 0 0 75%;
             flex: 0 0 75%;
             max-width: 75%
-        }
-
-        .col-lg-12 {
-            -ms-flex: 0 0 100%;
-            flex: 0 0 100%;
-            max-width: 100%
         }
     }
 
@@ -492,17 +489,14 @@ export default {
     }
 
     .col,
-    .col-lg-12,
-    .col-lg-2,
     .col-lg-3,
     .col-lg-4,
-    .col-lg-7,
     .col-lg-8,
     .col-lg-9,
     .col-md-12,
     .col-md-3,
     .col-md-4,
-    .col-md-5,
+    .col-md-6,
     .col-md-8,
     .col-md-9,
     .col-sm-12,
@@ -564,6 +558,8 @@ export default {
     .btn {
         display: inline-block;
         font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -582,24 +578,45 @@ export default {
         opacity: .65
     }
 
+    .btn-primary,
+    .btn-primary:hover,
     .btn-success:hover,
     .btn:hover,
     .footer-widget ul li a,
+    .page-title-wrap a,
     footer .contact a {
         color: #fff
     }
 
-    .btn-success:focus {
-        box-shadow: 0 0 0 3px rgba(40, 167, 69, .5)
+    .btn-primary:focus {
+        box-shadow: 0 0 0 3px #9C3133
     }
 
-    .btn-success:disabled {
+    .btn-primary:disabled {
         background-color: #9C3133;
         border-color: #9C3133
     }
 
+    .btn-primary:active {
+        border-color: #9C3133
+    }
+
+    .btn-success:focus {
+        box-shadow: 0 0 0 3px #9C3133
+    }
+
+    .btn-success:disabled {
+        background-color: #9C3133;
+        border-color: #9C3133;
+    }
+
     .btn-success:active {
         border-color: #9C3133;
+    }
+
+    .btn-block {
+        display: block;
+        width: 100%
     }
 
     .navbar {
@@ -620,46 +637,44 @@ export default {
         padding-bottom: .3125rem;
         margin-right: 1rem;
         font-size: 1.25rem;
-        line-height: inherit
-    }
-
-    .page-item:first-child .page-link {
-        margin-left: 0;
-        border-top-left-radius: .25rem;
-        border-bottom-left-radius: .25rem
-    }
-
-    .page-item:last-child .page-link {
-        border-top-right-radius: .25rem;
-        border-bottom-right-radius: .25rem
-    }
-
-    .page-link {
-        display: block;
-        padding: .5rem .75rem;
-        margin-left: -1px;
-        line-height: 1.25;
-        color: #007bff;
-        background-color: #fff;
-        border: 1px solid #ddd
+        line-height: inherit;
+        white-space: nowrap
     }
 
     [class^=lni-],
     [class^=ti-] {
         font-style: normal;
+        font-weight: 400;
         font-variant: normal;
         text-transform: none;
         line-height: 1;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        font-weight: 400
+        -moz-osx-font-smoothing: grayscale
     }
 
-    .page-link:focus,
-    .page-link:hover {
-        color: #0056b3;
-        background-color: #e9ecef;
-        border-color: #ddd
+    .card {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column
+    }
+
+    .card-img-top {
+        width: 100%;
+        border-top-left-radius: calc(.25rem - 1px);
+        border-top-right-radius: calc(.25rem - 1px)
+    }
+
+    .border-0 {
+        border: 0 !important
+    }
+
+    .rounded {
+        border-radius: .25rem !important
+    }
+
+    .rounded-0 {
+        border-radius: 0
     }
 
     .clearfix::after {
@@ -688,8 +703,8 @@ export default {
         justify-content: space-between !important
     }
 
-    .m-0 {
-        margin: 0 !important
+    .float-left {
+        float: left !important
     }
 
     .mb-0 {
@@ -700,9 +715,12 @@ export default {
         margin-right: .25rem !important
     }
 
-    .my-1 {
-        margin-top: .25rem !important;
-        margin-bottom: .25rem !important
+    .mr-2 {
+        margin-right: .5rem !important
+    }
+
+    .mb-2 {
+        margin-bottom: .5rem !important
     }
 
     .mt-3 {
@@ -721,6 +739,10 @@ export default {
         margin-top: 3rem !important
     }
 
+    .p-0 {
+        padding: 0 !important
+    }
+
     .p-1 {
         padding: .25rem !important
     }
@@ -734,13 +756,12 @@ export default {
         padding-right: .5rem !important
     }
 
-    .pr-3 {
-        padding-right: 1rem !important
+    .pl-2 {
+        padding-left: .5rem !important
     }
 
-    .mx-auto {
-        margin-right: auto !important;
-        margin-left: auto !important
+    .pr-3 {
+        padding-right: 1rem !important
     }
 
     .text-center {
@@ -751,14 +772,15 @@ export default {
         color: #f8f9fa !important
     }
 
+    .default-btn,
+    .section-btn .default-btn:hover {
+        color: #15273e !important
+    }
+
 
 
     [class^=ti-] {
         font-family: themify
-    }
-
-    .ti-search:before {
-        content: ""
     }
 
     .ti-menu:before {
@@ -766,25 +788,21 @@ export default {
     }
 
 
-    .dropzone .dz-preview .dz-details .dz-filename:not(:hover) {
-        overflow: hidden;
-        text-overflow: ellipsis
-    }
 
     .dropzone .dz-preview .dz-details .dz-filename:not(:hover) span {
         border: 1px solid transparent
     }
 
 
-
     [class^=lni-] {
         font-family: LineIcons !important
     }
 
+    .article-list small,
     .default-btn,
     .menuBox .content li a,
     .sec-heading h2,
-    span.event-grid-cat {
+    .side-proj .proj-dtls h5 {
         text-transform: uppercase
     }
 
@@ -798,12 +816,10 @@ export default {
 
 
 
-    .fa {
-        font: 14px/1 FontAwesome;
-        font-size: inherit;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale
+    .default-btn,
+    .send span {
+        font-weight: 500;
+        letter-spacing: 1px
     }
 
     .pull-right {
@@ -816,6 +832,10 @@ export default {
 
     .fa-home:before {
         content: ""
+    }
+
+    .fa-arrow-right:before {
+        content: ""
     }
 
     .fa-sign-in:before {
@@ -867,10 +887,6 @@ export default {
     .menuBox {
         position: fixed;
         z-index: 1900;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
         opacity: 0;
         visibility: hidden;
         -webkit-transition: .3s ease-in;
@@ -928,20 +944,22 @@ export default {
 
     .menuBox .overlay {
         position: absolute;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
         background-color: rgba(0, 0, 0, .7)
+    }
+
+    .menuBox .clse span,
+    .menuBox .clse span:before,
+    .menuBox .content {
+        height: 100%;
+        background-color: #fff;
+        position: absolute
     }
 
     .menuBox .content {
         padding-bottom: 30px;
-        position: absolute;
         top: 0;
         right: 0;
         width: 250px;
-        height: 100%;
         word-break: normal;
         -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
         box-shadow: 0 0 10px rgba(0, 0, 0, .5);
@@ -953,9 +971,8 @@ export default {
         -ms-transform: translate(543%, 0);
         -webkit-transform: translate(543%, 0);
         transform: translate(543%, 0);
-        background-color: #fff;
-        border-left: 3px solid #ff7600;
-        border-top: 3px solid #ff7600
+        border-left: 3px solid #9C3133;
+        border-top: 3px solid #9C3133
     }
 
     .menuBox.go-show .content {
@@ -983,22 +1000,16 @@ export default {
     }
 
     .menuBox .clse span {
-        position: absolute;
         width: 2px;
-        height: 100%;
         transform: rotate(45deg);
-        display: block;
-        background-color: #fff
+        display: block
     }
 
     .menuBox .clse span:before {
         content: '';
-        position: absolute;
         width: 2px;
-        height: 100%;
         transform: rotate(90deg);
-        display: block;
-        background-color: #fff
+        display: block
     }
 
     .menuBox.go-show .clse {
@@ -1025,16 +1036,19 @@ export default {
     }
 
     .menuBox .content li a:hover,
+    .page-title.image-title .page-title-wrap .current-page.active,
     ul.footer-bottom-social li a:focus,
     ul.footer-bottom-social li a:hover {
-        color: #ff7600
+        color: #9C3133
     }
 
     .menuBox .content li i {
         margin-right: 5px;
         width: 20px;
+        text-align: center;
         display: inline-block;
-        color: #ff7600;
+        vertical-align: middle;
+        color: #9C3133;
         line-height: 17px;
         height: 20px;
         font-size: 14px
@@ -1047,17 +1061,22 @@ export default {
 
     .default-btn {
         display: inline-block;
-        font-weight: 500;
         line-height: 1;
         padding: 10px 15px;
         z-index: 9;
         position: relative;
-        border: 1px solid #9C3133;
-        color: #9C3133 !important
+        border: 1px solid #15273e
+    }
+
+    .section-btn .default-btn {
+        padding: 15px 55px;
+        background-color: #15273e;
+        border: none;
+        color: #fff !important
     }
 
     .btn-hover::before {
-        background: #9C3133;
+        background: #15273e;
         bottom: 0;
         content: "";
         left: 0;
@@ -1072,6 +1091,11 @@ export default {
         z-index: -1
     }
 
+    .section-btn .btn-hover::before {
+        background: #fff;
+        border: 1px solid #15273e
+    }
+
     .btn-hover:hover::before {
         transform: scaleX(1)
     }
@@ -1084,6 +1108,44 @@ export default {
     .widget-boxed .form-control,
     select.form-control:not([size]):not([multiple]) {
         height: 46px
+    }
+
+    .side-proj .proj-dtls h5 {
+        color: #b9932d;
+        font-size: 11px;
+        line-height: 1.4;
+        margin-bottom: 5px
+    }
+
+    .side-proj {
+        border-bottom: 1px solid #e4e4e4;
+        padding-bottom: 10px;
+        margin-bottom: 10px
+    }
+
+    .side-proj:last-child {
+        border-bottom: 0
+    }
+
+    .side-proj .proj-dtls h2 {
+        line-height: 1;
+        margin-bottom: 3px;
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap
+    }
+
+    .side-proj .price {
+        margin-bottom: 0;
+        font-weight: 600;
+        font-size: 14px
+    }
+
+    .side-proj .price span {
+        font-weight: 400;
+        color: #948e8e;
+        font-size: 11px;
+        margin-right: 10px
     }
 
     @media(min-width: 768px) {
@@ -1121,6 +1183,10 @@ export default {
         h2 {
             line-height: 26px;
             font-size: 24px
+        }
+
+        .section-btn .default-btn {
+            display: block
         }
 
         .page-title.search-head {
@@ -1169,18 +1235,6 @@ export default {
         box-shadow: inset 1px 1px 0 #999, inset 0 -1px 0 #999
     }
 
-    .btn-success:active,
-    .btn-success:focus,
-    .btn-success:hover {
-        background: #9C3133
-    }
-
-    .img-responsive {
-        width: 100%;
-        height: auto;
-        display: inline-block
-    }
-
     section {
         padding: 50px 0 20px
     }
@@ -1189,28 +1243,31 @@ export default {
         background: #f8f8f9
     }
 
-    .theme-btn {
-        background: #ff7600;
-        border-color: #ff7600
-    }
-
     .loader,
     .send {
         background: #ffffffe6;
         left: 0;
-        position: absolute;
-        top: 0;
-        text-align: center;
         z-index: 1;
+        position: absolute;
+        text-align: center;
         right: 0;
+        top: 0;
         bottom: 0
     }
 
+    h1,
     h2,
-    h4 {
+    h3,
+    h4,
+    h5 {
         color: #37436c;
         font-weight: 600;
         font-family: Poppins, sans-serif
+    }
+
+    h1 {
+        line-height: 40px;
+        font-size: 36px
     }
 
     h2 {
@@ -1218,9 +1275,20 @@ export default {
         font-size: 30px
     }
 
+    h3 {
+        line-height: 30px;
+        font-size: 24px
+    }
+
     h4 {
         line-height: 26px;
         font-size: 21px
+    }
+
+    h5 {
+        line-height: 22px;
+        font-size: 18px;
+        font-weight: 400
     }
 
     .loader {
@@ -1234,19 +1302,21 @@ export default {
     .loader span {
         display: block;
         margin-top: -55px;
-        color: #848282
+        color: #848282;
+        letter-spacing: 1px
     }
 
     .send span {
         display: block;
         margin-top: 15px;
         color: #77b43f;
-        font-size: 15px;
-        font-weight: 500
+        font-size: 15px
     }
 
-    html body .m-0 {
-        margin: 0
+    .footer-widget,
+    .header-nav-bar,
+    html body .p-0 {
+        padding: 0
     }
 
     html body .font-16 {
@@ -1259,10 +1329,6 @@ export default {
 
     html body .font-20 {
         font-size: 20px
-    }
-
-    html body .b-0 {
-        border: none !important
     }
 
     html body .b-r {
@@ -1286,6 +1352,30 @@ export default {
         box-shadow: none
     }
 
+    .btn-primary {
+        background: #9C3133;
+        border: 1px solid #9C3133;
+        -webkit-transition: .2s ease-in;
+        -o-transition: .2s ease-in;
+        transition: .2s ease-in
+    }
+
+    .btn-primary:hover {
+        background: #2d323d;
+        border: 1px solid #2d323d
+    }
+
+    .btn-primary:active,
+    .btn-primary:focus {
+        background: #9C3133
+    }
+
+    .btn-success:active,
+    .btn-success:focus,
+    .btn-success:hover {
+        background: #9C3133
+    }
+
     .btn-success {
         background: #9C3133;
         border: 1px solid #9C3133;
@@ -1296,63 +1386,18 @@ export default {
         border: 1px solid #9C3133
     }
 
+    .btn-primary:active:focus,
+    .btn-primary:active:hover,
+    .btn-primary:focus {
+        background-color: #9C3133;
+        border: 1px solid #9C3133
+    }
+
     .btn-success:active:focus,
     .btn-success:active:hover,
     .btn-success:focus {
-        background-color: #1fd628;
-        border: 1px solid #1fd628
-    }
-
-    .pagination {
-        list-style: none;
-        display: table;
-        padding-left: 0;
-        border-radius: 4px;
-        margin: 20px auto
-    }
-
-    .pagination>li>a {
-        position: relative;
-        float: left;
-        padding: 0;
-        margin: 5px;
-        color: #5a6f7c;
-        background-color: #fff;
-        border-radius: 2px;
-        width: 37px;
-        height: 37px;
-        text-align: center;
-        line-height: 37px;
-        border: 1px solid #eaeff5;
-        -webkit-box-shadow: 0 2px 10px 0 #d8dde6;
-        box-shadow: 0 2px 10px 0 #d8dde6
-    }
-
-    .pagination>li>a:focus,
-    .pagination>li>a:hover {
-        z-index: 2;
-        color: #fff;
-        cursor: pointer;
-        background-color: #ff7600;
-        border-color: #ff7600
-    }
-
-    .pagination li:first-child a {
-        background: #ff7600;
-        border: 1px solid #ff7600;
-        border-radius: 2px;
-        color: #fff
-    }
-
-    .pagination li:last-child a {
-        background: #35434e;
-        border: 1px solid #35434e;
-        border-radius: 2px;
-        color: #fff
-    }
-
-    .pagination>li {
-        display: inline
+        background-color: #9C3133;
+        border: 1px solid #9C3133
     }
 
     [type=radio]:not(:checked) {
@@ -1384,7 +1429,7 @@ export default {
         content: '';
         width: 12px;
         height: 12px;
-        background: #ff7600;
+        background: #9C3133;
         position: absolute;
         top: 3px;
         left: 3px;
@@ -1403,14 +1448,14 @@ export default {
         box-shadow: none
     }
 
+    .fixed-header .header.exchange-logo .sticky-logo,
     .header.exchange-logo .default-logo {
-        display: block;
-        max-width: 100% !important
+        display: none
     }
 
-    .fixed-header .header.exchange-logo .sticky-logo,
-    .header .sticky-logo {
-        display: none
+    .fixed-header .header.exchange-logo .default-logo {
+        display: block;
+        max-width: auto !important
     }
 
     .topbar {
@@ -1436,11 +1481,6 @@ export default {
 
     .header .navbar-brand img {
         max-width: 129px
-    }
-
-    .footer-widget,
-    .header-nav-bar {
-        padding: 0
     }
 
     .act-buttons a.laung {
@@ -1471,8 +1511,7 @@ export default {
 
     .act-buttons .login,
     .act-buttons a.login {
-        cursor: pointer;
-        color: #000
+        cursor: pointer
     }
 
     .topbar .header.light .act-buttons a.login {
@@ -1492,39 +1531,78 @@ export default {
         color: #9dabb7
     }
 
-    .page-title fieldset .seub-btn {
-        width: 100%;
-        padding: 19px 25px;
-        border: none;
-        border-radius: 0;
-        height: auto;
-        line-height: 1.5;
-        font-size: 15px;
-        max-height: 59px
+    .finding-overlay {
+        content: "";
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        background: #10223e
     }
 
-    .page-title .home-form-1 i {
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -ms-border-radius: 3px;
-        border-radius: 3px;
-        font-size: 1.125rem;
-        position: absolute;
-        background-color: #fff;
-        line-height: 50px;
-        top: 5px;
-        right: 1px;
-        padding-right: 15px;
-        display: block;
-        width: 20px;
-        box-sizing: content-box;
-        height: 50px;
-        z-index: 9;
-        color: #9dabb7
+    .card,
+    .widget-boxed {
+        background-color: #fff
+    }
+
+    .finding-overlay.op-70 {
+        opacity: .7
+    }
+
+    .article-list {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 15px;
+        padding-bottom: 15px
+    }
+
+    .article-list small {
+        line-height: 1;
+        color: #8e8e8e;
+        font-size: 12px;
+        letter-spacing: 1px;
+        font-weight: 600
+    }
+
+    .article-list small span {
+        border-left: 1px solid #ccc;
+        margin-left: 5px;
+        padding-left: 7px
+    }
+
+    .article-list h4 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        line-height: 1.2em
+    }
+
+    .article-list figure {
+        position: relative;
+        overflow: hidden;
+        margin: 0
+    }
+
+    .article-list img {
+        min-width: 380px;
+        object-fit: cover;
+        transition: transform .35s ease-out;
+        transform: translate3d(0, 0, 0) scale(1)
+    }
+
+    .article-list p,
+    .dtls p {
+        margin-bottom: 4px;
+        text-align: justify
+    }
+
+    .dtls p {
+        margin-bottom: 12px
     }
 
     .widget-boxed {
-        background-color: #fff;
         border-radius: 6px;
         padding: 0 20px 25px;
         margin-bottom: 35px;
@@ -1541,80 +1619,6 @@ export default {
         font-size: 16px;
         opacity: .9;
         font-weight: 500
-    }
-
-    .verticleilist.listing-shot {
-        background: #f6f7f9;
-        overflow: hidden;
-        margin-bottom: 30px;
-        position: relative;
-        width: 100%
-    }
-
-    .verticleilist.listing-shot .signle-vert-listing-item {
-        display: flex;
-        background: #f8f8f9;
-        height: 210px;
-        overflow: hidden;
-        padding: 0;
-        width: 100%;
-        -webkit-transition: .5s;
-        transition: .5s
-    }
-
-    .verticleilist.listing-shot .listing-item {
-        flex: 4;
-        overflow: hidden;
-        min-height: 210px
-    }
-
-    .verticleilist.listing-shot .verticle-listing-caption {
-        flex: 5;
-        bottom: 0;
-        padding: 0;
-        left: 0;
-        position: relative;
-        border: 1px solid #e8e8e8;
-        border-left: 0
-    }
-
-    .listing-shot-img {
-        min-height: 220px;
-        max-height: 375px;
-        height: 100%
-    }
-
-    .listing-shot-img img {
-        min-width: 365px;
-        object-fit: cover;
-        transition: transform .35s ease-out;
-        transform: translate3d(0, 0, 0) scale(1)
-    }
-
-    .event-grid-wrap:focus .event-grid-header>img,
-    .event-grid-wrap:hover .event-grid-header>img,
-    .listing-shot-img:hover>img {
-        transform: translate3d(0, 0, 0) scale(1.08)
-    }
-
-    .verticle-listing-caption .listing-shot-caption {
-        position: absolute;
-        top: 104px;
-        transform: translateY(-50%);
-        left: 25px
-    }
-
-    a.list-cat {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: #9C3133;
-        color: #fff;
-        padding: 3px 10px;
-        border-radius: 4px;
-        line-height: 1.5;
-        font-size: 12px;
-        z-index: 1
     }
 
     .booking-form .form-group {
@@ -1638,58 +1642,88 @@ export default {
         display: none
     }
 
-    .event-grid-wrap {
-        background: #fff;
-        position: relative;
-        width: 100%;
-        border: 1px solid #e9ecf1;
-        border-radius: 4px;
-        overflow: hidden
-    }
-
-    .event-grid-header {
-        position: relative;
-        max-height: 400px;
-        overflow: hidden
-    }
-
-    .event-grid-header img {
-        min-height: 300px;
-        object-fit: cover
-    }
-
-    .event-grid-wrap .event-grid-header>img {
-        transition: transform .35s ease-out;
-        transform: translate3d(0, 0, 0) scale(1)
-    }
-
-    span.event-grid-cat {
-        position: absolute;
-        bottom: 20px;
-        right: 0;
-        color: #fff;
-        z-index: 2;
-        text-align: center;
-        left: 0;
-        letter-spacing: 1px
-    }
-
-    .event-grid-header:before {
-        background: linear-gradient(to bottom, transparent 10%, #20334e);
-        background: -webkit-linear-gradient(to bottom, transparent 10%, #20334e);
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
+    .page-title.search-head::after,
+    .walkthrough span {
         display: block;
-        height: 100%;
-        width: 100%;
-        z-index: 1
+        z-index: 1;
+        left: 0;
+        right: 0;
+        position: absolute
     }
 
-    .sec-heading p {
-        font-size: 17px
+    .article p {
+        text-align: justify
+    }
+
+    .article ul {
+        border-top: 1px solid #ccc
+    }
+
+    .article ul li {
+        width: 50%;
+        float: left;
+        font-size: 11px;
+        padding-top: 5px;
+        color: #143258;
+        font-weight: 600
+    }
+
+    .article ul li:last-child {
+        text-align: right
+    }
+
+    .walkthrough .walk-warp {
+        position: relative;
+        background: #fff;
+        border-radius: 3px;
+        padding: 11px;
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .06)
+    }
+
+    .walkthrough span {
+        top: 39%;
+        bottom: 10%;
+        text-align: center
+    }
+
+    .walkthrough span img {
+        background: #21202054;
+        padding: 3px;
+        border-radius: 5px
+    }
+
+    .walkthrough span:hover img {
+        background: #00000091
+    }
+
+    .walkthrough h3 {
+        text-align: center;
+        font-size: 16px;
+        margin-top: 6px;
+        white-space: nowrap;
+        margin-bottom: 25px
+    }
+
+    .widget-boxed .walkthrough .walk-warp {
+        border-radius: 0;
+        padding: 0
+    }
+
+    .widget-boxed .walkthrough span {
+        position: absolute;
+        top: 25%
+    }
+
+    .widget-boxed .walkthrough h3 {
+        font-size: 12px;
+        margin-top: 2px;
+        margin-bottom: 10px
+    }
+
+    .sec-heading h2 {
+        margin-bottom: 2px;
+        line-height: 36px;
+        font-size: 22px
     }
 
     .form-control:disabled {
@@ -1697,15 +1731,27 @@ export default {
         opacity: 1
     }
 
+    .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        background-clip: border-box;
+        border: 1px solid #e8eef1;
+        border-radius: .25rem
+    }
+
+    .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem
+    }
+
     .sec-heading {
         max-width: 780px;
         margin-bottom: 20px
-    }
-
-    .sec-heading h2 {
-        margin-bottom: 2px;
-        line-height: 36px;
-        font-size: 22px
     }
 
     .page-title {
@@ -1718,6 +1764,11 @@ export default {
         justify-content: center
     }
 
+    .page-title.image-title {
+        height: 450px;
+        text-align: center
+    }
+
     .page-title.search-head {
         height: 185px;
         text-align: center;
@@ -1726,12 +1777,7 @@ export default {
 
     .page-title.search-head::after {
         content: '';
-        display: block;
         background: #000000cf;
-        z-index: 1;
-        position: absolute;
-        left: 0;
-        right: 0;
         top: 0;
         bottom: 0
     }
@@ -1740,13 +1786,22 @@ export default {
         z-index: 2
     }
 
-    .page-title.search-head input {
-        border: 0
+    .page-title.image-title .page-title-wrap {
+        position: relative;
+        top: 25px
     }
 
-    .page-title.search-head input:focus {
-        outline: 0;
-        border: 0
+    .current-page {
+        padding-left: 15px;
+        position: relative
+    }
+
+    span.current-page:before {
+        content: '';
+        position: absolute;
+        font-family: themify;
+        color: #9C3133;
+        left: -3px
     }
 
     .side-list ul,
@@ -1762,9 +1817,11 @@ export default {
         width: 100%
     }
 
-    .side-list ul li a span {
-        float: right;
-        color: #9C3133
+    .side-list .top-articles li {
+        white-space: nowrap;
+        font-weight: 500;
+        padding: 1px 5px;
+        font-size: 13px
     }
 
     footer {
@@ -1820,7 +1877,6 @@ export default {
         list-style: none;
         display: inline-block;
         font-size: 11px;
-        width: 50%;
         letter-spacing: .7px
     }
 
@@ -1873,28 +1929,9 @@ export default {
             text-transform: uppercase;
             margin-bottom: 2px
         }
-
-        .sec-heading p {
-            font-size: 17px
-        }
     }
 
     @media(max-width: 767px) {
-        .home-form-1 .form-control {
-            height: 44px !important;
-            padding: 14px 15px !important;
-            border-radius: 3px !important
-        }
-
-        .page-title .home-form-1 i {
-            line-height: 34px;
-            height: 37px
-        }
-
-        .page-title fieldset .seub-btn {
-            padding: 10px 15px
-        }
-
         footer .border-right {
             border-right: 0;
             border-bottom: 1px solid #506275;
@@ -1910,12 +1947,6 @@ export default {
 
         .footer-bottom small {
             float: inherit
-        }
-    }
-
-    @media(max-width: 1199px) {
-        .verticleilist.listing-shot .signle-vert-listing-item {
-            height: 170px
         }
     }
 
@@ -1937,46 +1968,6 @@ export default {
         .act-buttons a.laung {
             width: 23px;
             margin-right: 7px
-        }
-
-        a.list-cat {
-            top: 20px;
-            right: 20px;
-            bottom: inherit;
-            left: inherit
-        }
-
-        .verticleilist.listing-shot .listing-item {
-            flex: auto;
-            overflow: hidden;
-            min-height: 210px;
-            height: 180px
-        }
-
-        .listing-shot-img {
-            min-height: 150px;
-            max-height: 150px;
-            height: 100%;
-            overflow: hidden
-        }
-
-        .verticleilist.listing-shot .verticle-listing-caption {
-            flex: auto;
-            padding: 2em;
-            position: relative
-        }
-
-        .verticle-listing-caption .listing-shot-caption {
-            position: relative;
-            top: 0;
-            transform: inherit;
-            left: 0;
-            padding-right: 0
-        }
-
-        .verticleilist.listing-shot .signle-vert-listing-item {
-            display: block;
-            height: auto
         }
     }
 </style>

@@ -93,10 +93,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import Base from '../layouts/Base.vue';
+import { slugify } from 'slugify'; // Ensure you have slugify or use a similar utility
 
 const form = ref({
     name: '',
@@ -114,6 +115,13 @@ const form = ref({
 const states = ref([]);
 
 const router = useRouter();
+
+// Watch for changes in the name field and update the slug
+watch(() => form.value.name, (newName) => {
+    if (newName) {
+        form.value.slug = slugify(newName, { lower: true, strict: true });
+    }
+});
 
 const handleFileUpload = (event) => {
     form.value.image = event.target.files[0];
@@ -160,6 +168,4 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-/* Add your styles here if needed */
-</style>
+

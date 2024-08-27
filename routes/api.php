@@ -13,6 +13,7 @@ use App\Http\Controllers\API\Admin\ArticleController;
 use App\Http\Controllers\API\FrontEnd\ContactController;
 use App\Http\Controllers\API\FrontEnd\AboutController as FrontendAboutController;
 use App\Http\Controllers\API\FrontEnd\NewsArticleController;
+use App\Http\Controllers\API\FrontEnd\CityController as city;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -55,3 +56,5 @@ Route::get('/articles', [NewsArticleController::class, 'index']);
 Route::get('/articles/{slug}', [NewsArticleController::class, 'show']);
 Route::get('/articles/top', [NewsArticleController::class, 'topArticles']);
 Route::post('/contact', [ContactController::class, 'submitContactForm']);
+Route::get('cities', [city::class, 'index']);
+Route::get('cities/{slug}', [city::class, 'show']);

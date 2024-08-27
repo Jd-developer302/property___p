@@ -3,45 +3,52 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-9 col-sm-12">
-
                     <div class="sec-heading mx-auto">
-                        <h2>POPULAR CITIES WORTH INVESTING IN THE UAE</h2>
-                        <p>Know More about the popular and investment-friendly residential properties in and around Dubai.</p>
+                        <h2>Prime Locations to Invest</h2>
+                        <p>Explore some of the finest locations offering great investment opportunities.</p>
                     </div>
-                    
-                    <div class="row">
-                        <!-- Loop through the cities and display each city -->
-                        <div v-for="city in cities.data" :key="city.id" class="col-sm-6 mb-4">
-                            <div class="event-grid-wrap">
-                                <a :href="`/cities?city=${city.name}`">
-                                    <div class="event-grid-header offes">
-                                        <img width="358" height="287"
-                                            :src="city.image ? '/storage/cities/' + city.image : 'default-image.jpg'"
-                                            class="img-fluid mx-auto" :alt="city.name">
-                                        <span class="event-grid-cat">{{ city.name }}</span>
+                    <div id="ContentPlaceHolder1_LocationId" class="row m-0 mb-3">
+                        <div v-for="city in cities.data" :key="city.id" class="verticleilist listing-shot">
+                            <div class="signle-vert-listing-item loc-list">
+                                <a class="listing-item"  :href="`/cities/${city.slug}`">
+                                    <div class="listing-items">
+                                        <div class="listing-shot-img">
+                                            <img :src="city.image ? `/storage/cities/${city.image}` : 'default-image.jpg'"
+                                                width="115" height="121" class="img-responsive" :alt="city.name">
+                                        </div>
                                     </div>
                                 </a>
+                                <div class="verticle-listing-caption">
+                                    <div class="listing-shot-caption">
+                                        <h4>{{ city.name }}</h4>
+                                        <p class="my-1"><small>Total Area : </small><strong>{{ city.total_area }} KM<sup>2</sup></strong></p>
+                                        <p class="my-1"><small>Density : </small><strong>{{ city.density }} Per KM<sup>2</sup></strong></p>
+                                        <p class="my-1"><small>Population : </small><strong>{{ city.population }}</strong></p>
+                                        <a class="btn-hover default-btn mt-3" :href="`/cities/${city.slug}`">Read More</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     <!-- Pagination -->
-                    <nav aria-label="Page navigation" v-if="cities.last_page > 1">
+                    <nav aria-label="Page navigation example" v-if="cities.last_page > 1">
                         <ul class="pagination">
                             <li class="page-item" :class="{ disabled: !cities.prev_page_url }">
-                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(cities.prev_page_url)">«</a>
+                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(cities.prev_page_url)" aria-label="Previous">
+                                    <span aria-hidden="true">«</span>
+                                </a>
                             </li>
-                            <li v-for="page in cities.last_page" :key="page" class="page-item" :class="{ active: page === cities.current_page }">
-                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(`/api/cities?page=${page}`)">{{ page }}</a>
+                            <li class="page-item" v-for="page in cities.last_page" :key="page" :class="{ active: page === cities.current_page }">
+                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(getPageUrl(page))">{{ page }}</a>
                             </li>
                             <li class="page-item" :class="{ disabled: !cities.next_page_url }">
-                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(cities.next_page_url)">»</a>
+                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(cities.next_page_url)" aria-label="Next">
+                                    <span aria-hidden="true">»</span>
+                                </a>
                             </li>
                         </ul>
                     </nav>
-
                 </div>
-
                 <div class="col-lg-4 col-md-3 col-sm-12">
                     <div class="widget-boxed">
                         <ContactArticle />
@@ -53,17 +60,16 @@
                         <div class="widget-boxed-body">
                             <div class="side-list">
                                 <ul id="ContentPlaceHolder1_TopCommunityId" class="category-list">
-                                    <li><a href="/properties-for-sale-at-jvc">JVC<span>101 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-business-bay">Business Bay<span>62 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-dubailand">Dubailand<span>44 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-downtown-dubai">Downtown Dubai<span>43 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-dubai-hills-estate">Dubai Hills Estate<span>38 <small>Projects</small></span></a></li>
+                                    <li><a href="">JVC<span>101 <small>Projects</small></span></a></li>
+                                    <li><a href="">Business Bay<span>62 <small>Projects</small></span></a></li>
+                                    <li><a href="">Dubailand<span>44 <small>Projects</small></span></a></li>
+                                    <li><a href="">Downtown Dubai<span>43 <small>Projects</small></span></a></li>
+                                    <li><a href="">Dubai Hills Estate<span>38 <small>Projects</small></span></a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -89,18 +95,21 @@ export default {
         };
     },
     created() {
-        this.fetchCities('/api/cities');  
+        this.fetchCities();
     },
     methods: {
-        async fetchCities(url) {
+        async fetchCities(pageUrl = '/api/cities') {
             try {
-                const response = await axios.get(url); 
-                this.cities = response.data; 
+                const response = await axios.get(pageUrl);
+                this.cities = response.data;
             } catch (error) {
-                console.error('Error fetching city data:', error);
+                console.error('Error fetching cities:', error);
             }
-        }
-    }
+        },
+        getPageUrl(page) {
+            return `/api/cities?page=${page}`;
+        },
+    },
 };
 </script>
 

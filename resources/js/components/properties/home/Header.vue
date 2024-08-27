@@ -63,7 +63,7 @@
             <li><router-link to="/communities">
               <span class="fa-solid fa-right-to-bracket mr-3 icon_side_menu"></span>Communities
             </router-link></li>
-            <li><router-link to="/cities">
+            <li><router-link to="/city-properties">
               <span class="fa-solid fa-right-to-bracket mr-3 icon_side_menu"></span>Cities
             </router-link></li>
             <li><router-link to="/location">

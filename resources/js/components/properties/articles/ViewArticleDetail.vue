@@ -22,80 +22,7 @@
                 </div>
                 <div class="col-lg-4 col-md-3 col-sm-12">
                     <div class="widget-boxed">
-    
-                        <div class="widget-boxed-header">
-                            <h4>Get in touch</h4>
-                        </div>
-                        <div class="widget-boxed-body">
-                            <div class="booking-form">
-                                <div class="form-group">
-                                    <label for="txtName"></label>
-                                    <input type="text" id="txtName" class="form-control" placeholder="Name *"
-                                        onblur="fnnameqc();" fdprocessedid="rr8jzh">
-                                    <span class="sperr" id="spname">
-                                    </span>
-                                </div>
-    
-                                <div class="form-group">
-                                    <label for="txtEmail"></label>
-                                    <input type="text" id="txtEmail" class="form-control" placeholder="Email Id *"
-                                        onblur="fnemailqc();" fdprocessedid="lnh15s">
-                                    <span class="sperr" id="spemail">
-                                    </span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ddlQueryType"></label>
-                                    <select name="QuickContact$ddlQueryType" id="ddlQueryType" class="form-control"
-                                        onchange="fnQueryTypeqc();" fdprocessedid="iu9tvu">
-                                        <option value="I am">I am</option>
-                                        <option value="1">Individual</option>
-                                        <option value="2">Agent</option>
-                                        <option value="3">Investor</option>
-                                        <option value="5">Do not want to disclose</option>
-                                        <option value="4">Others</option>
-    
-                                    </select>
-                                    <span class="sperr" id="spQueryType">
-                                    </span>
-                                </div>
-                                <div class="row no-gutters">
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <div class="form-group">
-                                            <label for="ddlCountryCode"></label>
-                                            <select id="ddlCountryCode" class="form-control b-r" title="Phone Code"
-                                                aria-label="Phone Code" onchange="fncountryqc();" fdprocessedid="d5ije">
-                                                <option selected="selected" value="Code">Code</option>
-                                                <option value="119">ARE +971</option>
-                                               
-                                                <option value="125">ZWE +263</option>
-                                                <option value="127">Other</option>
-                                            </select>
-                                            <span class="sperr" id="spcountrycode">
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <div class="form-group">
-                                            <label for="txtPhone"></label>
-                                            <input type="text" id="txtPhone" placeholder="Contact No *" class="form-control">
-                                            <span class="sperr" id="spphone">
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-    
-                                <div class="form-group">
-                                    <label for="txtMessage"></label>
-                                    <input type="text" id="txtMessage" class="form-control" placeholder="Message"
-                                        fdprocessedid="hg3dkh">
-                                </div>
-    
-                                <button type="button" id="btnQuickContact" onclick="return saveprojqc();"
-                                    class="btn btn-success full-width" fdprocessedid="wirt1">Send Message </button>
-                            </div>
-                        </div>
-    
-    
+                        <ContactArticle/>
                     </div>
                     <div class="widget-boxed">
                         <div class="widget-boxed-header">
@@ -197,9 +124,11 @@
 <script>
 import axios from 'axios';
 import TopArticle from '../articles/TopArticle.vue';
+import ContactArticle from '../articles/ContactArticle.vue';
 export default {
     components: {
-        TopArticle
+        TopArticle,
+        ContactArticle
     },
     data() {
         return {
@@ -645,16 +574,16 @@ select.form-control:focus::-ms-value {
 }
 
 .btn-primary:focus {
-    box-shadow: 0 0 0 3px rgba(0,123,255,.5)
+    box-shadow: 0 0 0 3px #9C3133
 }
 
 .btn-primary:disabled {
-    background-color: #007bff;
-    border-color: #007bff
+    background-color: #9C3133;
+    border-color: #9C3133
 }
 
 .btn-primary:active {
-    border-color: #0062cc
+    border-color: #9C3133
 }
 
 .btn-success:focus {
@@ -827,7 +756,7 @@ select.form-control:focus::-ms-value {
 }
 
 .default-btn,.section-btn .default-btn:hover {
-    color: #15273e!important
+    color: #9C3133!important
 }
 
 
@@ -1107,19 +1036,20 @@ select.form-control:focus::-ms-value {
     line-height: 1;
     padding: 10px 15px;
     z-index: 9;
+    background-color: #9C3133;
     position: relative;
-    border: 1px solid #15273e
+    border: 1px solid #9C3133
 }
 
 .section-btn .default-btn {
     padding: 15px 55px;
-    background-color: #15273e;
+    background-color: #9C3133;
     border: none;
     color: #fff!important
 }
 
 .btn-hover::before {
-    background: #15273e;
+    background: #9C3133;
     bottom: 0;
     content: "";
     left: 0;
@@ -1136,7 +1066,7 @@ select.form-control:focus::-ms-value {
 
 .section-btn .btn-hover::before {
     background: #fff;
-    border: 1px solid #15273e
+    border: 1px solid #9C3133
 }
 
 .btn-hover:hover::before {
@@ -1386,8 +1316,8 @@ html body .b-r {
 }
 
 .btn-primary {
-    background: #ff7600;
-    border: 1px solid #ff7600;
+    background: #9C3133;
+    border: 1px solid #9C3133;
     -webkit-transition: .2s ease-in;
     -o-transition: .2s ease-in;
     transition: .2s ease-in
@@ -1399,7 +1329,7 @@ html body .b-r {
 }
 
 .btn-primary:active,.btn-primary:focus {
-    background: #345bcb
+    background: #9C3133
 }
 
 .btn-success:active,.btn-success:focus,.btn-success:hover {
@@ -1417,8 +1347,8 @@ html body .b-r {
 }
 
 .btn-primary:active:focus,.btn-primary:active:hover,.btn-primary:focus {
-    background-color: #345bcb;
-    border: 1px solid #345bcb
+    background-color: #9C3133;
+    border: 1px solid #9C3133
 }
 
 .btn-success:active:focus,.btn-success:active:hover,.btn-success:focus {

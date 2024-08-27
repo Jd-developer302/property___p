@@ -16,7 +16,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Create Country</h6>
                     </div>
                     <div class="card-body">
-                        <form @submit.prevent="submitForm" enctype="multipart/form-data">
+                        <form @submit.prevent="submitForm">
                             <div class="row mb-3 mt-3 mx-3">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group">
@@ -27,7 +27,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Slug</label>
-                                        <input type="text" v-model="form.slug" class="form-control" name="slug" required>
+                                        <input type="text" v-model="form.slug" class="form-control" name="slug">
                                     </div>
                                 </div>
                             </div>
@@ -63,21 +63,21 @@ const form = ref({
 const router = useRouter();
 
 const submitForm = async () => {
-    const formData = new FormData();
-    formData.append('name', form.value.name);
-    formData.append('slug', form.value.slug);
-    formData.append('status', form.value.status ? 1 : 0); // Convert checkbox to 1 or 0
-
     try {
-        await axios.post('/api/admin/countries', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+        const response = await axios.post('/api/admin/countries', {
+            name: form.value.name,
+            slug: form.value.slug,
+            status: form.value.status ? 1 : 0,
         });
-        router.push('/admin/country'); // Adjust the route to match the list of countries
+        console.log('Created Country:', response.data);
+        router.push('/admin/country'); // Redirect to the list of countries
     } catch (error) {
-        console.error('There was an error!', error);
-        // Handle validation errors here if needed
+        if (error.response && error.response.status === 422) {
+            console.error('Validation Errors:', error.response.data.errors);
+            // Display validation errors to the user if necessary
+        } else {
+            console.error('There was an unexpected error!', error);
+        }
     }
 };
 </script>

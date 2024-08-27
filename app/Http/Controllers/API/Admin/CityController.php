@@ -23,7 +23,7 @@ class CityController extends Controller
             'country_state_id' => 'required|exists:country_states,id',
             'title' => 'required|string|max:255',
             'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:cities,slug',
+            'slug' => 'nullable|string|max:255', // Slug will be generated if not provided
             'status' => 'required|integer|between:0,1',
             'total_area' => 'nullable|numeric',
             'density' => 'nullable|numeric',
@@ -32,9 +32,9 @@ class CityController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Generate slug if not provided
+        // Generate unique slug if not provided
         if (empty($validatedData['slug'])) {
-            $validatedData['slug'] = Str::slug($validatedData['name']);
+            $validatedData['slug'] = $this->generateUniqueSlug($validatedData['name']);
         }
 
         // Handle image upload if present
@@ -56,13 +56,12 @@ class CityController extends Controller
         return response()->json($city);
     }
 
-   
     public function update(Request $request, $id)
     {
         try {
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
-                'country_state_id' => 'required|integer|exists:states,id', // Updated to match your model
+                'country_state_id' => 'required|integer|exists:country_states,id',
                 'title' => 'required|string|max:255',
                 'slug' => ['required', 'string', 'max:255', Rule::unique('cities', 'slug')->ignore($id)],
                 'status' => 'required|boolean',
@@ -72,25 +71,27 @@ class CityController extends Controller
                 'description' => 'nullable|string',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ]);
-    
-            $city = City::find($id);
-            if (!$city) {
-                return response()->json(['message' => 'City not found'], 404);
+
+            $city = City::findOrFail($id);
+
+            // Generate unique slug if it's different from the current one
+            if ($city->slug !== $validatedData['slug']) {
+                $validatedData['slug'] = $this->generateUniqueSlug($validatedData['name']);
             }
-    
+
             $city->fill($validatedData);
-    
+
             if ($request->hasFile('image')) {
                 if ($city->image) {
                     Storage::delete('public/cities/' . $city->image);
                 }
-    
+
                 $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->storeAs('public/cities', $imageName);
                 $city->image = $imageName;
             }
-    
+
             $city->save();
             return response()->json(['message' => 'City updated successfully'], 200);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -99,9 +100,6 @@ class CityController extends Controller
             return response()->json(['message' => 'Internal server error'], 500);
         }
     }
-    
-
-      
 
     public function destroy($id)
     {
@@ -115,5 +113,18 @@ class CityController extends Controller
         $city->delete();
 
         return response()->json(null, 204);
+    }
+
+    /**
+     * Generate a unique slug for the city.
+     *
+     * @param string $name
+     * @return string
+     */
+    protected function generateUniqueSlug($name)
+    {
+        $slug = Str::slug($name);
+        $count = City::where('slug', 'like', "$slug%")->count();
+        return $count ? "{$slug}-{$count}" : $slug;
     }
 }

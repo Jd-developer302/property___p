@@ -44,6 +44,8 @@ import ProjectPropertiesIndex from '../components/properties/project/index.vue';
 import DeveloperPropertiesIndex from '../components/properties/developer/index.vue';
 import CommunityPropertiesIndex from '../components/properties/communties/index.vue';
 import CityPropertiesIndex from '../components/properties/cities/index.vue';
+import CityPrimeIndex from '../components/properties/cities/PrimeLocation.vue';
+import CityDisIndex from '../components/properties/cities/DisCity.vue';
 import LocationIndex from '../components/properties/location/index.vue';
 import ForeignInvestorIndex from '../components/properties/foreigninvestors/index.vue';
 import NewArticleIndex from '../components/properties/articles/index.vue';
@@ -104,8 +106,12 @@ const routes = [
     {
         path:'/location',component:LocationIndex
     },
-    {path: '/cities',component: CityPropertiesIndex
+    {path: '/city-properties',component: CityPropertiesIndex
     },
+    {path: '/cities/:slug',name:'CityDisIndex',component: CityDisIndex
+    },
+    {  path: '/cities',  name: 'CityPrimeIndex',  component: CityPrimeIndex,props: (route) => ({ city: route.query.city })
+      },
     {path: '/foreign-investors',component: ForeignInvestorIndex
     },
     {path: '/news-articles',component: NewArticleIndex

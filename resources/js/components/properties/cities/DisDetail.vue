@@ -1,110 +1,110 @@
 <template>
-    <section class="tr-single-detail gray-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-9 col-sm-12">
-
-                    <div class="sec-heading mx-auto">
-                        <h2>POPULAR CITIES WORTH INVESTING IN THE UAE</h2>
-                        <p>Know More about the popular and investment-friendly residential properties in and around Dubai.</p>
-                    </div>
-                    
-                    <div class="row">
-                        <!-- Loop through the cities and display each city -->
-                        <div v-for="city in cities.data" :key="city.id" class="col-sm-6 mb-4">
-                            <div class="event-grid-wrap">
-                                <a :href="`/cities?city=${city.name}`">
-                                    <div class="event-grid-header offes">
-                                        <img width="358" height="287"
-                                            :src="city.image ? '/storage/cities/' + city.image : 'default-image.jpg'"
-                                            class="img-fluid mx-auto" :alt="city.name">
-                                        <span class="event-grid-cat">{{ city.name }}</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pagination -->
-                    <nav aria-label="Page navigation" v-if="cities.last_page > 1">
-                        <ul class="pagination">
-                            <li class="page-item" :class="{ disabled: !cities.prev_page_url }">
-                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(cities.prev_page_url)">«</a>
-                            </li>
-                            <li v-for="page in cities.last_page" :key="page" class="page-item" :class="{ active: page === cities.current_page }">
-                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(`/api/cities?page=${page}`)">{{ page }}</a>
-                            </li>
-                            <li class="page-item" :class="{ disabled: !cities.next_page_url }">
-                                <a class="page-link" href="javascript:void(0);" @click="fetchCities(cities.next_page_url)">»</a>
-                            </li>
-                        </ul>
-                    </nav>
-
-                </div>
-
-                <div class="col-lg-4 col-md-3 col-sm-12">
-                    <div class="widget-boxed">
-                        <ContactArticle />
-                    </div>
-                    <div class="widget-boxed d-none d-xl-block">
-                        <div class="widget-boxed-header">
-                            <h4>Top Communities</h4>
-                        </div>
-                        <div class="widget-boxed-body">
-                            <div class="side-list">
-                                <ul id="ContentPlaceHolder1_TopCommunityId" class="category-list">
-                                    <li><a href="/properties-for-sale-at-jvc">JVC<span>101 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-business-bay">Business Bay<span>62 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-dubailand">Dubailand<span>44 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-downtown-dubai">Downtown Dubai<span>43 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-dubai-hills-estate">Dubai Hills Estate<span>38 <small>Projects</small></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+    <div>
+      <!-- Dynamic About City Section -->
+      <section class="container who-we-are" id="who">
+        <div class="title my-lg-3 text-center">
+          <h2>About {{ city.name }}</h2>
         </div>
-    </section>
-</template>
-
-<script>
-import axios from 'axios';
-import ContactArticle from '../articles/ContactArticle.vue';
-
-export default {
-    components: {
-        ContactArticle,
-    },
+        <div class="row justify-content-center">
+          <div class="col-md-9 text-center">
+            <p>{{ city.description }}</p>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Route Map Section -->
+      <section class="gray about" id="vision">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="title mb-4 text-center">
+                <h2>ROUTE MAP</h2>
+              </div>
+              <div class="card border-0 contact-box">
+                <img :src="routeMapUrl" alt="Route Map" class="img-fluid">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- More Cities Section -->
+      <section id="OthercityHSId" class="gray ShowContent">
+        <div class="container">
+          <div class="row">
+            <div class="col text-center">
+              <div class="title mb-lg-4">
+                <h2>More Cities to Invest</h2>
+              </div>
+            </div>
+          </div>
+          <div id="othercityId" class="row">
+            <div v-for="city in cities" :key="city.id" class="col-lg-3 col-md-3 col-sm-6 mb-4">
+              <div class="event-grid-wrap">
+                <a :href="`/cities/${city.slug}`">
+                  <div class="event-grid-header">
+                    <img :src="city.image ? `/storage/cities/${city.image}` : ''" 
+                         width="369" 
+                         height="296" 
+                         class="img-fluid mx-auto" 
+                         :alt="city.name">
+                    <span class="event-grid-cat">{{ city.name }}</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row text-center mt-3 justify-content-center">
+            <div class="col-lg-8 col-md-8 col-sm-6 section-btn">
+              <a class="btn-hover default-btn" href="/city-properties">All Cities</a>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" id="whatsappMessage" value="Hello, I’d like to know about viable investment opportunities offered by real estate projects in Ajman">
+      </section>
+    </div>
+  </template>
+  
+  <script>
+  import axios from 'axios';
+  
+  export default {
     data() {
-        return {
-            cities: {
-                data: [],
-                current_page: 1,
-                last_page: 1,
-                next_page_url: null,
-                prev_page_url: null,
-            },
-        };
+      return {
+        city: {},
+        cities: [],
+        routeMapUrl: '/path/to/route-map-image.jpg', // Update this URL to your actual map image
+      };
     },
-    created() {
-        this.fetchCities('/api/cities');  
+    mounted() {
+      this.fetchCity();
+      this.fetchCities();
     },
     methods: {
-        async fetchCities(url) {
-            try {
-                const response = await axios.get(url); 
-                this.cities = response.data; 
-            } catch (error) {
-                console.error('Error fetching city data:', error);
-            }
+      async fetchCity() {
+        try {
+          // Assuming `:slug` is the dynamic parameter in the route
+          const slug = this.$route.params.slug;
+          const response = await axios.get(`/api/cities/${slug}`);
+          this.city = response.data; // Adjust if your response structure is different
+        } catch (error) {
+          console.error('Failed to fetch city:', error);
         }
+      },
+      async fetchCities() {
+        try {
+          const response = await axios.get('/api/cities');
+          this.cities = response.data.data; // Adjust if your response structure is different
+        } catch (error) {
+          console.error('Failed to fetch cities:', error);
+        }
+      }
     }
-};
-</script>
+  }
+  </script>
+  
 
-
+  
 <style scoped>
     h2,
     h4,
