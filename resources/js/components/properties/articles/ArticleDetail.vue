@@ -9,7 +9,7 @@
                     <div class="row">
                         <div v-for="article in articles" :key="article.id" class="col-12 col-md-6 col-lg-6 mb-4">
                             <div class="card">
-                                <a :href="`/article/${article.slug}`" target="_blank">
+                                <a :href="`/news-articles/${article.slug}`">
                                     <div class="listing-items">
                                         <div class="listing-shot-img">
                                             <img v-if="article.image" :src="`/storage/${article.image}`" class="img-responsive" :alt="article.name">
@@ -20,12 +20,12 @@
                                     <div class="listing-shot-caption">
                                         <small><i>&nbsp;</i> {{ article.category.name }} <span class="separator"></span>
                                             <span>{{ formatDate(article.created_at) }}</span> </small>
-                                        <a href="">
+                                        <a :href="`/news-articles/${article.slug}`">
                                             <h4>{{ article.name }}</h4>
                                         </a>
                                         <p class="my-1">{{ truncateText(article.description, 100) }}</p>
-                                        <a class="btn-hover default-btn mt-3" :href="`/article/${article.slug}`"
-                                            target="_blank">Read More</a>
+                                        <a class="btn-hover default-btn mt-3" :href="`/news-articles/${article.slug}`">Read More</a>
+
                                     </div>
                                 </div>
                             </div>

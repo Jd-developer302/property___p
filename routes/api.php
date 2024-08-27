@@ -52,7 +52,6 @@ Route::prefix('admin')->group(function () {
 
 Route::get('frontend/about', [FrontendAboutController::class, 'index']);
 Route::get('/articles', [NewsArticleController::class, 'index']);
+Route::get('/articles/{slug}', [NewsArticleController::class, 'show']);
 Route::get('/articles/top', [NewsArticleController::class, 'topArticles']);
-Route::get('/articles/{id}/similar', [NewsArticleController::class, 'similarArticles']);
-Route::get('/articles/slug/{slug}', [NewsArticleController::class, 'showBySlug']);
 Route::post('/contact', [ContactController::class, 'submitContactForm']);

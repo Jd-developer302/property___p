@@ -47,6 +47,7 @@ import CityPropertiesIndex from '../components/properties/cities/index.vue';
 import LocationIndex from '../components/properties/location/index.vue';
 import ForeignInvestorIndex from '../components/properties/foreigninvestors/index.vue';
 import NewArticleIndex from '../components/properties/articles/index.vue';
+import ViewArticleIndex from '../components/properties/articles/ViewBySlug.vue';
 import MortgageIndex from '../components/properties/mortgage/index.vue';
 import InvestmentIndex from '../components/properties/investment/index.vue';
 //notFound
@@ -108,6 +109,8 @@ const routes = [
     {path: '/foreign-investors',component: ForeignInvestorIndex
     },
     {path: '/news-articles',component: NewArticleIndex
+    },
+    {path: '/news-articles/:slug',component: ViewArticleIndex
     },
     {path: '/mortgage-offers',component: MortgageIndex
     },
