@@ -52,6 +52,12 @@
         <span>Location</span>
       </router-link>
     </li>
+    <li class="nav-item">
+      <router-link class="nav-link" to="/admin/foreign-investors">
+        <i class="fa-solid fa-money-bill"></i>
+        <span>Foreign Investors</span>
+      </router-link>
+    </li>
     <hr class="sidebar-divider" />
     <li class="nav-item">
       <router-link class="nav-link" to="/admin/category">
@@ -63,6 +69,12 @@
       <router-link class="nav-link" to="/admin/article">
         <i class="fas fa-th-list"></i>
         <span>Article</span>
+      </router-link>
+    </li>
+    <li class="nav-item">
+      <router-link class="nav-link" to="/admin/mortgage-loan">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Mortgage & Home Loan</span>
       </router-link>
     </li>
 

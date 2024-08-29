@@ -3,7 +3,8 @@
     <div class="breadcrumb__area">
         <div class="breadcrumb__thumb" :style="{ backgroundImage: `url(${thumb1})` }"></div>
         <div class="breadcrumb__content">
-            <h2 class="breadcrumb__title">CITIES</h2>
+            <h2 class="breadcrumb__title">{{ city.name }}</h2>
+            <p class="text-white">Total Area: <strong>{{ city.total_area }} KM<sup>2</sup></strong></p>
             <div class="breadcrumb__menu">
                 <nav>
                     <ul>
@@ -27,7 +28,43 @@
     import DisDetail from '../cities/DisDetail.vue'
     import thumb1 from '@/assets/img/search-bg.jpg';
 </script>
-
+<script>
+import axios from 'axios';
+import routeMapImage from '@/assets/img/defaultloc.webp';
+export default {
+  data() {
+    return {
+      city: {},
+      cities: [],
+      routeMapImage,
+    };
+  },
+  mounted() {
+    this.fetchCity();
+    this.fetchCities();
+  },
+  methods: {
+    async fetchCity() {
+      try {
+        // Use the specific city slug or ID to fetch the data
+        const citySlug = this.$route.params.slug; // Assuming you have a slug in the route
+        const response = await axios.get(`/api/cities/${citySlug}`);
+        this.city = response.data; 
+      } catch (error) {
+        console.error('Failed to fetch city:', error);
+      }
+    },
+    async fetchCities() {
+      try {
+        const response = await axios.get('/api/cities');
+        this.cities = response.data.data; 
+      } catch (error) {
+        console.error('Failed to fetch cities:', error);
+      }
+    }
+  }
+}
+</script>
 <style scoped>
     .breadcrumb__area {
         position: relative;

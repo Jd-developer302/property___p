@@ -28,6 +28,7 @@
     import thumb1 from '@/assets/img/search-bg.jpg';
 </script>
 
+
 <style scoped>
     .breadcrumb__area {
         position: relative;

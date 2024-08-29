@@ -6,26 +6,23 @@
             <h2 class="breadcrumb__title">Foreign Investors</h2>
             <div class="breadcrumb__menu">
                 <nav>
-                    <ul>
-                        <li class="breadcrumb-list"><span><a href="/" title="Home">Home</a></span></li>
-                        <li class="breadcrumb-list"><span><i class="fa-solid fa-angle-double-right"></i><a
-                                    href="/projects">Foreign Investors</a></span></li>
-                    </ul>
+                    <NameSlug/>
                 </nav>
             </div>
            
         </div>
         
     </div>
-    <ForeignDetail/>
+    <InvestSlug/>
     <Footer />
 </template>
 
 <script setup>
     import Footer from '../home/Footer.vue';
     import Header from '../home/Header.vue';
-    import ForeignDetail from '../foreigninvestors/ForeignDetail.vue'
+    import InvestSlug from '../foreigninvestors/InvestSlug.vue'
     import thumb1 from '@/assets/img/bnn1.jpg';
+import NameSlug from './NameSlug.vue';
 </script>
 
 <style scoped>

@@ -1,33 +1,10 @@
 <template>
-    <Header />
-    <div class="breadcrumb__area">
-        <div class="breadcrumb__thumb" :style="{ backgroundImage: `url(${thumb1})` }"></div>
-        <div class="breadcrumb__content">
-            <h2 class="breadcrumb__title">Foreign Investors</h2>
-            <div class="breadcrumb__menu">
-                <nav>
-                    <ul>
+     <ul>
                         <li class="breadcrumb-list"><span><a href="/" title="Home">Home</a></span></li>
                         <li class="breadcrumb-list"><span><i class="fa-solid fa-angle-double-right"></i><a
                                     href="/projects">Foreign Investors</a></span></li>
                     </ul>
-                </nav>
-            </div>
-           
-        </div>
-        
-    </div>
-    <ForeignDetail/>
-    <Footer />
 </template>
-
-<script setup>
-    import Footer from '../home/Footer.vue';
-    import Header from '../home/Header.vue';
-    import ForeignDetail from '../foreigninvestors/ForeignDetail.vue'
-    import thumb1 from '@/assets/img/bnn1.jpg';
-</script>
-
 <style scoped>
     .breadcrumb__area {
         position: relative;

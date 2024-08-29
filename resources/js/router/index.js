@@ -35,6 +35,14 @@ import EditCategory from '../components/admin/category/edit.vue';
 import Article from '../components/admin/article/index.vue';
 import CreateArticle from '../components/admin/article/create.vue';
 import EditArticle from '../components/admin/article/edit.vue';
+////admin/Foreign Investor
+import Foreign from '../components/admin/foreign-investors/index.vue';
+import CreateForeign from '../components/admin/foreign-investors/create.vue';
+import EditForeign from '../components/admin/foreign-investors/edit.vue';
+///admin/Mortgage & Home Loan
+import MortgageLoan from '../components/admin/mortgage/index.vue';
+import MortgageLoanH from '../components/admin/mortgage/create.vue';
+import MortgageLoanHo from '../components/admin/mortgage/edit.vue';
 
 //websiteHome
 import HomePropertiesIndex from '../components/properties/home/index.vue';
@@ -48,6 +56,7 @@ import CityPrimeIndex from '../components/properties/cities/PrimeLocation.vue';
 import CityDisIndex from '../components/properties/cities/DisCity.vue';
 import LocationIndex from '../components/properties/location/index.vue';
 import ForeignInvestorIndex from '../components/properties/foreigninvestors/index.vue';
+import ForeignInvestorDIndex from '../components/properties/foreigninvestors/InvestDetail.vue';
 import NewArticleIndex from '../components/properties/articles/index.vue';
 import ViewArticleIndex from '../components/properties/articles/ViewBySlug.vue';
 import MortgageIndex from '../components/properties/mortgage/index.vue';
@@ -85,7 +94,14 @@ const routes = [
     {path: '/admin/article',component: Article,meta: { requiresAuth: true }},
     {path: '/admin/article/create',component: CreateArticle,meta: { requiresAuth: true }},
     { path: '/admin/article/edit/:id', component: EditArticle, meta: { requiresAuth: true } },
-
+    //admin/Foreign Investors
+    {path: '/admin/foreign-investors',component: Foreign,meta: { requiresAuth: true }},
+    {path: '/admin/foreign-investors/create',component: CreateForeign,meta: { requiresAuth: true }},
+    { path: '/admin/foreign-investors/edit/:id', component: EditForeign, meta: { requiresAuth: true } },
+    //admin/Mortgage & Home Loan
+    {path: '/admin/mortgage-loan',component: MortgageLoan,meta: { requiresAuth: true }},
+    {path: '/admin/mortgage-loan/create',component: MortgageLoanH,meta: { requiresAuth: true }},
+    { path: '/admin/mortgage-loan/edit/:id', component: MortgageLoanHo, meta: { requiresAuth: true } },
 
     { path: '/Project',component: Project, meta: { requiresAuth: true }},
     { path: '/register',name: 'Register',component: RegistrationComponent,},
@@ -108,12 +124,13 @@ const routes = [
     },
     {path: '/city-properties',component: CityPropertiesIndex
     },
-    {path: '/cities/:slug',name:'CityDisIndex',component: CityDisIndex
+    {path: '/:slug',name:'CityDisIndex',component: CityDisIndex
     },
     {  path: '/cities',  name: 'CityPrimeIndex',  component: CityPrimeIndex,props: (route) => ({ city: route.query.city })
       },
     {path: '/foreign-investors',component: ForeignInvestorIndex
     },
+    {path: '/foreign-investors/:slug',name:'ForeignInvestorDIndex',component: ForeignInvestorDIndex},
     {path: '/news-articles',component: NewArticleIndex
     },
     {path: '/news-articles/:slug',component: ViewArticleIndex

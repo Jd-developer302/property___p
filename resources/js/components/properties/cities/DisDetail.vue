@@ -21,7 +21,7 @@
                 <h2>ROUTE MAP</h2>
               </div>
               <div class="card border-0 contact-box">
-                <img :src="routeMapUrl" alt="Route Map" class="img-fluid">
+                <img :src="routeMapImage" alt="Route Map" class="img-fluid">
               </div>
             </div>
           </div>
@@ -39,7 +39,8 @@
             </div>
           </div>
           <div id="othercityId" class="row">
-            <div v-for="city in cities" :key="city.id" class="col-lg-3 col-md-3 col-sm-6 mb-4">
+            <!-- Limit the number of cities displayed to 4 -->
+            <div v-for="city in cities.slice(0, 4)" :key="city.id" class="col-lg-3 col-md-3 col-sm-6 mb-4">
               <div class="event-grid-wrap">
                 <a :href="`/cities/${city.slug}`">
                   <div class="event-grid-header">
@@ -67,13 +68,13 @@
   
   <script>
   import axios from 'axios';
-  
+  import routeMapImage from '@/assets/img/defaultloc.webp';
   export default {
     data() {
       return {
         city: {},
         cities: [],
-        routeMapUrl: '/path/to/route-map-image.jpg', // Update this URL to your actual map image
+        routeMapImage,
       };
     },
     mounted() {
@@ -83,10 +84,10 @@
     methods: {
       async fetchCity() {
         try {
-          // Assuming `:slug` is the dynamic parameter in the route
-          const slug = this.$route.params.slug;
-          const response = await axios.get(`/api/cities/${slug}`);
-          this.city = response.data; // Adjust if your response structure is different
+          // Use the specific city slug or ID to fetch the data
+          const citySlug = this.$route.params.slug; // Assuming you have a slug in the route
+          const response = await axios.get(`/api/cities/${citySlug}`);
+          this.city = response.data; 
         } catch (error) {
           console.error('Failed to fetch city:', error);
         }
@@ -94,7 +95,7 @@
       async fetchCities() {
         try {
           const response = await axios.get('/api/cities');
-          this.cities = response.data.data; // Adjust if your response structure is different
+          this.cities = response.data.data; 
         } catch (error) {
           console.error('Failed to fetch cities:', error);
         }
@@ -102,6 +103,8 @@
     }
   }
   </script>
+  
+  
   
 
   

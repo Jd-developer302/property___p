@@ -132,12 +132,12 @@ export default {
     },
     data() {
         return {
-            article: null, // Initialize article as null to handle loading state
+            article: null, 
         };
     },
     computed: {
         formattedDate() {
-            // Format the date to display (e.g., "17 Jun 2020")
+           
             return this.article
                 ? new Date(this.article.created_at).toLocaleDateString('en-GB', {
                       day: '2-digit',

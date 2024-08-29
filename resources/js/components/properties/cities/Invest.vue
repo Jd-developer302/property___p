@@ -10,7 +10,7 @@
                     <div id="ContentPlaceHolder1_LocationId" class="row m-0 mb-3">
                         <div v-for="city in cities.data" :key="city.id" class="verticleilist listing-shot">
                             <div class="signle-vert-listing-item loc-list">
-                                <a class="listing-item"  :href="`/cities/${city.slug}`">
+                                <a class="listing-item"  :href="`/${city.slug}`">
                                     <div class="listing-items">
                                         <div class="listing-shot-img">
                                             <img :src="city.image ? `/storage/cities/${city.image}` : 'default-image.jpg'"
@@ -24,7 +24,7 @@
                                         <p class="my-1"><small>Total Area : </small><strong>{{ city.total_area }} KM<sup>2</sup></strong></p>
                                         <p class="my-1"><small>Density : </small><strong>{{ city.density }} Per KM<sup>2</sup></strong></p>
                                         <p class="my-1"><small>Population : </small><strong>{{ city.population }}</strong></p>
-                                        <a class="btn-hover default-btn mt-3" :href="`/cities/${city.slug}`">Read More</a>
+                                        <a class="btn-hover default-btn mt-3" :href="`/${city.slug}`">Read More</a>
                                     </div>
                                 </div>
                             </div>

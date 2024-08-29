@@ -10,10 +10,15 @@ use App\Http\Controllers\API\Admin\CityController;
 use App\Http\Controllers\API\Admin\LocationController;
 use App\Http\Controllers\API\Admin\CategoryController;
 use App\Http\Controllers\API\Admin\ArticleController;
+use App\Http\Controllers\API\Admin\ForeignInvestorController;
+use App\Http\Controllers\API\Admin\MortgagesController;
 use App\Http\Controllers\API\FrontEnd\ContactController;
 use App\Http\Controllers\API\FrontEnd\AboutController as FrontendAboutController;
 use App\Http\Controllers\API\FrontEnd\NewsArticleController;
 use App\Http\Controllers\API\FrontEnd\CityController as city;
+use App\Http\Controllers\API\FrontEnd\LocController;
+use App\Http\Controllers\API\FrontEnd\InvestorsController;
+use App\Http\Controllers\API\FrontEnd\HomeLoanController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,7 +52,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('locations', LocationController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('articles', ArticleController::class);
-
+    Route::resource('foreign-investors', ForeignInvestorController::class);
+    Route::resource('mortgages', MortgagesController::class);
+    
 });
 
 
@@ -58,3 +65,7 @@ Route::get('/articles/top', [NewsArticleController::class, 'topArticles']);
 Route::post('/contact', [ContactController::class, 'submitContactForm']);
 Route::get('cities', [city::class, 'index']);
 Route::get('cities/{slug}', [city::class, 'show']);
+Route::get('locations', [LocController::class, 'index']);
+Route::get('investors', [InvestorsController::class, 'index']);
+Route::get('investors/slug/{slug}', [InvestorsController::class, 'showBySlug']);
+Route::get('/mortgage-loans-home', [HomeLoanController::class, 'index']);
