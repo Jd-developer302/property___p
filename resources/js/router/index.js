@@ -43,7 +43,18 @@ import EditForeign from '../components/admin/foreign-investors/edit.vue';
 import MortgageLoan from '../components/admin/mortgage/index.vue';
 import MortgageLoanH from '../components/admin/mortgage/create.vue';
 import MortgageLoanHo from '../components/admin/mortgage/edit.vue';
-
+///admin/PDf
+import Pdf from '../components/admin/pdf/index.vue';
+import PdfC from '../components/admin/pdf/create.vue';
+import PdfEdit from '../components/admin/pdf/edit.vue';
+///admin/Developer
+import DeveloperI from '../components/admin/developer/index.vue';
+import DeveloperIC from '../components/admin/developer/create.vue';
+import DeveloperIE from '../components/admin/developer/edit.vue';
+///admin//Community
+import ComuunityI from '../components/admin/community/index.vue';
+import ComuunityIC from '../components/admin/community/create.vue';
+import ComuunityIE from '../components/admin/community/edit.vue';
 //websiteHome
 import HomePropertiesIndex from '../components/properties/home/index.vue';
 import ContactPropertiesIndex from '../components/properties/contact/contact.vue';
@@ -102,6 +113,18 @@ const routes = [
     {path: '/admin/mortgage-loan',component: MortgageLoan,meta: { requiresAuth: true }},
     {path: '/admin/mortgage-loan/create',component: MortgageLoanH,meta: { requiresAuth: true }},
     { path: '/admin/mortgage-loan/edit/:id', component: MortgageLoanHo, meta: { requiresAuth: true } },
+    ///admin/PDf
+    {path: '/admin/pdf',component: Pdf,meta: { requiresAuth: true }},
+    {path: '/admin/pdf/create',component: PdfC,meta: { requiresAuth: true }},
+    { path: '/admin/pdfs/:id/edit',   name: 'PdfEdit',   component: PdfEdit,   meta: { requiresAuth: true }},
+    ///admin/Developer
+    {path: '/admin/developers',component: DeveloperI,meta: { requiresAuth: true }},
+    {path: '/admin/developers/create',component: DeveloperIC,meta: { requiresAuth: true }},
+    { path: '/admin/developers/:id/edit',   name: 'DeveloperIE',   component: DeveloperIE,   meta: { requiresAuth: true }},
+    ///admin/Developer
+    {path: '/admin/communities',component: ComuunityI,meta: { requiresAuth: true }},
+    {path: '/admin/communities/create',component: ComuunityIC,meta: { requiresAuth: true }},
+    { path: '/admin/communities/:id/edit',   name: 'ComuunityIE',   component: ComuunityIE,   meta: { requiresAuth: true }},
 
     { path: '/Project',component: Project, meta: { requiresAuth: true }},
     { path: '/register',name: 'Register',component: RegistrationComponent,},

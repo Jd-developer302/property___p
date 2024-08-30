@@ -10,7 +10,7 @@ class HomeLoanController extends Controller
 {
     public function index()
     {
-        $homeLoans = Mortgage::all(); // Fetch all home loans
+        $homeLoans = Mortgage::all(); 
         return response()->json($homeLoans);
     }
 }

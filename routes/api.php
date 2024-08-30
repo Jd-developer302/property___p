@@ -12,6 +12,9 @@ use App\Http\Controllers\API\Admin\CategoryController;
 use App\Http\Controllers\API\Admin\ArticleController;
 use App\Http\Controllers\API\Admin\ForeignInvestorController;
 use App\Http\Controllers\API\Admin\MortgagesController;
+use App\Http\Controllers\API\Admin\PdfController;
+use App\Http\Controllers\API\Admin\CommunityController;
+use App\Http\Controllers\API\Admin\DeveloperController;
 use App\Http\Controllers\API\FrontEnd\ContactController;
 use App\Http\Controllers\API\FrontEnd\AboutController as FrontendAboutController;
 use App\Http\Controllers\API\FrontEnd\NewsArticleController;
@@ -54,6 +57,13 @@ Route::prefix('admin')->group(function () {
     Route::resource('articles', ArticleController::class);
     Route::resource('foreign-investors', ForeignInvestorController::class);
     Route::resource('mortgages', MortgagesController::class);
+    Route::get('/pdfs', [PdfController::class, 'index']); 
+    Route::post('/pdfs', [PdfController::class, 'store']); 
+    Route::get('/pdfs/{id}', [PdfController::class, 'show']); 
+    Route::put('/pdfs/{id}', [PdfController::class, 'update']); 
+    Route::delete('/pdfs/{id}', [PdfController::class, 'destroy']); 
+    Route::resource('developers', DeveloperController::class);
+    Route::resource('communities', CommunityController::class);
     
 });
 
