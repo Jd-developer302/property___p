@@ -14,6 +14,7 @@ use App\Http\Controllers\API\Admin\ForeignInvestorController;
 use App\Http\Controllers\API\Admin\MortgagesController;
 use App\Http\Controllers\API\Admin\PdfController;
 use App\Http\Controllers\API\Admin\CommunityController;
+use App\Http\Controllers\API\Admin\ProjectController;
 use App\Http\Controllers\API\Admin\DeveloperController;
 use App\Http\Controllers\API\FrontEnd\ContactController;
 use App\Http\Controllers\API\FrontEnd\AboutController as FrontendAboutController;
@@ -64,6 +65,8 @@ Route::prefix('admin')->group(function () {
     Route::delete('/pdfs/{id}', [PdfController::class, 'destroy']); 
     Route::resource('developers', DeveloperController::class);
     Route::resource('communities', CommunityController::class);
+    Route::resource('projects', ProjectController::class);
+
     
 });
 

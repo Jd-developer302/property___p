@@ -22,11 +22,24 @@
       </router-link >
     </li>
     <li class="nav-item">
-      <router-link class="nav-link" to="/admin/about">
+      <router-link class="nav-link" to="/admin/projects">
         <i class="fa-solid fa-address-card"></i>
-        <span>About</span>
+        <span>Projects</span>
       </router-link>
     </li>
+    <li class="nav-item">
+      <router-link class="nav-link" to="/admin/developers">
+        <i class="fa-solid fa-code"></i>
+        <span>Developers</span>
+      </router-link>
+      <li class="nav-item">
+      <router-link class="nav-link" to="/admin/communities">
+        <i class="fa-solid fa-person"></i>
+        <span>Communties</span>
+      </router-link>
+    </li>
+    </li>
+    
     <hr class="sidebar-divider" />
     <li class="nav-item">
       <router-link class="nav-link" to="/admin/country">
@@ -77,7 +90,12 @@
         <span>Mortgage & Home Loan</span>
       </router-link>
     </li>
-
+    <li class="nav-item">
+      <router-link class="nav-link" to="/admin/about">
+        <i class="fa-solid fa-address-card"></i>
+        <span>About</span>
+      </router-link>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider" />
 

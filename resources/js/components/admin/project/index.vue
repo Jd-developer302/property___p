@@ -1,16 +1,16 @@
 <template>
     <Base>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Communities List</h1>
+            <h1 class="h3 mb-0 text-gray-800">Projects List</h1>
             <li class="breadcrumb-item" style="list-style: none;">
-                <router-link class="btn btn-primary" to="/admin/communities/create">+ New</router-link>
+                <router-link class="btn btn-primary" to="/admin/projects/create">+ New</router-link>
             </li>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Communities</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -19,30 +19,26 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Slug</th>
-                                        <th>Description</th>
+                                        <th>Apartments</th>
                                         <th>Image</th>
-                                        <th>Video</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-if="communities.length === 0">
-                                        <td colspan="6" class="text-center">No communities found.</td>
+                                    <tr v-if="projects.length === 0">
+                                        <td colspan="6" class="text-center">No projects found.</td>
                                     </tr>
-                                    <tr v-else v-for="community in communities" :key="community.id">
-                                        <td>{{ community.name }}</td>
-                                        <td>{{ community.slug }}</td>
-                                        <td>{{ stripHtmlTags(community.description).slice(0, 100) }}...</td>
+                                    <tr v-else v-for="project in projects" :key="project.id">
+                                        <td>{{ project.name }}</td>
+                                        <td>{{ project.slug }}</td>
+                                        <td>{{ stripHtmlTags(project.apartments).slice(0, 100) }}...</td>
                                         <td>
-                                            <img :src="getImageUrl(community.image)" alt="Community Image" width="100">
+                                            <img :src="getImageUrl(project.image)" alt="Project Image" width="100">
                                         </td>
+                                       
                                         <td>
-                                            <a v-if="community.video" :href="getVideoUrl(community.video)" target="_blank" class="btn btn-sm btn-info">View Video</a>
-                                            <span v-else>No Video</span>
-                                        </td>
-                                        <td>
-                                            <router-link :to="`/admin/communities/${community.id}/edit`" class="btn btn-sm btn-primary"><i class="fa-solid fa-pencil"></i></router-link>
-                                            <button @click="deleteCommunity(community.id)" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                            <router-link :to="`/admin/projects/${project.id}/edit`" class="btn btn-sm btn-primary"><i class="fa-solid fa-pencil"></i></router-link>
+                                            <button @click="deleteProject(project.id)" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -59,30 +55,31 @@
         </div>
     </Base>
 </template>
+
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import Base from '../layouts/Base.vue'; 
 
-const communities = ref([]);
+const projects = ref([]);
 const currentPage = ref(1);
 const perPage = ref(10);
 const totalPages = ref(1);
 
 const fetchData = async () => {
     try {
-        const response = await axios.get('/api/admin/communities', {
+        const response = await axios.get('/api/admin/projects', {
             params: {
                 page: currentPage.value,
                 perPage: perPage.value,
             },
         });
 
-        communities.value = response.data.data;
+        projects.value = response.data.data;
         totalPages.value = response.data.meta ? response.data.meta.total_pages : 1;
     } catch (error) {
-        console.error("Error fetching communities:", error);
-        alert('Failed to load communities. Please try again later.');
+        console.error("Error fetching projects:", error);
+        alert('Failed to load projects. Please try again later.');
     }
 };
 
@@ -100,13 +97,13 @@ const nextPage = () => {
     }
 };
 
-const deleteCommunity = async (id) => {
+const deleteProject = async (id) => {
     try {
-        await axios.delete(`/api/admin/communities/${id}`);
+        await axios.delete(`/api/admin/projects/${id}`);
         fetchData();
     } catch (error) {
-        console.error("Error deleting community:", error);
-        alert('Failed to delete community. Please try again later.');
+        console.error("Error deleting project:", error);
+        alert('Failed to delete project. Please try again later.');
     }
 };
 
@@ -114,9 +111,7 @@ const getImageUrl = (image) => {
     return image ? `/storage/${image}` : '/images/default-image.png'; 
 };
 
-const getVideoUrl = (video) => {
-    return video ? `/storage/${video}` : ''; 
-};
+
 
 const stripHtmlTags = (html) => {
     const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -127,7 +122,6 @@ onMounted(() => {
     fetchData();
 });
 </script>
-
 
 <style scoped>
 .pagination {

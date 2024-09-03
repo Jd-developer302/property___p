@@ -55,6 +55,12 @@ import DeveloperIE from '../components/admin/developer/edit.vue';
 import ComuunityI from '../components/admin/community/index.vue';
 import ComuunityIC from '../components/admin/community/create.vue';
 import ComuunityIE from '../components/admin/community/edit.vue';
+///admin//Projects
+import ProjectI from '../components/admin/project/index.vue';
+import ProjectC from '../components/admin/project/create.vue';
+import ProjectE from '../components/admin/project/edit.vue';
+
+
 //websiteHome
 import HomePropertiesIndex from '../components/properties/home/index.vue';
 import ContactPropertiesIndex from '../components/properties/contact/contact.vue';
@@ -125,6 +131,12 @@ const routes = [
     {path: '/admin/communities',component: ComuunityI,meta: { requiresAuth: true }},
     {path: '/admin/communities/create',component: ComuunityIC,meta: { requiresAuth: true }},
     { path: '/admin/communities/:id/edit',   name: 'ComuunityIE',   component: ComuunityIE,   meta: { requiresAuth: true }},
+    ///admin/Projects
+    {path: '/admin/projects',component: ProjectI,meta: { requiresAuth: true }},
+    {path: '/admin/projects/create',component: ProjectC,meta: { requiresAuth: true }},
+    { path: '/admin/projects/:id/edit',   name: 'ProjectE',   component: ProjectE,   meta: { requiresAuth: true }},
+
+
 
     { path: '/Project',component: Project, meta: { requiresAuth: true }},
     { path: '/register',name: 'Register',component: RegistrationComponent,},
