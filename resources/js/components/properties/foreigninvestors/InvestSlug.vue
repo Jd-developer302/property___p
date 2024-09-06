@@ -31,7 +31,6 @@
         </div>
     </section>
 </template>
-
 <script>
 import axios from 'axios';
 import ContactArticle from '../articles/ContactArticle.vue';

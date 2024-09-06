@@ -23,6 +23,9 @@ use App\Http\Controllers\API\FrontEnd\CityController as city;
 use App\Http\Controllers\API\FrontEnd\LocController;
 use App\Http\Controllers\API\FrontEnd\InvestorsController;
 use App\Http\Controllers\API\FrontEnd\HomeLoanController;
+use App\Http\Controllers\API\FrontEnd\ProjectsController;
+use App\Http\Controllers\API\FrontEnd\DevelopersController;
+use App\Http\Controllers\API\FrontEnd\CommunitiesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -82,3 +85,14 @@ Route::get('locations', [LocController::class, 'index']);
 Route::get('investors', [InvestorsController::class, 'index']);
 Route::get('investors/slug/{slug}', [InvestorsController::class, 'showBySlug']);
 Route::get('/mortgage-loans-home', [HomeLoanController::class, 'index']);
+Route::get('/projects', [ProjectsController::class, 'index']);
+Route::get('/projects/total-by-community', [ProjectsController::class, 'getTotalProjectsByCommunity']);
+Route::get('/projects/total-by-developer', [ProjectsController::class, 'getTotalProjectsByDeveloper']);
+Route::get('/developers/{developerId}/projects', [DevelopersController::class, 'getAllProjectsByDeveloper']);
+Route::get('/developers/{developerId}/new-launches', [DevelopersController::class, 'getNewLaunchesByDeveloper']);
+Route::get('/developers/{developerId}/near-completion', [DevelopersController::class, 'getNearCompletionProjectsByDeveloper']);
+Route::get('/all_developers', [DevelopersController::class, 'index']);
+Route::get('all_communities', [CommunitiesController::class, 'index']);
+Route::get('top-communities', [CommunitiesController::class, 'topCommunities']);
+Route::get('/communities/featured', [CommunitiesController::class, 'featuredCommunities']);
+Route::get('/communities/{slug}', [CommunitiesController::class, 'getBySlug']);

@@ -1,105 +1,57 @@
 <template>
-    <section class="tr-single-detail gray-bg">
+        <section class="gray">
         <div class="container">
+            <div class="col text-center">
+                <div class="sec-heading mx-auto">
+                    <h2>Featured Communities</h2>
+                    <p>Best of the locations for investment purposes in dubai and rest of UAE.</p>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-lg-8 col-md-9 col-sm-12">
-                    <div class="sec-heading mx-auto">
-                        <h2>Premium Residential Communities in the UAE</h2>
-                        <p>UAE is home to several residential communities that offer distinct lifestyle facilities.</p>
-                    </div>
-                    <div class="row">
-                        <div v-for="community in communities.data" :key="community.id" class="col-12 col-md-6 col-lg-6 mb-4">
-                            <div class="card">
-                                <a :href="`/communities/${community.slug}`" class="list-cat">{{ community.projects_count }} Projects</a>
-                                <a class="listing-item" :href="`/communities/${community.slug}`">
-                                    <div class="listing-items">
-                                        <div class="listing-shot-img">
-                                            <img width="800" height="450" :src="getImageUrl(community.image)" class="img-responsive" :alt="community.name">
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="card-body">
-                                    <div class="listing-shot-caption">
-                                        <h4>{{ community.name }}</h4>
-                                        <p class="my-1">{{ truncateText(community.description, 200) }}</p>
-                                        <a class="btn-hover default-btn mt-3" :href="`/communities/${community.slug}`">Read More</a>
-                                    </div>
-                                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
+                    <div class="event-grid-wrap">
+                        <a href="#" target="_blank">
+                            <div class="event-grid-header">
+                                <img width="800" height="450"
+                                    src="https://manage.goldpillars.ae/Township/Township_Image/37/Thumb/37.jpg"
+                                    class="img-fluid mx-auto" alt="Emaar Beachfront">
+                                <span class="event-grid-cat">Emaar Beachfront</span>
                             </div>
-                        </div>
+                        </a>
+
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-3 col-sm-12">
-                    <div class="widget-boxed">
-                        <ContactArticle/>
+                <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
+                    <div class="event-grid-wrap">
+                        <a href="#" target="_blank">
+                            <div class="event-grid-header">
+                                <img width="800" height="450"
+                                    src="https://manage.goldpillars.ae/Township/Township_Image/34/Thumb/34.jpg"
+                                    class="img-fluid mx-auto" alt="Aljada">
+                                <span class="event-grid-cat">Aljada</span>
+                            </div>
+                        </a>
+
                     </div>
-                    <div class="widget-boxed d-none d-xl-block">
-                        <TopCommunities/>       
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
+                    <div class="event-grid-wrap">
+                        <a href="#" target="_blank">
+                            <div class="event-grid-header">
+                                <img width="800" height="450"
+                                    src="https://manage.goldpillars.ae/Township/Township_Image/31/Thumb/31.jpg"
+                                    class="img-fluid mx-auto" alt="Yas Island">
+                                <span class="event-grid-cat">Yas Island</span>
+                            </div>
+                        </a>
+
                     </div>
                 </div>
             </div>
         </div>
+        <input type="hidden" id="whatsappMessage" value="I want more information on residential communities in UAE">
     </section>
-    <FeaturedCommunity/>
 </template>
-
-<script>
-import axios from 'axios';
-import ContactArticle from '../articles/ContactArticle.vue';
-import TopCommunities from './TopCommunities.vue';
-import FeaturedCommunity from './FeaturedCommunity.vue';
-
-export default {
-    components: {
-        ContactArticle,
-        TopCommunities,
-        FeaturedCommunity,
-    },
-    data() {
-        return {
-            communities: {
-                data: [],
-                current_page: 1,
-                last_page: 1,
-                prev_page_url: null,
-                next_page_url: null,
-            },
-            pages: [],
-        };
-    },
-    created() {
-        this.fetchCommunities();
-    },
-    methods: {
-        async fetchCommunities(url = '/api/all_communities') {
-            try {
-                const response = await axios.get(url);
-                this.communities = response.data;
-                this.pages = Array.from({ length: this.communities.last_page }, (_, i) => i + 1);
-            } catch (error) {
-                console.error('Error fetching communities:', error);
-            }
-        },
-        pageUrl(page) {
-            return `/frontend/communities?page=${page}`;
-        },
-        stripHtmlTags(html) {
-            const doc = new DOMParser().parseFromString(html, 'text/html');
-            return doc.body.textContent || '';
-        },
-        truncateText(text, length) {
-            const strippedText = this.stripHtmlTags(text);
-            return strippedText.length > length ? strippedText.substring(0, length) + '...' : strippedText;
-        },
-        getImageUrl(image) {
-            return image ? `/storage/${image}` : '/images/default-image.png';
-        },
-    },
-};
-</script>
-
-    
-
 
 <style scoped>
     h2,
@@ -1584,7 +1536,6 @@ export default {
 
     .listing-shot-img img {
         min-width: 365px;
-        height: 230px;
         object-fit: cover;
         transition: transform .35s ease-out;
         transform: translate3d(0, 0, 0) scale(1)

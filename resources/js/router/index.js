@@ -78,6 +78,7 @@ import NewArticleIndex from '../components/properties/articles/index.vue';
 import ViewArticleIndex from '../components/properties/articles/ViewBySlug.vue';
 import MortgageIndex from '../components/properties/mortgage/index.vue';
 import InvestmentIndex from '../components/properties/investment/index.vue';
+import CommunityBySlug from '../components/properties/communties/ComunityBySlug.vue';
 //notFound
 import NotFound from '../components/notFound.vue';
 
@@ -154,6 +155,7 @@ const routes = [
     },
     {path: '/communities',component: CommunityPropertiesIndex
     },
+    {path: '/communities/:slug',name:'CommunityBySlug',component: CommunityBySlug},
     {
         path:'/location',component:LocationIndex
     },
@@ -166,6 +168,7 @@ const routes = [
     {path: '/foreign-investors',component: ForeignInvestorIndex
     },
     {path: '/foreign-investors/:slug',name:'ForeignInvestorDIndex',component: ForeignInvestorDIndex},
+    
     {path: '/news-articles',component: NewArticleIndex
     },
     {path: '/news-articles/:slug',component: ViewArticleIndex

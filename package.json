@@ -13,11 +13,13 @@
     "dependencies": {
         "@fawmi/vue-google-maps": "^0.9.79",
         "jquery": "^3.7.1",
+        "slick-carousel": "^1.8.1",
         "slugify": "^1.6.6",
         "summernote": "^0.8.20",
         "swiper": "^11.1.9",
         "vue": "^3.4.35",
         "vue-loader": "^17.4.2",
-        "vue-router": "^4.4.2"
+        "vue-router": "^4.4.2",
+        "vue-slick-carousel": "^1.0.6"
     }
 }

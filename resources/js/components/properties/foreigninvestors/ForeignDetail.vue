@@ -120,7 +120,7 @@
             },
             // Strip HTML tags method
             stripHtmlTags(text) {
-                return text.replace(/<\/?[^>]+(>|$)/g, ""); // Remove HTML tags
+                return text.replace(/<\/?[^>]+(>|$)/g, ""); 
             },
             // Truncate text method
             truncateText(text, length) {

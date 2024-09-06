@@ -1,70 +1,54 @@
 <template>
     <div class="container mt-5">
-        <div class="row">
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="dev-bg  border-0 shadow rounded-0 mb-4">
-                    <img :src="thumb1" class="card-img-top" width="122" height="129" alt="Image 2">
-                    <div class="card-body">
-                        <a href="" style="text-decoration: none;">
-                            <figure class="shadow text-center ">
-                                <img width="122" height="129"
-                                    :src="thumb3"
-                                    alt="Damac Properties" class="img-fluid">
-                            </figure>
-                            <h4 class="card-title">Damac Properties</h4>
-                            <p class="card-text">Total Projects: <span>154</span></p>
-                            <span class="btn-hover default-btn" href="">View Details</span>
-                        </a>
-                    </div>
-                </div>
+      <div class="row" v-if="developers.length > 0">
+        <div class="col-md-4 mb-4" v-for="developer in developers" :key="developer.id">
+          <div class="dev-bg border-0 shadow rounded-0 mb-4">
+            <img :src="thumb1" class="card-img-top" width="122" height="129" alt="Default Background Image">
+            <div class="card-body">
+              <a :href="`/developer/${developer.id}`" style="text-decoration: none;">
+                <figure class="shadow text-center">
+                  <img width="122" height="129" :src="getImageUrl(developer.logo)" alt="Developer Logo" class="img-fluid">
+                </figure>
+                <h4 class="card-title">{{ developer.name }}</h4>
+                <p class="card-text">Total Projects: <span>{{ developer.projects_count }}</span></p>
+                <span class="btn-hover default-btn">View Details</span>
+              </a>
             </div>
-            <!-- Card 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="dev-bg  border-0 shadow rounded-0 mb-4">
-                    <img :src="thumb1" class="card-img-top" width="122" height="129" alt="Image 2">
-                    <div class="card-body">
-                        <a href="" style="text-decoration: none;">
-                            <figure class="shadow text-center ">
-                                <img width="122" height="129"
-                                    :src="thumb2"
-                                    alt="Damac Properties" class="img-fluid">
-                            </figure>
-                            <h4 class="card-title">Damac Properties</h4>
-                            <p class="card-text">Total Projects: <span>154</span></p>
-                            <span class="btn-hover default-btn" href="#">View Details</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="dev-bg  border-0 shadow rounded-0 mb-4">
-                    <img :src="thumb1" class="card-img-top" width="122" height="129" alt="Image 2">
-                    <div class="card-body">
-                        <a href="" style="text-decoration: none;">
-                            <figure class="shadow text-center ">
-                                <img width="122" height="129"
-                                    :src="thumb4"
-                                    alt="Damac Properties" class="img-fluid">
-                            </figure>
-                            <h4 class="card-title">Damac Properties</h4>
-                            <p class="card-text">Total Projects: <span>154</span></p>
-                            <span class="btn-hover default-btn" href="#">View Details</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
+      <div v-else>
+        <p>No developers found</p>
+      </div>
     </div>
-</template>
-
-<script setup>
-    import thumb1 from '@/assets/img/dev-bg.jpg';
-    import thumb2 from '@/assets/img/1.webp';
-    import thumb3 from '@/assets/img/13.webp';
-    import thumb4 from '@/assets/img/69.webp';
-</script>
+  </template>
+  
+  <script setup>
+  import { ref, onMounted } from 'vue';
+  import thumb1 from '@/assets/img/dev-bg.jpg'; 
+  import axios from 'axios';
+  
+  const developers = ref([]);
+  
+  const fetchDevelopers = async () => {
+    try {
+      const response = await axios.get('/api/all_developers');
+      developers.value = response.data.data;
+      console.log(developers.value); // Debugging to check if logos are present
+    } catch (error) {
+      console.error('Error fetching developers:', error);
+    }
+  };
+  
+  function getImageUrl(logo) {
+    return logo ? `${import.meta.env.VITE_APP_BASE_URL}/storage/logos/${logo}` : '/images/default-image.png'; 
+  }
+  
+  onMounted(() => {
+    fetchDevelopers();
+  });
+  </script>
+  
 
 <style scoped>
     .card {
