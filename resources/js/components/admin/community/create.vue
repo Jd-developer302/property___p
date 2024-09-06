@@ -2,7 +2,7 @@
     <Base>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Create Developer</h1>
+            <h1 class="h3 mb-0 text-gray-800">Create Community</h1>
             <li class="breadcrumb-item" style="list-style: none;">
                 <router-link class="btn btn-primary" to="/admin/communities">- Back</router-link>
             </li>
@@ -13,7 +13,7 @@
                 <div class="card shadow mb-4">
                     <!-- Card Body -->
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Create Developer</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Create Community</h6>
                     </div>
                     <div class="card-body">
                         <form @submit.prevent="submitForm" enctype="multipart/form-data">

@@ -71,18 +71,10 @@ const totalPages = ref(1);
 
 const fetchData = async () => {
     try {
-        const response = await axios.get('/api/admin/communities', {
-            params: {
-                page: currentPage.value,
-                perPage: perPage.value,
-            },
-        });
-
-        communities.value = response.data.data;
-        totalPages.value = response.data.meta ? response.data.meta.total_pages : 1;
+        const response = await axios.get('/api/admin/communities');
+        communities.value = response.data;
     } catch (error) {
-        console.error("Error fetching communities:", error);
-        alert('Failed to load communities. Please try again later.');
+        console.error('Error fetching categories:', error);
     }
 };
 

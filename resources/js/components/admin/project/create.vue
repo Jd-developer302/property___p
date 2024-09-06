@@ -9,9 +9,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <!-- Dropdown Card Example -->
+                <!-- Project Form Card -->
                 <div class="card shadow mb-4">
-                    <!-- Card Body -->
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Create Project</h6>
                     </div>
@@ -23,77 +22,79 @@
                                     <div class="form-group">
                                         <label class="form-label">Community</label>
                                         <select v-model="form.community_id" class="form-control" required>
+                                            <option disabled value="">Select Community</option>
                                             <option v-for="community in communities" :key="community.id" :value="community.id">
                                                 {{ community.name }}
                                             </option>
                                         </select>
                                     </div>
                                 </div>
-                                
                                 <!-- Developer Selection -->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Developer</label>
                                         <select v-model="form.developer_id" class="form-control" required>
+                                            <option disabled value="">Select Developer</option>
                                             <option v-for="developer in developers" :key="developer.id" :value="developer.id">
                                                 {{ developer.name }}
                                             </option>
                                         </select>
                                     </div>
                                 </div>
-                                
-                                <!-- Other Fields -->
+                                <!-- Project Name -->
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group">
-                                        <label class="form-label">Name</label>
-                                        <input type="text" v-model="form.name" class="form-control" name="name" required>
+                                        <label class="form-label">Project Name</label>
+                                        <input type="text" v-model="form.name" class="form-control" required>
                                     </div>
                                 </div>
-<!-- Apartments -->
-<div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- Apartments -->
+                                <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Apartments</label>
-                                        <input type="text" v-model="form.apartments" class="form-control" name="apartments">
+                                        <input type="text" v-model="form.apartments" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Payment Plan -->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Payment Plan</label>
-                                        <input type="text" v-model="form.payment_plan" class="form-control" name="payment_plan">
+                                        <input type="text" v-model="form.payment_plan" class="form-control">
                                     </div>
                                 </div>
-                                
+                                <!-- Image Upload -->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label class="form-label">Image</label>
-                                        <input type="file" class="form-control" @change="handleFileUpload('image', $event)" name="image">
+                                        <label class="form-label">Project Image</label>
+                                        <input type="file" class="form-control" @change="handleFileUpload('image', $event)">
                                     </div>
-                                </div>                                
+                                </div>
+                                <!-- Slug -->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Slug</label>
-                                        <input type="text" v-model="form.slug" class="form-control" name="slug" required>
+                                        <input type="text" v-model="form.slug" class="form-control" required>
                                     </div>
                                 </div>
+                                <!-- Down Payment -->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Down Payment</label>
-                                        <input type="text" v-model="form.down_payment" class="form-control" name="down_payment">
+                                        <input type="text" v-model="form.down_payment" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Handover -->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label class="form-label">Handover</label>
-                                        <input type="text" v-model="form.handover" class="form-control" name="handover">
+                                        <label class="form-label">Handover Date</label>
+                                        <input type="text" v-model="form.handover" class="form-control">
                                     </div>
                                 </div>
                                 <!-- Starting Price -->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label class="form-label">Starting Price</label>
-                                        <input type="text" v-model="form.starting_price" class="form-control" name="starting_price">
+                                        <input type="text" v-model="form.starting_price" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -108,14 +109,13 @@
     </Base>
 </template>
 
-
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import Base from '../layouts/Base.vue';
 
-
+// Form data
 const form = ref({
     community_id: '',
     developer_id: '',
@@ -126,80 +126,58 @@ const form = ref({
     handover: '',
     starting_price: '',
     image: null,
-    slug:'',
-
+    slug: '',
 });
 
 const communities = ref([]);
 const developers = ref([]);
-
 const router = useRouter();
 
+// Fetch communities and developers
 const fetchCommunities = async () => {
     try {
-        const response = await axios.get('/api/admin/communities'); 
-        communities.value = response.data;
+        const response = await axios.get('/api/admin/communities');
+        communities.value = response.data || [];
     } catch (error) {
         console.error('Failed to fetch communities:', error);
+        communities.value = [];
     }
 };
 
 const fetchDevelopers = async () => {
     try {
-        const response = await axios.get('/api/admin/developers'); 
-        developers.value = response.data;
+        const response = await axios.get('/api/admin/developers');
+        developers.value = response.data || [];
     } catch (error) {
         console.error('Failed to fetch developers:', error);
+        developers.value = [];
     }
 };
 
+// Handle file uploads
 const handleFileUpload = (field, event) => {
     form.value[field] = event.target.files[0];
 };
 
+// Submit form
 const submitForm = async () => {
     const formData = new FormData();
-    formData.append('community_id', form.value.community_id);
-    formData.append('developer_id', form.value.developer_id);
-    formData.append('name', form.value.name);
-    formData.append('apartments', form.value.apartments);
-    formData.append('payment_plan', form.value.payment_plan);
-    formData.append('down_payment', form.value.down_payment);
-    formData.append('handover', form.value.handover);
-    formData.append('starting_price', form.value.starting_price);
-    if (form.value.image) {
-        formData.append('image', form.value.image);
+    for (const key in form.value) {
+        formData.append(key, form.value[key]);
     }
-    formData.append('slug', form.value.slug);
 
     try {
         await axios.post('/api/admin/projects', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+            headers: { 'Content-Type': 'multipart/form-data' },
         });
         router.push('/admin/projects');
     } catch (error) {
-        console.error('There was an error!', error);
+        console.error('Submission failed:', error);
     }
 };
 
 onMounted(() => {
-    $('#summernote').summernote({
-        height: 300,
-        callbacks: {
-            onChange: function(contents) {
-                form.value.description = contents;
-            }
-        }
-    });
-
     fetchCommunities();
     fetchDevelopers();
 });
-
-onBeforeUnmount(() => {
-    $('#summernote').summernote('destroy');
-});
 </script>
-

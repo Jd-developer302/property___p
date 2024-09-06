@@ -25,4 +25,8 @@ class Developer extends Model
         
         $this->attributes['logo'] = $value ? 'logos/' . $value : null;
     }
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'developer_id');
+    }
 }

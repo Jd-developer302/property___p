@@ -61,6 +61,9 @@ class ProjectController extends Controller
 
 public function update(Request $request, $id)
 {
+    // Debugging: dump request data
+    // dd($request->all());
+
     $validator = Validator::make($request->all(), [
         'community_id' => 'required|integer|exists:communities,id',
         'developer_id' => 'required|integer|exists:developers,id',
@@ -108,6 +111,7 @@ public function update(Request $request, $id)
 
     return response()->json($project);
 }
+
 
 
     public function show($id)

@@ -14,8 +14,7 @@ class CommunityController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page', 15);
-        $communities = Community::paginate($perPage);
+        $communities = Community::all();
         return response()->json($communities);
     }
 

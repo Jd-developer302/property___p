@@ -15,4 +15,8 @@ class Community extends Model
         'image',
         'video',
     ];
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'community_id');
+    }
 }

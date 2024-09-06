@@ -160,7 +160,7 @@ const submitForm = async () => {
             formData.append(key, form.value[key]);
         }
     });
-
+    console.log(formData);
     try {
         const response = await axios.put(`/api/admin/articles/${form.value.id}`, formData, {
     headers: {

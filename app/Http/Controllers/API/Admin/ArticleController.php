@@ -77,6 +77,7 @@ class ArticleController extends Controller
 
     public function update(Request $request, $id)
 {
+    dd($request->all());
     $validator = Validator::make($request->all(), [
         'name' => 'required|string|max:255',
         'meta_title' => 'required|string|max:255',
@@ -90,6 +91,7 @@ class ArticleController extends Controller
         'status' => 'boolean',
         'created_by' => 'required|exists:users,name',
     ]);
+    
 
     if ($validator->fails()) {
         return response()->json([
