@@ -5,23 +5,22 @@
                 <div class="col-lg-8 col-md-9 col-sm-12">
                     <div class="sec-heading mx-auto">
                         <h2>Off-plan Projects in the UAE</h2>
-                        <p>
-                            Whether you are looking forward to buying or invest in homes, we
-                            help you pick up the best.
-                        </p>
+                        <p>Whether you are looking forward to buying or investing in homes, we help you pick the best.</p>
                     </div>
+
                     <div class="filter-row mb-3">
                         <div class="filter-option">
-                            <h4 id="TotalProjId">{{ projects.length }} Projects</h4>
+                            <h4 id="TotalProjId">{{ totalProjects }}</h4>
                         </div>
                         <div class="dropdown show">
-                            <select name="ddlSort" id="ddlSort" class="dropdown-menu show">
+                            <select name="ddlSort" id="ddlSort" class="dropdown-menu show" fdprocessedid="5yon8a">
                                 <option value="0">Select</option>
                                 <option value="1">Price High to Low</option>
                                 <option value="2">Price Low to High</option>
                             </select>
                         </div>
                     </div>
+
                     <div class="position-relative">
                         <span id="resId"></span>
                         <div class="loader-area d-none" id="pageloaderid">
@@ -34,54 +33,34 @@
                             <div v-for="project in projects" :key="project.id" class="proj-list-item mb-4">
                                 <div class="row no-gutters">
                                     <div class="col-md-5">
-                                        <a :href="project.link">
-                                            <img :src="project.imageUrl" :alt="project.name" class="img-fluid" />
+                                        <a :href="`/project/${project.slug}`">
+                                            <img :src="project.image" :alt="project.name" class="img-fluid">
                                         </a>
                                     </div>
                                     <div class="col-md-7">
                                         <div class="card rounded-0 proj-dtls border-0 shadow-sm">
                                             <div class="card-body p-3">
-                                                <h2>
-                                                    <a :href="project.link" :title="project.name">{{
-                                                        project.name
-                                                        }}</a>
-                                                </h2>
-                                                <h5>
-                                                    <a :href="'/developer/' + project.developer">{{
-                                                        project.developer
-                                                        }}</a>
-                                                </h5>
-                                                <p class="loc">{{ project.location }}</p>
+                                                <h2><a :href="`/project/${project.slug}`" :title="project.name">{{ project.name }}</a></h2>
+                                                <h5><a :href="`/developer/${project.developer.slug}`">{{ project.developer.name }}</a></h5>
+                                                <p class="loc">{{ project.community.name }}</p>
                                                 <div class="row summry">
                                                     <div class="col-6 col-md-6">
-                                                        <p>
-                                                            <span>{{ project.propertyType }}</span>
-                                                            {{ project.bedrooms }}
-                                                        </p>
+                                                        <p><span>Apartments</span> {{ project.apartments }}</p>
                                                     </div>
                                                     <div class="col-6 col-md-6">
-                                                        <p>
-                                                            <span>Payment Plan</span>{{ project.paymentPlan }}
-                                                        </p>
+                                                        <p><span>Payment Plan</span>{{ project.payment_plan }}</p>
                                                     </div>
                                                     <div class="col-6 col-md-6">
-                                                        <p>
-                                                            <span>Down Payment</span>{{ project.downPayment }}
-                                                        </p>
+                                                        <p><span>Down Payment</span>{{ project.down_payment }}</p>
                                                     </div>
                                                     <div class="col-6 col-md-6">
-                                                        <p>
-                                                            <span>Handover</span>{{ project.handover }}
-                                                        </p>
+                                                        <p><span>Handover</span>{{ project.handover }}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-footer bg-transparent py-2">
-                                                <p class="float-left price">
-                                                    <span>Starting Price</span>{{ project.startingPrice }}
-                                                </p>
-                                                <a class="btn-hover default-btn float-right"
-                                                    >Property Details</a>
+                                                <p class="float-left price"><span>Starting Price</span>{{ project.starting_price }}</p>
+                                                <a class="btn-hover default-btn float-right" :href="`/project/${project.slug}`">Property Details</a>
                                             </div>
                                         </div>
                                     </div>
@@ -89,185 +68,65 @@
                             </div>
                         </div>
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination" id="divProjpagingId">
+                            <!-- Pagination links will be dynamically generated here -->
+                        </ul>
+                    </nav>
                 </div>
                 <div class="col-lg-4 col-md-3 col-sm-12">
                     <div class="widget-boxed">
-
-                        <div class="widget-boxed-header">
-                            <h4>Get in touch</h4>
-                        </div>
-                        <div class="widget-boxed-body">
-                            <div class="booking-form">
-                                <form @submit.prevent="submitForm">
-                                    <div class="form-group">
-                                        <label for="txtName"></label>
-                                        <input v-model="form.name" type="text" id="name" class="form-control"
-                                            placeholder="Name" />
-                                        <span v-if="errors.name">{{ errors.name }}</span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="txtEmail"></label>
-                                        <input v-model="form.email" type="email" id="email" class="form-control"
-                                            placeholder="Email Id *" />
-                                        <span v-if="errors.email">{{ errors.email }}</span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="ddlQueryType"></label>
-                                        <select v-model="form.type" id="type" class="form-control">
-                                            <option value="individual">Individual</option>
-                                            <option value="agent">Agent</option>
-                                            <option value="investor">Investor</option>
-                                        </select>
-                                        <span v-if="errors.type">{{ errors.type }}</span>
-                                    </div>
-
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-4 col-md-4 col-sm-4">
-                                            <div class="form-group">
-                                                <label for="ddlCountryCode"></label>
-                                                <input v-model="form.country_code" type="text" id="country_code"
-                                                    class="form-control" />
-                                                <span v-if="errors.country_code">{{ errors.country_code }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-sm-8">
-                                            <div class="form-group">
-
-                                                <label for="message-field" class="label pb-2"></label>
-                                                <input v-model="form.phone" type="text" id="phone" class="form-control"
-                                                    placeholder="Contact No *" />
-                                                <span v-if="errors.phone">{{ errors.phone }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtMessage"></label>
-                                        <textarea v-model="form.message" id="message" rows="10" class="form-control"
-                                            placeholder="Message"></textarea>
-                                        <span v-if="errors.message">{{ errors.message }}</span>
-                                    </div>
-
-                                    <div>
-                                        <button type="submit" class="btn btn-success full-width">Send Message</button>
-                                        <p v-if="responseMessage">{{ responseMessage }}</p>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-
+                        <ContactArticle />
                     </div>
                     <div class="widget-boxed d-none d-xl-block">
-                        <div class="widget-boxed-header">
-                            <h4>Top Communities</h4>
-                        </div>
-                        <div class="widget-boxed-body">
-                            <div class="side-list">
-                                <ul id="TopCommunityId" class="category-list">
-                                    <li><a href="">JVC<span>101 <small>Projects</small></span></a></li>
-                                    <li><a href="">Business Bay<span>62 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-dubailand">Dubailand<span>44
-                                                <small>Projects</small></span></a></li>
-                                    <li><a href="">Downtown Dubai<span>43 <small>Projects</small></span></a></li>
-                                    <li><a href="">Dubai Hills Estate<span>38 <small>Projects</small></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <TopCommunities />
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
 </template>
+
 <script>
 import axios from 'axios';
+import ContactArticle from '../articles/ContactArticle.vue';
+import TopCommunities from '../communties/TopCommunities.vue';
 
 export default {
+    components: {
+        ContactArticle,
+        TopCommunities,
+    },
     data() {
         return {
-            form: {
-                name: '',
-                email: '',
-                type: 'individual',
-                country_code: '',
-                phone: '',
-                message: '',
-            },
-            errors: {},
-            responseMessage: '',
-            projects: [
-                {
-                    id: 1,
-                    name: "Emaar Parkland",
-                    developer: "Emaar Properties",
-                    location: "Hadaeq Sheikh Mohammed Bin Rashid",
-                    propertyType: "Apartments",
-                    bedrooms: "1, 2 & 3 Bedrooms",
-                    paymentPlan: "80/20",
-                    downPayment: "Call Us",
-                    handover: "Nov - 2028",
-                    startingPrice: "AED 1.5 M",
-                    imageUrl: "https://manage.goldpillars.ae/Project/Project_Index/1585/Thumb/1585.webp",
-                    link: "/project/emaar-parkland",
-                },
-                {
-                    id: 2,
-                    name: "Selene Beach Residences",
-                    developer: "Sobha Group",
-                    location: "Al Seanneeah",
-                    propertyType: "Apartments",
-                    bedrooms: "1, 2 & 3 Bedrooms",
-                    paymentPlan: "40% On Completion",
-                    downPayment: "Call Us",
-                    handover: "Dec - 2027",
-                    startingPrice: "AED 1.1 M",
-                    imageUrl: "https://manage.goldpillars.ae/Project/Project_Index/1573/Thumb/1573.webp",
-                    link: "/project/selene-beach-residences",
-                },
-                // Add more projects here
-            ],
+            projects: [],
+            totalProjects: 0,
+            currentPage: 1,
+            totalPages: 0,
         };
     },
+    created() {
+        this.fetchProjects(this.currentPage);
+    },
     methods: {
-        async submitForm() {
-            try {
-                this.errors = {};
-                this.responseMessage = '';
-
-                const response = await axios.post('/api/contact', this.form);
-
-                // Display the response message
-                this.responseMessage = response.data.message;
-
-                // Clear the form fields
-                this.form = {
-                    name: '',
-                    email: '',
-                    type: 'individual',
-                    country_code: '',
-                    phone: '',
-                    message: '',
-                };
-
-                // Clear the response message after 5 seconds
-                setTimeout(() => {
-                    this.responseMessage = '';
-                }, 5000);
-
-            } catch (error) {
-                if (error.response && error.response.status === 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    this.responseMessage = 'An error occurred while sending your message.';
-                }
-            }
+        fetchProjects(page) {
+            axios.get(`/api/projects?page=${page}`)
+                .then(response => {
+                    this.projects = response.data.data;
+                    this.totalProjects = response.data.total;
+                    this.totalPages = response.data.last_page;
+                })
+                .catch(error => {
+                    console.error("There was an error fetching the projects!", error);
+                });
+        },
+        handlePageChange(page) {
+            this.fetchProjects(page);
         },
     },
 };
 </script>
+
 
 <style scoped>
     h2,
@@ -991,7 +850,7 @@ export default {
         content: ""
     }
 
-   
+
 
     @media(min-width: 1200px) {
         .container {

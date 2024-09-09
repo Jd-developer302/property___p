@@ -8,23 +8,11 @@ use App\Models\Project;
 
 class ProjectsController extends Controller
 {
-    public function index(Request $request){
-        
-         $request->validate([
-            'community_id' => 'required|integer|exists:communities,id',
-            'developer_id' => 'required|integer|exists:developers,id',
-        ]);
+    public function index(Request $request)
+    {
+        $projects = Project::with(['community', 'developer'])->paginate(10);
+return response()->json($projects);
 
-        $communityId = $request->input('community_id');
-        $developerId = $request->input('developer_id');
-
-       
-        $projects = Project::where('community_id', $communityId)
-            ->where('developer_id', $developerId)
-            ->with(['community', 'developer'])
-            ->get();
-
-        return response()->json($projects);
     }
     public function getTotalProjectsByCommunity()
     {

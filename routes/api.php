@@ -69,6 +69,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('developers', DeveloperController::class);
     Route::resource('communities', CommunityController::class);
     Route::resource('projects', ProjectController::class);
+    Route::post('community_update/{id}', [CommunityController::class, 'update']);
+    Route::post('projects-update/{project}', [ProjectController::class, 'update']);
 
     
 });

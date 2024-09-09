@@ -49,16 +49,11 @@ class CommunityController extends Controller
 
     public function update(UpdateCommunityRequest $request, $id)
     {
-        // Validate request data
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'slug' => 'required|string|unique:communities,slug,' . $id,
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'video' => 'nullable|mimes:mp4,avi,mov|max:10000',
-        ]);
+
+    //    dd($request->all());
+
+    $validatedData = $request->validated();
     
-        // Find the community or fail
         $community = Community::findOrFail($id);
     
         // Update community properties
@@ -84,11 +79,12 @@ class CommunityController extends Controller
             }
             // Store new video
             $community->video = $request->file('video')->store('videos', 'public');
+
         }
     
         // Save the updated community
+        // $community->update($request->all());
         $community->save();
-    
         // Return updated community as JSON
         return response()->json($community);
     }

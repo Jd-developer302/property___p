@@ -59,10 +59,10 @@ class ProjectController extends Controller
     return response()->json($project, 201);
 }
 
-public function update(Request $request, $id)
+public function update(Request $request, Project $project)
 {
     // Debugging: dump request data
-    // dd($request->all());
+    // dd($request->all(), $project);
 
     $validator = Validator::make($request->all(), [
         'community_id' => 'required|integer|exists:communities,id',
@@ -80,7 +80,7 @@ public function update(Request $request, $id)
         return response()->json(['errors' => $validator->errors()], 422);
     }
 
-    $project = Project::find($id);
+    $project = Project::find($project->id);
 
     if (!$project) {
         return response()->json(['message' => 'Project not found'], 404);
@@ -111,6 +111,7 @@ public function update(Request $request, $id)
 
     return response()->json($project);
 }
+
 
 
 
