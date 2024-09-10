@@ -16,6 +16,14 @@ use App\Http\Controllers\API\Admin\PdfController;
 use App\Http\Controllers\API\Admin\CommunityController;
 use App\Http\Controllers\API\Admin\ProjectController;
 use App\Http\Controllers\API\Admin\DeveloperController;
+use App\Http\Controllers\API\Admin\OverviewController;
+use App\Http\Controllers\API\Admin\FeatureController;
+use App\Http\Controllers\API\Admin\FloorPlanController;
+use App\Http\Controllers\API\Admin\MasterPlanController;
+use App\Http\Controllers\API\Admin\ProjectLocationController;
+use App\Http\Controllers\API\Admin\SpecialOfferController;
+
+
 use App\Http\Controllers\API\FrontEnd\ContactController;
 use App\Http\Controllers\API\FrontEnd\AboutController as FrontendAboutController;
 use App\Http\Controllers\API\FrontEnd\NewsArticleController;
@@ -26,6 +34,7 @@ use App\Http\Controllers\API\FrontEnd\HomeLoanController;
 use App\Http\Controllers\API\FrontEnd\ProjectsController;
 use App\Http\Controllers\API\FrontEnd\DevelopersController;
 use App\Http\Controllers\API\FrontEnd\CommunitiesController;
+use App\Http\Controllers\API\FrontEnd\OverviewsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -71,8 +80,18 @@ Route::prefix('admin')->group(function () {
     Route::resource('projects', ProjectController::class);
     Route::post('community_update/{id}', [CommunityController::class, 'update']);
     Route::post('projects-update/{project}', [ProjectController::class, 'update']);
-
-    
+    Route::resource('overviews', OverviewController::class);
+    Route::post('overviews-update/{overview}', [OverviewController::class, 'update']);
+    Route::resource('features', FeatureController::class);
+    Route::post('features-update/{feature}', [FeatureController::class, 'update']);
+    Route::resource('floorplans', FloorPlanController::class);
+    Route::post('floorplans-update/{floorPlan}', [FloorPlanController::class, 'update']);
+    Route::resource('masterplans', MasterPlanController::class);
+    Route::post('masterplans-update/{masterPlan}', [MasterPlanController::class, 'update']);
+    Route::resource('projectlocations', ProjectLocationController::class);
+    Route::post('projectlocations-update/{projectLocation}', [ProjectLocationController::class, 'update']);
+    Route::resource('specialoffers', SpecialOfferController::class);
+    Route::post('specialoffers-update/{specialOffer}', [SpecialOfferController::class, 'update']);
 });
 
 
@@ -98,3 +117,6 @@ Route::get('all_communities', [CommunitiesController::class, 'index']);
 Route::get('top-communities', [CommunitiesController::class, 'topCommunities']);
 Route::get('/communities/featured', [CommunitiesController::class, 'featuredCommunities']);
 Route::get('/communities/{slug}', [CommunitiesController::class, 'getBySlug']);
+Route::get('/overviews', [OverviewsController::class, 'index']);
+Route::get('projects/{slug}', [ProjectsController::class, 'getProjectBySlug']);
+

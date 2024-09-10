@@ -222,7 +222,7 @@
 
     .owl-carousel .owl-stage {
         position: relative;
-        -ms-touch-action: pan-Y
+
     }
 
     .owl-carousel .owl-stage:after {
@@ -237,7 +237,7 @@
     .owl-carousel .owl-stage-outer {
         position: relative;
         overflow: hidden;
-        -webkit-transform: translate3d(0, 0, 0)
+ 
     }
 
     .owl-carousel .owl-controls .owl-nav .owl-prev,
@@ -273,7 +273,7 @@
         position: relative;
         min-height: 1px;
         float: left;
-        -webkit-backface-visibility: hidden;
+
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -285,7 +285,7 @@
     .owl-carousel .owl-item img {
         display: block;
         width: 100%;
-        -webkit-transform-style: preserve-3d
+
     }
 
     .owl-carousel.owl-text-select-on .owl-item {
@@ -342,10 +342,10 @@
         top: 50%;
         margin-left: -40px;
         margin-top: -40px;
-        background: url(owl.video.play.png) no-repeat;
+
         cursor: pointer;
         z-index: 1;
-        -webkit-backface-visibility: hidden;
+
         -webkit-transition: scale 100ms ease;
         -moz-transition: scale 100ms ease;
         -ms-transition: scale 100ms ease;
@@ -853,22 +853,8 @@
         overflow: auto
     }
 
-    .lg-outer .lg-has-vimeo .lg-video-play {
-        background: url(../img/vimeo-play.png) no-repeat scroll 0 0 transparent
-    }
-
-    .lg-outer .lg-has-vimeo:hover .lg-video-play {
-        background: url(../img/vimeo-play.png) no-repeat scroll 0 -58px transparent
-    }
-
-    .lg-outer .lg-has-html5 .lg-video-play {
-        background: transparent url(../img/video-play.png) no-repeat scroll 0 0;
-        height: 64px;
-        margin-left: -32px;
-        margin-top: -32px;
-        width: 64px;
-        opacity: .8
-    }
+ 
+   
 
     .lg-outer .lg-has-html5:hover .lg-video-play {
         opacity: 1
@@ -878,9 +864,7 @@
         background: url(../img/youtube-play.png) no-repeat scroll 0 0 transparent
     }
 
-    .lg-outer .lg-has-youtube:hover .lg-video-play {
-        background: url(../img/youtube-play.png) no-repeat scroll 0 -60px transparent
-    }
+  
 
     .lg-outer .lg-video-object {
         width: 100% !important;
@@ -1343,10 +1327,7 @@
         white-space: nowrap
     }
 
-    .lg-outer .lg-item {
-        background: url(../img/loading.gif) no-repeat scroll center center transparent;
-        display: none !important
-    }
+    
 
     .lg-outer.lg-css3 .lg-prev-slide,
     .lg-outer.lg-css3 .lg-current,
@@ -1756,12 +1737,7 @@
         text-transform: none
     }
 
-    [type=reset],
-    [type=submit],
-    button,
-    html [type=button] {
-        -webkit-appearance: button
-    }
+  
 
     [type=button]::-moz-focus-inner,
     [type=reset]::-moz-focus-inner,
@@ -1777,12 +1753,7 @@
         padding: 0
     }
 
-    input[type=date],
-    input[type=datetime-local],
-    input[type=month],
-    input[type=time] {
-        -webkit-appearance: listbox
-    }
+ 
 
     textarea {
         overflow: auto;
@@ -1794,10 +1765,7 @@
         height: auto
     }
 
-    [type=search] {
-        outline-offset: -2px;
-        -webkit-appearance: none
-    }
+
 
     [type=search]::-webkit-search-cancel-button,
     [type=search]::-webkit-search-decoration {
@@ -2599,10 +2567,7 @@
         border-radius: .25rem
     }
 
-    .nav,
-    .navbar {
-        -ms-flex-wrap: wrap
-    }
+  
 
     .custom-select {
         display: inline-block;
@@ -2971,7 +2936,7 @@
         padding: 0;
         background-color: transparent;
         border: 0;
-        -webkit-appearance: none
+
     }
 
     .modal {
@@ -4863,33 +4828,7 @@
         }
     }
 
-    @font-face {
-        font-family: Lato;
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: local('Lato Regular'), local(Lato-Regular), url(/fonts/S6uyw4BMUTPHjxAwXjeu.woff2) format("woff2");
-        unicode-range: U+100-24F, U+259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
-    }
-
-    @font-face {
-        font-family: Lato;
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: local('Lato Regular'), local(Lato-Regular), url(/fonts/S6uyw4BMUTPHjx4wXg.woff2) format("woff2");
-        unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
-    }
-
-    @font-face {
-        font-family: FontAwesome;
-        src: url(/fonts/fontawesome-webfont.eot?v=4.7.0);
-        src: url(/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0) format("embedded-opentype"), url(/fonts/fontawesome-webfont.woff2?v=4.7.0) format("woff2"), url(/fonts/fontawesome-webfont.woff?v=4.7.0) format("woff"), url(/fonts/fontawesome-webfont.ttf?v=4.7.0) format("truetype"), url(/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format("svg");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap
-    }
-
+    
     .fa {
         display: inline-block;
         font: 14px/1 FontAwesome;
@@ -5290,10 +5229,7 @@
         opacity: .5
     }
 
-    .owl-item.loading {
-        min-height: 150px;
-        background: url(/Content/AjaxLoader.html) center center no-repeat
-    }
+    
 
     .owl-fade-in {
         -webkit-animation: .7s both fadeIn;
@@ -6301,7 +6237,6 @@
         margin-bottom: 14px;
         text-align: justify;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical
     }
 
@@ -7011,7 +6946,7 @@
     }
 
     .bg_inner {
-        background-image: url(/images/beach.webp);
+       
         background-size: cover;
         background-position: center center
     }
@@ -7116,7 +7051,7 @@
         height: 2.8rem;
         width: 2.8rem;
         background-color: #fff;
-        background-image: url(/images/download-arrow.png);
+      
         background-position: center center;
         background-repeat: no-repeat;
         background-size: 15px 15px;

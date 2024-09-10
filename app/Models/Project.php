@@ -38,4 +38,8 @@ class Project extends Model
     {
         return $this->belongsTo(Developer::class);
     }
+    public function overviews()
+    {
+        return $this->hasMany(Overview::class, 'project_id');
+    }
 }

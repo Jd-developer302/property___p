@@ -10,7 +10,7 @@
 
                     <div class="filter-row mb-3">
                         <div class="filter-option">
-                            <h4 id="TotalProjId">{{ totalProjects }}</h4>
+                            <h4 id="TotalProjId">Number of Projects={{ totalProjects }}</h4>
                         </div>
                         <div class="dropdown show">
                             <select name="ddlSort" id="ddlSort" class="dropdown-menu show" fdprocessedid="5yon8a">
@@ -33,15 +33,18 @@
                             <div v-for="project in projects" :key="project.id" class="proj-list-item mb-4">
                                 <div class="row no-gutters">
                                     <div class="col-md-5">
-                                        <a :href="`/project/${project.slug}`">
-                                            <img :src="project.image" :alt="project.name" class="img-fluid">
+                                        <a :href="`/projects/${project.slug}`">
+                                            <img :src="project.image ? `/storage/${project.image}` : '/images/default-image.png'" :alt="project.name" class="img-fluid">
                                         </a>
                                     </div>
                                     <div class="col-md-7">
                                         <div class="card rounded-0 proj-dtls border-0 shadow-sm">
                                             <div class="card-body p-3">
-                                                <h2><a :href="`/project/${project.slug}`" :title="project.name">{{ project.name }}</a></h2>
-                                                <h5><a :href="`/developer/${project.developer.slug}`">{{ project.developer.name }}</a></h5>
+                                                <h2>
+  <a :href="`/projects/${project.slug}`" :title="project.name">{{ project.name }}</a>
+</h2>
+
+                                                <h5><a :href="`/projects/${project.slug}`">{{ project.developer.name }}</a></h5>
                                                 <p class="loc">{{ project.community.name }}</p>
                                                 <div class="row summry">
                                                     <div class="col-6 col-md-6">
@@ -60,7 +63,7 @@
                                             </div>
                                             <div class="card-footer bg-transparent py-2">
                                                 <p class="float-left price"><span>Starting Price</span>{{ project.starting_price }}</p>
-                                                <a class="btn-hover default-btn float-right" :href="`/project/${project.slug}`">Property Details</a>
+                                                <a class="btn-hover default-btn float-right" :href="`/projects/${project.slug}`">Property Details</a>
                                             </div>
                                         </div>
                                     </div>
@@ -126,7 +129,6 @@ export default {
     },
 };
 </script>
-
 
 <style scoped>
     h2,

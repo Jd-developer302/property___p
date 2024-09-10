@@ -542,7 +542,7 @@
 
     [type=search] {
         outline-offset: -2px;
-        -webkit-appearance: none
+
     }
 
     [type=search]::-webkit-search-cancel-button,
@@ -1350,21 +1350,7 @@
         -ms-flex-wrap: wrap
     }
 
-    .custom-select {
-        display: inline-block;
-        width: 100%;
-        height: calc(2.25rem + 2px);
-        padding: .375rem 1.75rem .375rem .75rem;
-        line-height: 1.5;
-        color: #495057;
-        background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") right .75rem center/8px 10px no-repeat #fff;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
-    }
+   
 
     .custom-select-lg,
     .custom-select-sm {
@@ -1717,7 +1703,7 @@
         padding: 0;
         background-color: transparent;
         border: 0;
-        -webkit-appearance: none
+
     }
 
     .modal {
@@ -3609,32 +3595,7 @@
         }
     }
 
-    @font-face {
-        font-family: Lato;
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: local('Lato Regular'), local(Lato-Regular), url(/fonts/S6uyw4BMUTPHjxAwXjeu.woff2) format("woff2");
-        unicode-range: U+100-24F, U+259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
-    }
-
-    @font-face {
-        font-family: Lato;
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: local('Lato Regular'), local(Lato-Regular), url(/fonts/S6uyw4BMUTPHjx4wXg.woff2) format("woff2");
-        unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
-    }
-
-    @font-face {
-        font-family: FontAwesome;
-        src: url(/fonts/fontawesome-webfont.eot?v=4.7.0);
-        src: url(/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0) format("embedded-opentype"), url(/fonts/fontawesome-webfont.woff2?v=4.7.0) format("woff2"), url(/fonts/fontawesome-webfont.woff?v=4.7.0) format("woff"), url(/fonts/fontawesome-webfont.ttf?v=4.7.0) format("truetype"), url(/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format("svg");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap
-    }
+   
 
     .fa {
         display: inline-block;
@@ -4036,11 +3997,7 @@
         opacity: .5
     }
 
-    .owl-item.loading {
-        min-height: 150px;
-        background: url(/Content/AjaxLoader.html) center center no-repeat
-    }
-
+    
     .owl-fade-in {
         -webkit-animation: .7s both fadeIn;
         -moz-animation: .7s both fadeIn;
@@ -5047,7 +5004,7 @@
         margin-bottom: 14px;
         text-align: justify;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+
         -webkit-box-orient: vertical
     }
 
@@ -5757,7 +5714,7 @@
     }
 
     .bg_inner {
-        background-image: url(/images/beach.webp);
+
         background-size: cover;
         background-position: center center
     }
@@ -5862,7 +5819,7 @@
         height: 2.8rem;
         width: 2.8rem;
         background-color: #fff;
-        background-image: url(/images/download-arrow.png);
+      
         background-position: center center;
         background-repeat: no-repeat;
         background-size: 15px 15px;
@@ -6152,7 +6109,7 @@
         display: inline-block;
         width: auto !important;
         max-width: 30px;
-        -webkit-transform-style: preserve-3d
+    
     }
 
     .features_border_top {
@@ -6222,7 +6179,7 @@
         margin-bottom: -10px;
         position: initial;
         height: 35px;
-        float: left;
+   
         margin-right: 10px
     }
 

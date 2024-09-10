@@ -26,7 +26,7 @@ class DeveloperController extends Controller
 
         $logoPath = null;
         if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('logos', 'public');
+            $logoPath = $request->file('logo')->store('developer', 'public');
         }
 
         $developer = Developer::create([

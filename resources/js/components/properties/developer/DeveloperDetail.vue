@@ -7,7 +7,7 @@
             <div class="card-body">
               <a :href="`/developer/${developer.id}`" style="text-decoration: none;">
                 <figure class="shadow text-center">
-                  <img width="122" height="129" :src="getImageUrl(developer.logo)" alt="Developer Logo" class="img-fluid">
+                  <img width="122" height="129" :src="`/storage/${developer.logos}`" alt="Developer Logo" class="img-fluid">
                 </figure>
                 <h4 class="card-title">{{ developer.name }}</h4>
                 <p class="card-text">Total Projects: <span>{{ developer.projects_count }}</span></p>

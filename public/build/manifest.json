@@ -1,5 +1,30 @@
 {
-  "_components-664df87f.js": {
+  "node_modules/summernote/dist/font/summernote.eot": {
+    "file": "assets/summernote-05ce99db.eot",
+    "src": "node_modules/summernote/dist/font/summernote.eot"
+  },
+  "node_modules/summernote/dist/font/summernote.ttf": {
+    "file": "assets/summernote-2a5c8f9c.ttf",
+    "src": "node_modules/summernote/dist/font/summernote.ttf"
+  },
+  "node_modules/summernote/dist/font/summernote.woff": {
+    "file": "assets/summernote-9ea36fc9.woff",
+    "src": "node_modules/summernote/dist/font/summernote.woff"
+  },
+  "node_modules/summernote/dist/font/summernote.woff2": {
+    "file": "assets/summernote-17aff429.woff2",
+    "src": "node_modules/summernote/dist/font/summernote.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-4ed993c7.js",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.css": {
+    "file": "assets/app-967620a2.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.js": {
     "assets": [
       "assets/undraw_profile-b1150fda.svg",
       "assets/Insha-icon-14473f7c.png",
@@ -34,78 +59,18 @@
       "assets/world-gate-property-2-c22854aa.png",
       "assets/search-bg-887f471e.jpg",
       "assets/dev-bg-f3300c35.jpg",
-      "assets/1-ade6d1ce.webp",
-      "assets/13-1dba8277.webp",
-      "assets/69-637395f5.webp",
-      "assets/location-icon-929a3581.png",
+      "assets/defaultloc-9551de5b.webp",
+      "assets/bnn1-3f9d0586.jpg",
       "assets/Articles-Banners-44ca70a9.png",
-      "assets/UAE-Mortgage-Home-Loans_ Everything-you-need-to-know-5bc572d3.jpg",
-      "assets/Mortgages-in-the-UAE-45784fd4.jpg",
-      "assets/What-are-the-documents-required-to-get-a-mortgage-8672be33.jpg",
-      "assets/For-Salaried-0Individuals-5de34d3a.jpg",
-      "assets/For-Self-Employed-f009a89b.jpg",
-      "assets/For-Expats-78880ba1.jpg",
-      "assets/UAE-mortgage-eligibility-criteria-abaee060.jpg",
-      "assets/Some-additional-points-to-remember-bd15a7e3.jpg"
-    ],
-    "css": [
-      "assets/components-3ba610db.css"
-    ],
-    "file": "assets/components-664df87f.js",
-    "imports": [
-      "_vendor-37dd7c6c.js"
-    ]
-  },
-  "_vendor-37dd7c6c.js": {
-    "assets": [
       "assets/summernote-05ce99db.eot",
       "assets/summernote-17aff429.woff2",
       "assets/summernote-9ea36fc9.woff",
       "assets/summernote-2a5c8f9c.ttf"
     ],
     "css": [
-      "assets/vendor-a4c6d897.css"
+      "assets/app-967620a2.css"
     ],
-    "file": "assets/vendor-37dd7c6c.js"
-  },
-  "components.css": {
-    "file": "assets/components-3ba610db.css",
-    "src": "components.css"
-  },
-  "node_modules/summernote/dist/font/summernote.eot": {
-    "file": "assets/summernote-05ce99db.eot",
-    "src": "node_modules/summernote/dist/font/summernote.eot"
-  },
-  "node_modules/summernote/dist/font/summernote.ttf": {
-    "file": "assets/summernote-2a5c8f9c.ttf",
-    "src": "node_modules/summernote/dist/font/summernote.ttf"
-  },
-  "node_modules/summernote/dist/font/summernote.woff": {
-    "file": "assets/summernote-9ea36fc9.woff",
-    "src": "node_modules/summernote/dist/font/summernote.woff"
-  },
-  "node_modules/summernote/dist/font/summernote.woff2": {
-    "file": "assets/summernote-17aff429.woff2",
-    "src": "node_modules/summernote/dist/font/summernote.woff2"
-  },
-  "resources/css/app.css": {
-    "file": "assets/app-4ed993c7.js",
-    "isEntry": true,
-    "src": "resources/css/app.css"
-  },
-  "resources/js/app.css": {
-    "file": "assets/app-cfee8364.css",
-    "src": "resources/js/app.css"
-  },
-  "resources/js/app.js": {
-    "css": [
-      "assets/app-cfee8364.css"
-    ],
-    "file": "assets/app-557b0183.js",
-    "imports": [
-      "_vendor-37dd7c6c.js",
-      "_components-664df87f.js"
-    ],
+    "file": "assets/app-52533c34.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -117,10 +82,6 @@
     "file": "assets/1-b065a727.jpg",
     "src": "resources/js/assets/img/1.jpg"
   },
-  "resources/js/assets/img/1.webp": {
-    "file": "assets/1-ade6d1ce.webp",
-    "src": "resources/js/assets/img/1.webp"
-  },
   "resources/js/assets/img/11.jpg": {
     "file": "assets/11-61272f80.jpg",
     "src": "resources/js/assets/img/11.jpg"
@@ -128,10 +89,6 @@
   "resources/js/assets/img/111.jpg": {
     "file": "assets/111-4895f5ee.jpg",
     "src": "resources/js/assets/img/111.jpg"
-  },
-  "resources/js/assets/img/13.webp": {
-    "file": "assets/13-1dba8277.webp",
-    "src": "resources/js/assets/img/13.webp"
   },
   "resources/js/assets/img/2.2.jpg": {
     "file": "assets/2.2-e5fab8d2.jpg",
@@ -193,10 +150,6 @@
     "file": "assets/6-df090f7e.jpg",
     "src": "resources/js/assets/img/6.jpg"
   },
-  "resources/js/assets/img/69.webp": {
-    "file": "assets/69-637395f5.webp",
-    "src": "resources/js/assets/img/69.webp"
-  },
   "resources/js/assets/img/Articles-Banners.png": {
     "file": "assets/Articles-Banners-44ca70a9.png",
     "src": "resources/js/assets/img/Articles-Banners.png"
@@ -213,9 +166,17 @@
     "file": "assets/background-40eab8f8.jpg",
     "src": "resources/js/assets/img/background.jpg"
   },
+  "resources/js/assets/img/bnn1.jpg": {
+    "file": "assets/bnn1-3f9d0586.jpg",
+    "src": "resources/js/assets/img/bnn1.jpg"
+  },
   "resources/js/assets/img/cn.webp": {
     "file": "assets/cn-7bed1dc9.webp",
     "src": "resources/js/assets/img/cn.webp"
+  },
+  "resources/js/assets/img/defaultloc.webp": {
+    "file": "assets/defaultloc-9551de5b.webp",
+    "src": "resources/js/assets/img/defaultloc.webp"
   },
   "resources/js/assets/img/dev-bg.jpg": {
     "file": "assets/dev-bg-f3300c35.jpg",
@@ -225,38 +186,6 @@
     "file": "assets/fr-99ad4e82.webp",
     "src": "resources/js/assets/img/fr.webp"
   },
-  "resources/js/assets/img/images/For-Expats.jpg": {
-    "file": "assets/For-Expats-78880ba1.jpg",
-    "src": "resources/js/assets/img/images/For-Expats.jpg"
-  },
-  "resources/js/assets/img/images/For-Salaried-0Individuals.jpg": {
-    "file": "assets/For-Salaried-0Individuals-5de34d3a.jpg",
-    "src": "resources/js/assets/img/images/For-Salaried-0Individuals.jpg"
-  },
-  "resources/js/assets/img/images/For-Self-Employed.jpg": {
-    "file": "assets/For-Self-Employed-f009a89b.jpg",
-    "src": "resources/js/assets/img/images/For-Self-Employed.jpg"
-  },
-  "resources/js/assets/img/images/Mortgages-in-the-UAE.jpg": {
-    "file": "assets/Mortgages-in-the-UAE-45784fd4.jpg",
-    "src": "resources/js/assets/img/images/Mortgages-in-the-UAE.jpg"
-  },
-  "resources/js/assets/img/images/Some-additional-points-to-remember.jpg": {
-    "file": "assets/Some-additional-points-to-remember-bd15a7e3.jpg",
-    "src": "resources/js/assets/img/images/Some-additional-points-to-remember.jpg"
-  },
-  "resources/js/assets/img/images/UAE-Mortgage-Home-Loans_ Everything-you-need-to-know.jpg": {
-    "file": "assets/UAE-Mortgage-Home-Loans_ Everything-you-need-to-know-5bc572d3.jpg",
-    "src": "resources/js/assets/img/images/UAE-Mortgage-Home-Loans_ Everything-you-need-to-know.jpg"
-  },
-  "resources/js/assets/img/images/UAE-mortgage-eligibility-criteria.jpg": {
-    "file": "assets/UAE-mortgage-eligibility-criteria-abaee060.jpg",
-    "src": "resources/js/assets/img/images/UAE-mortgage-eligibility-criteria.jpg"
-  },
-  "resources/js/assets/img/images/What-are-the-documents-required-to-get-a-mortgage.jpg": {
-    "file": "assets/What-are-the-documents-required-to-get-a-mortgage-8672be33.jpg",
-    "src": "resources/js/assets/img/images/What-are-the-documents-required-to-get-a-mortgage.jpg"
-  },
   "resources/js/assets/img/lady.png": {
     "file": "assets/lady-c0e3c481.png",
     "src": "resources/js/assets/img/lady.png"
@@ -264,10 +193,6 @@
   "resources/js/assets/img/last-banner.jpg": {
     "file": "assets/last-banner-1dc2fbc3.jpg",
     "src": "resources/js/assets/img/last-banner.jpg"
-  },
-  "resources/js/assets/img/location-icon.png": {
-    "file": "assets/location-icon-929a3581.png",
-    "src": "resources/js/assets/img/location-icon.png"
   },
   "resources/js/assets/img/logo-insha.png": {
     "file": "assets/logo-insha-0dd74051.png",
@@ -292,9 +217,5 @@
   "resources/js/assets/img/world-gate-property-2.png": {
     "file": "assets/world-gate-property-2-c22854aa.png",
     "src": "resources/js/assets/img/world-gate-property-2.png"
-  },
-  "vendor.css": {
-    "file": "assets/vendor-a4c6d897.css",
-    "src": "vendor.css"
   }
 }

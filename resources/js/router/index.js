@@ -59,13 +59,38 @@ import ComuunityIE from '../components/admin/community/edit.vue';
 import ProjectI from '../components/admin/project/index.vue';
 import ProjectC from '../components/admin/project/create.vue';
 import ProjectE from '../components/admin/project/edit.vue';
+///admin//Overviews
+import OverviewI from '../components/admin/overview/index.vue';
+import OverviewC from '../components/admin/overview/create.vue';
+import OverviewE from '../components/admin/overview/edit.vue';
 
+////Admin//Feature
+import FeatureI from '../components/admin/features/index.vue';
+import FeatureC from '../components/admin/features/create.vue';
+import FeatureE from '../components/admin/features/edit.vue';
+////Admin//FloorPlan
+import FloorPlan from '../components/admin/floorplan/index.vue';
+import FloorPlanC from '../components/admin/floorplan/create.vue';
+import FloorPlanE from '../components/admin/floorplan/edit.vue';
+////Admin//MasterPlan 
+import MasterPlan from '../components/admin/masterplan/index.vue';
+import MasterPlanC from '../components/admin/masterplan/create.vue';
+import MasterPlanE from '../components/admin/masterplan/edit.vue';
+////Admin//ProjectLocation    SpecialOffer 
+import ProjectLocation from '../components/admin/projectlocation/index.vue';
+import ProjectLocationC from '../components/admin/projectlocation/create.vue';
+import ProjectLocationE from '../components/admin/projectlocation/edit.vue';
+////Admin//SpecialOffer  
+import SpecialOffer from '../components/admin/specialoffer/index.vue';
+import SpecialOfferC from '../components/admin/specialoffer/create.vue';
+import SpecialOfferE from '../components/admin/specialoffer/edit.vue';
 
 //websiteHome
 import HomePropertiesIndex from '../components/properties/home/index.vue';
 import ContactPropertiesIndex from '../components/properties/contact/contact.vue';
 import AboutPropertiesIndex from '../components/properties/about/index.vue';
 import ProjectPropertiesIndex from '../components/properties/project/index.vue';
+import ProjectBySlugIndex from '../components/properties/project/ProjectBySlug.vue';
 import DeveloperPropertiesIndex from '../components/properties/developer/index.vue';
 import CommunityPropertiesIndex from '../components/properties/communties/index.vue';
 import CityPropertiesIndex from '../components/properties/cities/index.vue';
@@ -136,8 +161,30 @@ const routes = [
     {path: '/admin/projects',component: ProjectI,meta: { requiresAuth: true }},
     {path: '/admin/projects/create',component: ProjectC,meta: { requiresAuth: true }},
     { path: '/admin/projects/:id/edit',   name: 'ProjectE',   component: ProjectE,   meta: { requiresAuth: true }},
-
-
+     ///admin/Overview
+     {path: '/admin/overviews',component: OverviewI,meta: { requiresAuth: true }},
+     {path: '/admin/overviews/create',component: OverviewC,meta: { requiresAuth: true }},
+     { path: '/admin/overviews/:id/edit',   name: 'OverviewE',   component: OverviewE,   meta: { requiresAuth: true }},
+     ///admin/Overview
+     {path: '/admin/features',component: FeatureI,meta: { requiresAuth: true }},
+     {path: '/admin/features/create',component: FeatureC,meta: { requiresAuth: true }},
+     { path: '/admin/features/:id/edit',   name: 'FeatureE',   component: FeatureE,   meta: { requiresAuth: true }},
+       ///admin/FloorPlan
+       {path: '/admin/floorplans',component: FloorPlan,meta: { requiresAuth: true }},
+       {path: '/admin/floorplans/create',component: FloorPlanC,meta: { requiresAuth: true }},
+       { path: '/admin/floorplans/:id/edit',   name: 'FloorPlanE',   component: FloorPlanE,   meta: { requiresAuth: true }},
+        ///admin/MasterPlan
+        {path: '/admin/masterplans',component: MasterPlan,meta: { requiresAuth: true }},
+        {path: '/admin/masterplans/create',component: MasterPlanC,meta: { requiresAuth: true }},
+        { path: '/admin/masterplans/:id/edit',   name: 'MasterPlanE',   component: MasterPlanE,   meta: { requiresAuth: true }},
+         ///admin/ProjectLocation
+         {path: '/admin/projectlocation',component: ProjectLocation,meta: { requiresAuth: true }},
+         {path: '/admin/projectlocation/create',component: ProjectLocationC,meta: { requiresAuth: true }},
+         { path: '/admin/projectlocation/:id/edit',   name: 'ProjectLocationE',   component: ProjectLocationE,   meta: { requiresAuth: true }},
+         ///admin/SpecialOffer
+         {path: '/admin/specialoffers',component: SpecialOffer,meta: { requiresAuth: true }},
+         {path: '/admin/specialoffers/create',component: SpecialOfferC,meta: { requiresAuth: true }},
+         { path: '/admin/specialoffers/:id/edit',   name: 'SpecialOfferE',   component: SpecialOfferE,   meta: { requiresAuth: true }},
 
     { path: '/Project',component: Project, meta: { requiresAuth: true }},
     { path: '/register',name: 'Register',component: RegistrationComponent,},
@@ -151,6 +198,7 @@ const routes = [
     },
     {path: '/projects',component: ProjectPropertiesIndex
     },
+    {path: '/projects/:slug',name:'ProjectBySlugIndex',component: ProjectBySlugIndex},
     {path: '/developer',component: DeveloperPropertiesIndex
     },
     {path: '/communities',component: CommunityPropertiesIndex

@@ -26,7 +26,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-if="projects.length === 0">
-                                        <td colspan="6" class="text-center">No projects found.</td>
+                                        <td colspan="5" class="text-center">No projects found.</td>
                                     </tr>
                                     <tr v-else v-for="project in projects" :key="project.id">
                                         <td>{{ project.name }}</td>
@@ -35,7 +35,6 @@
                                         <td>
                                             <img :src="getImageUrl(project.image)" alt="Project Image" width="100">
                                         </td>
-                                       
                                         <td>
                                             <router-link :to="`/admin/projects/${project.id}/edit`" class="btn btn-sm btn-primary"><i class="fa-solid fa-pencil"></i></router-link>
                                             <button @click="deleteProject(project.id)" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
@@ -43,11 +42,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="pagination">
-                            <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
-                            <span>Page {{ currentPage }} of {{ totalPages }}</span>
-                            <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
                         </div>
                     </div>
                 </div>
@@ -62,38 +56,14 @@ import axios from 'axios';
 import Base from '../layouts/Base.vue'; 
 
 const projects = ref([]);
-const currentPage = ref(1);
-const perPage = ref(10);
-const totalPages = ref(1);
 
 const fetchData = async () => {
     try {
-        const response = await axios.get('/api/admin/projects', {
-            params: {
-                page: currentPage.value,
-                perPage: perPage.value,
-            },
-        });
-
-        projects.value = response.data.data;
-        totalPages.value = response.data.meta ? response.data.meta.total_pages : 1;
+        const response = await axios.get('/api/admin/projects');
+        projects.value = response.data;
     } catch (error) {
         console.error("Error fetching projects:", error);
         alert('Failed to load projects. Please try again later.');
-    }
-};
-
-const prevPage = () => {
-    if (currentPage.value > 1) {
-        currentPage.value--;
-        fetchData();
-    }
-};
-
-const nextPage = () => {
-    if (currentPage.value < totalPages.value) {
-        currentPage.value++;
-        fetchData();
     }
 };
 
@@ -111,8 +81,6 @@ const getImageUrl = (image) => {
     return image ? `/storage/${image}` : '/images/default-image.png'; 
 };
 
-
-
 const stripHtmlTags = (html) => {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent || '';
@@ -124,24 +92,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.pagination {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.pagination button {
-    margin: 0 10px;
-    padding: 5px 10px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
-
-.pagination button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
+/* Remove pagination styles */
 </style>

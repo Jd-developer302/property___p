@@ -13,9 +13,10 @@ class ProjectController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page', 15);
-        $projects = Project::with(['community', 'developer'])->paginate($perPage);
-
+        // Fetch all projects with their related community and developer models
+        $projects = Project::with(['community', 'developer'])->get();
+    
+        // Return the data as JSON
         return response()->json($projects);
     }
     public function store(Request $request)

@@ -12,7 +12,7 @@
 
      <!-- Vite assets -->
      @if (app()->environment('production'))
-        <link rel="stylesheet" href="{{ asset('build/assets/app-cfee8364.css ') }}">
+        <link rel="stylesheet" href="{{ asset('build/assets/app-967620a2.css  ') }}">
     @else
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
@@ -24,7 +24,7 @@
     <!-- Scripts -->
     @if (app()->environment('production'))
         <script src="{{ asset('build/assets/app-4ed993c7.js ') }}"></script>
-        <script src="{{ asset('build/assets/app-557b0183.js') }}"></script>
+        <script src="{{ asset('build/assets/app-49635c0e.js ') }}"></script>
     @else
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
