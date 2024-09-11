@@ -1,7 +1,7 @@
 <template>
 <Header/>
 <section class="main-slider">
-            <div id="projBannerId"><div id="proslider" class="carousel"><img class="img-banner" :src="project.image ? `/storage/${project.image}` : '/images/default-image.png'" alt="Luxury Living at Ellington Art Bay East"></div></div>
+            <div id="projBannerId"><div id="proslider" class="carousel"><img class="img-banner" src="https://manage.goldpillars.ae/Banner/820/Large/4658.webp" alt="Luxury Living at Ellington Art Bay East"></div></div>
             <div class="pro-summary">
                 <div class="container">
                     <div class="row">
@@ -18,20 +18,20 @@
                                         <tbody><tr>
                                             <td>
                                                 <div class="pro-info-warp">
-                                                    <img src="" width="48" height="48" alt="Unit Type"><span>Apartments</span>
+                                                    <img src="https://www.goldpillars.ae/project/images/icon/Bedroom.svg" width="48" height="48" alt="Unit Type"><span>Apartments</span>
                                                     <p>Studio, 1, 2 &amp; 3 Bedrooms</p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="pro-info-warp">
-                                                    <img src="" width="48" height="48" alt="Size">
+                                                    <img src="https://www.goldpillars.ae/project/images/icon/Area.svg" width="48" height="48" alt="Size">
                                                     <span>Size</span>
                                                     <p>430 to 2,459 sq. ft. <i id="sizehsid" class="fa fa-info-circle" aria-hidden="true" data-toggle="modal" data-target="#Sizeinfo"></i></p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="pro-info-warp">
-                                                    <img src="" width="48" height="48" alt="Ellington Art Bay EastAnticipated Handover - Q3 - 2026">
+                                                    <img src="https://www.goldpillars.ae/project/images/icon/Handover.svg" width="48" height="48" alt="Ellington Art Bay EastAnticipated Handover - Q3 - 2026">
                                                     <span>Handover</span>
                                                     <p>Q3 - 2026</p>
                                                 </div>
@@ -56,13 +56,23 @@
                 </div>
             </div>
         </section>
+        <Overview/>
+        <SummaryFloor/>
+        <Amenities/>
+        <LatestProject/>
+        <Footer/>
   </template>
   
   <script setup>
     import { ref, onMounted } from 'vue';
     import axios from 'axios';
-import Header from './Header.vue'
-import { useRoute } from 'vue-router';
+    import Header from './Header.vue'
+    import { useRoute } from 'vue-router';
+    import Footer from '../home/Footer.vue';
+import Overview from './Component/Overview.vue';
+import SummaryFloor from './Component/SummaryFloor.vue';
+import Amenities from './Component/Amenities.vue';
+import LatestProject from './Component/LatestProject.vue';
 
 const route = useRoute();
 const project = ref(null);

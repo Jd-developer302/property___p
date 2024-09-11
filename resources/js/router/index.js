@@ -91,7 +91,12 @@ import ContactPropertiesIndex from '../components/properties/contact/contact.vue
 import AboutPropertiesIndex from '../components/properties/about/index.vue';
 import ProjectPropertiesIndex from '../components/properties/project/index.vue';
 import ProjectBySlugIndex from '../components/properties/project/ProjectBySlug.vue';
+import FeatureIndex from '../components/properties/project/Feature/index.vue';
+import FloorPlanIndex from '../components/properties/project/FloorPlan/index.vue';
+import MasterPlanIndex from '../components/properties/project/MasterPlan/index.vue'
 import DeveloperPropertiesIndex from '../components/properties/developer/index.vue';
+import DeveloperProjectBySlug from '../components/properties/developer/DeveloperProjectBySlug.vue';
+
 import CommunityPropertiesIndex from '../components/properties/communties/index.vue';
 import CityPropertiesIndex from '../components/properties/cities/index.vue';
 import CityPrimeIndex from '../components/properties/cities/PrimeLocation.vue';
@@ -199,8 +204,19 @@ const routes = [
     {path: '/projects',component: ProjectPropertiesIndex
     },
     {path: '/projects/:slug',name:'ProjectBySlugIndex',component: ProjectBySlugIndex},
+    { path: '/Feature/:slug', name: 'FeatureIndex', component: FeatureIndex },
+    { path: '/FloorPlan/:slug', name: 'FloorPlanIndex', component: FloorPlanIndex },
+    { path: '/MasterPlan/:slug', name: 'MasterPlanIndex', component: MasterPlanIndex },
+    
+    
     {path: '/developer',component: DeveloperPropertiesIndex
     },
+    {
+        path: '/developer/:slug',
+        name: 'DeveloperProjectBySlug',
+        component: DeveloperProjectBySlug,
+        props: true // Pass the slug as a prop to the component
+      },
     {path: '/communities',component: CommunityPropertiesIndex
     },
     {path: '/communities/:slug',name:'CommunityBySlug',component: CommunityBySlug},

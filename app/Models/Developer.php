@@ -29,4 +29,8 @@ class Developer extends Model
     {
         return $this->hasMany(Project::class, 'developer_id');
     }
+    public function communities()
+    {
+        return $this->hasMany(Community::class, 'developer_id');
+    }
 }

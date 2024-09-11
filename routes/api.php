@@ -109,9 +109,12 @@ Route::get('/mortgage-loans-home', [HomeLoanController::class, 'index']);
 Route::get('/projects', [ProjectsController::class, 'index']);
 Route::get('/projects/total-by-community', [ProjectsController::class, 'getTotalProjectsByCommunity']);
 Route::get('/projects/total-by-developer', [ProjectsController::class, 'getTotalProjectsByDeveloper']);
-Route::get('/developers/{developerId}/projects', [DevelopersController::class, 'getAllProjectsByDeveloper']);
-Route::get('/developers/{developerId}/new-launches', [DevelopersController::class, 'getNewLaunchesByDeveloper']);
-Route::get('/developers/{developerId}/near-completion', [DevelopersController::class, 'getNearCompletionProjectsByDeveloper']);
+Route::get('developers/{slug}', [DevelopersController::class, 'getAllProjectsByDeveloper']);
+
+Route::get('/develope/{slug}', [DevelopersController::class, 'findDeveloperBySlug']);
+
+Route::get('developers/{slug}/new-launches', [DevelopersController::class, 'getNewLaunchesByDeveloper']);
+Route::get('{slug}/near-completion', [DevelopersController::class, 'getNearCompletionProjectsByDeveloper']);
 Route::get('/all_developers', [DevelopersController::class, 'index']);
 Route::get('all_communities', [CommunitiesController::class, 'index']);
 Route::get('top-communities', [CommunitiesController::class, 'topCommunities']);

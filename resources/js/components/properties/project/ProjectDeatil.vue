@@ -5,7 +5,8 @@
                 <div class="col-lg-8 col-md-9 col-sm-12">
                     <div class="sec-heading mx-auto">
                         <h2>Off-plan Projects in the UAE</h2>
-                        <p>Whether you are looking forward to buying or investing in homes, we help you pick the best.</p>
+                        <p>Whether you are looking forward to buying or investing in homes, we help you pick the best.
+                        </p>
                     </div>
 
                     <div class="filter-row mb-3">
@@ -34,17 +35,20 @@
                                 <div class="row no-gutters">
                                     <div class="col-md-5">
                                         <a :href="`/projects/${project.slug}`">
-                                            <img :src="project.image ? `/storage/${project.image}` : '/images/default-image.png'" :alt="project.name" class="img-fluid">
+                                            <img :src="project.image ? `/storage/${project.image}` : '/images/default-image.png'"
+                                                :alt="project.name" class="img-fluid">
                                         </a>
                                     </div>
                                     <div class="col-md-7">
                                         <div class="card rounded-0 proj-dtls border-0 shadow-sm">
                                             <div class="card-body p-3">
                                                 <h2>
-  <a :href="`/projects/${project.slug}`" :title="project.name">{{ project.name }}</a>
-</h2>
+                                                    <a :href="`/projects/${project.slug}`" :title="project.name">{{
+                                                        project.name }}</a>
+                                                </h2>
 
-                                                <h5><a :href="`/projects/${project.slug}`">{{ project.developer.name }}</a></h5>
+                                                <h5><a :href="`/projects/${project.slug}`">{{ project.developer.name
+                                                        }}</a></h5>
                                                 <p class="loc">{{ project.community.name }}</p>
                                                 <div class="row summry">
                                                     <div class="col-6 col-md-6">
@@ -62,8 +66,10 @@
                                                 </div>
                                             </div>
                                             <div class="card-footer bg-transparent py-2">
-                                                <p class="float-left price"><span>Starting Price</span>{{ project.starting_price }}</p>
-                                                <a class="btn-hover default-btn float-right" :href="`/projects/${project.slug}`">Property Details</a>
+                                                <p class="float-left price"><span>Starting Price</span>{{
+                                                    project.starting_price }}</p>
+                                                <a class="btn-hover default-btn float-right"
+                                                    :href="`/projects/${project.slug}`">Property Details</a>
                                             </div>
                                         </div>
                                     </div>
@@ -91,43 +97,43 @@
 </template>
 
 <script>
-import axios from 'axios';
-import ContactArticle from '../articles/ContactArticle.vue';
-import TopCommunities from '../communties/TopCommunities.vue';
+    import axios from 'axios';
+    import ContactArticle from '../articles/ContactArticle.vue';
+    import TopCommunities from '../communties/TopCommunities.vue';
 
-export default {
-    components: {
-        ContactArticle,
-        TopCommunities,
-    },
-    data() {
-        return {
-            projects: [],
-            totalProjects: 0,
-            currentPage: 1,
-            totalPages: 0,
-        };
-    },
-    created() {
-        this.fetchProjects(this.currentPage);
-    },
-    methods: {
-        fetchProjects(page) {
-            axios.get(`/api/projects?page=${page}`)
-                .then(response => {
-                    this.projects = response.data.data;
-                    this.totalProjects = response.data.total;
-                    this.totalPages = response.data.last_page;
-                })
-                .catch(error => {
-                    console.error("There was an error fetching the projects!", error);
-                });
+    export default {
+        components: {
+            ContactArticle,
+            TopCommunities,
         },
-        handlePageChange(page) {
-            this.fetchProjects(page);
+        data() {
+            return {
+                projects: [],
+                totalProjects: 0,
+                currentPage: 1,
+                totalPages: 0,
+            };
         },
-    },
-};
+        created() {
+            this.fetchProjects(this.currentPage);
+        },
+        methods: {
+            fetchProjects(page) {
+                axios.get(`/api/projects?page=${page}`)
+                    .then(response => {
+                        this.projects = response.data.data;
+                        this.totalProjects = response.data.total;
+                        this.totalPages = response.data.last_page;
+                    })
+                    .catch(error => {
+                        console.error("There was an error fetching the projects!", error);
+                    });
+            },
+            handlePageChange(page) {
+                this.fetchProjects(page);
+            },
+        },
+    };
 </script>
 
 <style scoped>

@@ -1,53 +1,61 @@
 <template>
-    <div class="container mt-5">
-      <div class="row" v-if="developers.length > 0">
-        <div class="col-md-4 mb-4" v-for="developer in developers" :key="developer.id">
-          <div class="dev-bg border-0 shadow rounded-0 mb-4">
-            <img :src="thumb1" class="card-img-top" width="122" height="129" alt="Default Background Image">
-            <div class="card-body">
-              <a :href="`/developer/${developer.id}`" style="text-decoration: none;">
-                <figure class="shadow text-center">
-                  <img width="122" height="129" :src="`/storage/${developer.logos}`" alt="Developer Logo" class="img-fluid">
-                </figure>
-                <h4 class="card-title">{{ developer.name }}</h4>
-                <p class="card-text">Total Projects: <span>{{ developer.projects_count }}</span></p>
-                <span class="btn-hover default-btn">View Details</span>
-              </a>
-            </div>
+  <div class="container mt-5">
+    <div class="row" v-if="developers.length > 0">
+      <div class="col-md-4 mb-4" v-for="developer in developers" :key="developer.id">
+        <div class="dev-bg border-0 shadow rounded-0 mb-4">
+          <!-- Default background image -->
+          <img :src="thumb1" class="card-img-top" width="122" height="129" alt="Default Background Image">
+          <div class="card-body">
+            <!-- Use slug in href instead of id -->
+            <a :href="`/developer/${developer.slug}`" style="text-decoration: none;">
+              <figure class="shadow text-center">
+                <!-- Use the logo image from the storage folder -->
+                <img width="122" height="129" :src="getImageUrl(developer.logos)" alt="Developer Logo" class="img-fluid">
+              </figure>
+              <h4 class="card-title">{{ developer.name }}</h4>
+              <p class="card-text">Total Projects: <span>{{ developer.projects_count }}</span></p>
+              <!-- View Details button with slug -->
+              <span class="btn-hover default-btn" :href="`/developer/${developer.slug}`">View Details</span>
+            </a>
           </div>
         </div>
       </div>
-      <div v-else>
-        <p>No developers found</p>
-      </div>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  import thumb1 from '@/assets/img/dev-bg.jpg'; 
-  import axios from 'axios';
-  
-  const developers = ref([]);
-  
-  const fetchDevelopers = async () => {
-    try {
-      const response = await axios.get('/api/all_developers');
-      developers.value = response.data.data;
-      console.log(developers.value); // Debugging to check if logos are present
-    } catch (error) {
-      console.error('Error fetching developers:', error);
-    }
-  };
-  
-  function getImageUrl(logo) {
-    return logo ? `${import.meta.env.VITE_APP_BASE_URL}/storage/logos/${logo}` : '/images/default-image.png'; 
+    <div v-else>
+      <p>No developers found</p>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import thumb1 from '@/assets/img/dev-bg.jpg'; // Default background image
+import axios from 'axios';
+
+const developers = ref([]);
+
+// Fetch developers from the backend
+const fetchDevelopers = async () => {
+  try {
+    const response = await axios.get('/api/all_developers'); // Ensure this API endpoint returns developers with slugs
+    developers.value = response.data.data;
+    console.log(developers.value); // Check for logos and slugs in console
+  } catch (error) {
+    console.error('Error fetching developers:', error);
   }
-  
-  onMounted(() => {
-    fetchDevelopers();
-  });
-  </script>
+};
+
+// Function to get the image URL for logos
+function getImageUrl(logo) {
+  return logo ? `${import.meta.env.VITE_APP_BASE_URL}/storage/logos/${logo}` : '/images/default-image.png'; 
+}
+
+// Fetch developers on component mount
+onMounted(() => {
+  fetchDevelopers();
+});
+</script>
+
   
 
 <style scoped>

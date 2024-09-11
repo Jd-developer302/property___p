@@ -30,10 +30,7 @@
                   </div>
                 </li>
                 <li class="list-inline-item">
-                  <a
-                    href="https://api.whatsapp.com/send?phone=971551623236&text=I want more information on Ellington Art Bay East"
-                    target="_blank"
-                  >
+                  <a href="https://api.whatsapp.com/send?phone=971551623236&text=I want more information on Ellington Art Bay East" target="_blank">
                     <i class="fa fa-whatsapp"></i> WhatsApp
                   </a>
                 </li>
@@ -46,32 +43,35 @@
       <!-- Responsive Navbar Section -->
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a href="" class="navbar-brand">
-            <img
-              :src="overview.logo1 ? overview.logo1 : '/default/logo.png'"
-              width="208"
-              height="80"
-              alt="Ellington Art Bay East"
-              class="logo"
-            />
+          <a href="/" class="navbar-brand">
+            <img :src="overview.logo1 ? overview.logo1 : '/default/logo.png'" width="208" height="80" alt="Ellington Art Bay East" class="logo" />
           </a>
   
           <!-- Mobile Menu Button -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            @click="toggleMobileMenu"
-          >
+          <button class="navbar-toggler" type="button" @click="toggleMobileMenu">
             <span></span><span></span><span></span>
           </button>
   
           <!-- Mobile and Desktop Menu -->
           <div :class="['navbar-collapse', { collapse: !isMobileMenuOpen }]">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item" v-for="(link, index) in navLinks" :key="index">
-                <router-link :to="link.path" class="nav-link" @click="closeMobileMenu">
-                  {{ link.label }}
-                </router-link>
+            <ul class="navbar-nav mx-auto mr-0" style="margin-right: 0 !important;">
+              <li class="nav-item">
+                <a :href="`/projects/project/${project.slug}`" class="nav-link">Overview</a>
+              </li>
+              <li class="nav-item">
+                <a :href="`/Feature/project/${project.slug}`" class="nav-link">Features</a>
+              </li>
+              <li class="nav-item">
+                <a :href="`/FloorPlan/project/${project.slug}`" class="nav-link">Floor Plan</a>
+              </li>
+              <li class="nav-item">
+                <a :href="`/MasterPlan/project/${project.slug}`" class="nav-link">Master Plan</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">Location</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">Special Offer</a>
               </li>
             </ul>
           </div>
@@ -81,57 +81,44 @@
   </template>
   
   <script setup>
-   import { ref, onMounted } from 'vue';
-   import axios from 'axios';
+  import { ref, onMounted } from 'vue';
+  import axios from 'axios';
   
-  // Data for navigation links
-  const navLinks = ref([
-    { path: '/project/ellington-art-bay-east', label: 'Overview' },
-    { path: '/project/ellington-art-bay-east-features', label: 'Features' },
-    { path: '/project/ellington-art-bay-east-payment-plan', label: 'Payment Plan' },
-    { path: '/project/ellington-art-bay-east-floor-plan', label: 'Floor Plan' },
-    { path: '/project/ellington-art-bay-east-master-plan', label: 'Master Plan' },
-    { path: '/project/ellington-art-bay-east-location', label: 'Location' },
-    { path: '/project/ellington-art-bay-east-property-offer', label: 'Special Offer' }
-  ]);
- 
-
+  const project = ref({ slug: '' });
   const overview = ref({});
-
-// Fetch the overview data on component mount
-onMounted(() => {
+  
+  onMounted(() => {
     axios.get('/api/overviews')
-        .then(response => {
-            console.log('API response:', response.data); // Debugging line
-            // Assuming the first overview object is needed
-            overview.value = response.data[0] || {};
-        })
-        .catch(error => {
-            console.error('Error fetching overview:', error);
-        });
-});
-  // Mobile menu state
+      .then(response => {
+        console.log('API response:', response.data);
+        if (response.data.length > 0) {
+          overview.value = response.data[0];
+          project.value.slug = overview.value.slug || ''; // Ensure slug is assigned
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching overview:', error);
+      });
+  });
+  
   const isMobileMenuOpen = ref(false);
   
-  // Toggle mobile menu
   const toggleMobileMenu = () => {
     isMobileMenuOpen.value = !isMobileMenuOpen.value;
   };
   
-  // Close mobile menu after clicking a link
   const closeMobileMenu = () => {
     isMobileMenuOpen.value = false;
   };
   </script>
+  
+  
+  
+  
+  
+  
   <style scoped>
-  @font-face {
-      font-family: FontAwesome;
-      src: url(/fonts/fontawesome-webfont.eot?v=4.7.0);
-      src: url(/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0) format("embedded-opentype"),url(/fonts/fontawesome-webfont.woff2?v=4.7.0) format("woff2"),url(/fonts/fontawesome-webfont.woff?v=4.7.0) format("woff"),url(/fonts/fontawesome-webfont.ttf?v=4.7.0) format("truetype"),url(/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular) format("svg");
-      font-display: swap;
-      font-weight: 400;
-      font-style: normal
-  }
+
   
   .fa {
       font: 14px/1 FontAwesome;
