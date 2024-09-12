@@ -1,21 +1,83 @@
 <template>
-   <section class="similar-properties">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="h4 has-line mb-4" itemprop="author" itemscope=""><span itemprop="name" class="text-dark">Ellington Group</span> Latest Projects </h3>
-                    </div>
-                    <div class="col-md-6 text-right"><a href="" class="btn btn-outline-secondary btn-sm mt-md-3 mb-2 text-dark text-uppercase">More Projects <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+    <section class="similar-properties">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="h4 has-line mb-4" itemprop="author" itemscope="">
+                        <span itemprop="name" class="text-dark">{{ projectName }}</span> Latest Projects
+                    </h3>
                 </div>
-                <div class="row">
-                    <div class="col-md-4"><div class="property mb-lg-0"><div class="image"><img src="https://manage.goldpillars.ae/Project/Project_Index/1598/Thumb/1598.webp" width="800" height="450" alt="Ellington Belgrove Residences" class="img-fluid cover"><div class="overlay d-flex align-items-center justify-content-center"><a href="" class="btn btn-light btn-sm">View Details</a> </div></div><div class="info"><a href="" class="no-anchor-style"><h3 class="text-thin mb-1">Ellington Belgrove Residences</h3></a><p class="loc">Al Merkadh</p></div></div></div><div class="col-md-4"><div class="property mb-lg-0"><div class="image"><img src="https://manage.goldpillars.ae/Project/Project_Index/1550/Thumb/1550.webp" width="800" height="450" alt="Ellington The Watercrest" class="img-fluid cover"><div class="overlay d-flex align-items-center justify-content-center"><a href="/project/ellington-the-watercrest" class="btn btn-light btn-sm">View Details</a> </div></div><div class="info"><a href="" class="no-anchor-style"><h3 class="text-thin mb-1">Ellington The Watercrest</h3></a><p class="loc">Al Merkadh</p></div></div></div><div class="col-md-4"><div class="property mb-lg-0"><div class="image"><img src="https://manage.goldpillars.ae/Project/Project_Index/1506/Thumb/1506.webp" width="800" height="450" alt="Rosemont Residences" class="img-fluid cover"><div class="overlay d-flex align-items-center justify-content-center"><a href="" class="btn btn-light btn-sm">View Details</a> </div></div><div class="info"><a href="" class="no-anchor-style"><h3 class="text-thin mb-1">Rosemont Residences</h3></a><p class="loc">Al Barsha South Fifth</p></div></div></div>
+                <div class="col-md-6 text-right">
+                    <a href="" class="btn btn-outline-secondary btn-sm mt-md-3 mb-2 text-dark text-uppercase">
+                        More Projects <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
-        </section>
+            <div class="row">
+                <div v-for="project in projects" :key="project.id" class="col-md-4">
+                    <div class="property mb-lg-0">
+                        <div class="image">
+                            <img
+                                :src="project.image ? `/storage/${project.image}` : '/images/default-image.png'"
+                                :alt="project.name"
+                                class="img-fluid"
+                            />
+                            <div class="overlay d-flex align-items-center justify-content-center">
+                                <a :href="`/project/${project.slug}`" class="btn btn-light btn-sm">View Details</a>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <a :href="`/project/${project.slug}`" class="no-anchor-style">
+                                <h3 class="text-thin mb-1">{{ project.name }}</h3>
+                            </a>
+                            <p class="loc">{{ project.location }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
-<style scoped>
- 
 
+<script>
+export default {
+    data() {
+        return {
+            projects: [],
+            projectName: '' // Initialize as an empty string
+        };
+    },
+    mounted() {
+        const slug = this.$route.params.slug;
+        if (slug) {
+            this.fetchProjectBySlug(slug);
+        }
+    },
+    methods: {
+        async fetchProjectBySlug(slug) {
+            try {
+                const response = await fetch(`/api/projects/${slug}`); 
+                const data = await response.json();
+                console.log(data); 
+
+                if (data) {
+                    this.projects = [data]; 
+                    this.projectName = data.name; // Set the project name for the heading
+                }
+            } catch (error) {
+                console.error('Error fetching project:', error);
+            }
+        }
+    }
+};
+</script>
+
+
+
+
+
+
+<style scoped>
     .fa {
         font: 14px/1 FontAwesome;
         font-size: inherit;

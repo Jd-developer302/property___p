@@ -32,4 +32,23 @@ class OverviewsController extends Controller
         
         return response()->json($overviews);
     }
+    public function showBySlug($slug)
+{
+    $overview = Overview::with(['project'])->where('slug', $slug)->first();
+
+    if (!$overview) {
+        return response()->json(['message' => 'Overview not found'], Response::HTTP_NOT_FOUND);
+    }
+
+    // Ensure the logo path is correct
+    if ($overview->logo1) {
+        $overview->logo1 = url('overview/' . $overview->logo1);
+    }
+    if ($overview->logo2) {
+        $overview->logo2 = url('overview/' . $overview->logo2);
+    }
+
+    return response()->json($overview);
+}
+
 }

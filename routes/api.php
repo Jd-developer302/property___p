@@ -35,6 +35,7 @@ use App\Http\Controllers\API\FrontEnd\ProjectsController;
 use App\Http\Controllers\API\FrontEnd\DevelopersController;
 use App\Http\Controllers\API\FrontEnd\CommunitiesController;
 use App\Http\Controllers\API\FrontEnd\OverviewsController;
+use App\Http\Controllers\API\FrontEnd\FeaturesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -122,4 +123,5 @@ Route::get('/communities/featured', [CommunitiesController::class, 'featuredComm
 Route::get('/communities/{slug}', [CommunitiesController::class, 'getBySlug']);
 Route::get('/overviews', [OverviewsController::class, 'index']);
 Route::get('projects/{slug}', [ProjectsController::class, 'getProjectBySlug']);
-
+Route::get('/overviews/{slug}', [OverviewsController::class, 'showBySlug']);
+Route::get('/features/{slug}', [FeaturesController::class, 'showBySlug']);

@@ -8,15 +8,16 @@
                 <div class="row">
                     <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block">
                         <figure>
-                            <img src="https://manage.goldpillars.ae/Developer/Developer_Logo/15/Thumb/15.webp" width="243" height="117" alt="Ellington Group" class="img-fluid">
+                            <img :src="feature.logo1" width="243" height="117" alt="Ellington Group" class="img-fluid">
                         </figure>
                     </div>
                     <div class="col-md-9">
                         <header>
-                            <h1>Ellington Art Bay East Key Features</h1>
+                            <h1>{{ feature.name }} Key Features</h1>
                             <div class="pro-info">
-                                    <table class="table">
-                                        <tbody><tr>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
                                             <td>
                                                 <div class="pro-info-warp">
                                                     <img src="" width="32" height="32" alt="Unit Type"><span>Apartments</span>
@@ -28,25 +29,25 @@
                                                     <img src="" width="32" height="32" alt="Size">
                                                     <span>Size</span>
                                                     <p>
-                                                        430 to 2,459 sq. ft. <i id="ContentPlaceHolder1_sizehsid" class="fa fa-info-circle" aria-hidden="true" data-toggle="modal" data-target="#Sizeinfo"></i>
+                                                        430 to 2,459 sq. ft.
                                                     </p>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="pro-info-warp">
-                                                    <img src="" width="32" height="32" alt="Ellington Art Bay EastAnticipated Handover - Q3 - 2026">
+                                                    <img src="" width="32" height="32" alt="Handover">
                                                     <span>Handover</span>
                                                     <p>Q3 - 2026</p>
                                                 </div>
                                             </td>
                                             <td class="text-md-right pb-3 price">
                                                 <label for="pStartingPriceID">Starting Price</label>
-                                                <h3 id="pStartingPriceID" itemprop="price">AED 1,814,828 (1 BR)
-                                                    <i id="ContentPlaceHolder1_pricehsid" class="fa fa-info-circle" aria-hidden="true" data-toggle="modal" data-target="#Priceinfo" onclick="fnbindPriceCurrency();"></i>
-                                                </h3>
+                                                <h3 id="pStartingPriceID" itemprop="price">{{ feature.starting_price }}</h3>
                                             </td>
-                                    </tr></tbody></table>
-                                </div>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <nav aria-label="breadcrumb" class="mt-3 d-none d-md-block d-lg-block d-xl-block">
                                 <ol class="breadcrumb">
@@ -58,7 +59,6 @@
                                 </ol>
                             </nav>
                             <input name="ctl00$ContentPlaceHolder1$hdnOffer" type="hidden" id="ContentPlaceHolder1_hdnOffer" value="0">
-
                         </header>
                     </div>
                 </div>
@@ -66,6 +66,31 @@
         </div>
     </section>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import axios from 'axios'
+
+// Get route and slug from URL
+const route = useRoute();
+const feature = ref({}); // Initialize as an empty object
+
+onMounted(async () => {
+  const slug = route.params.slug;
+  try {
+    const response = await axios.get(`/api/features/${slug}`);
+    if (response.data.length > 0) {
+      feature.value = response.data[0]; // Access the first item in the array
+    } else {
+      console.error("No feature data found");
+    }
+  } catch (error) {
+    console.error("Error fetching feature data:", error);
+  }
+});
+</script>
+
 <style scoped>
 /* Minification failed. Returning unminified contents.
 (1,25): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'

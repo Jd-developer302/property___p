@@ -21,12 +21,24 @@
                             <div class="row mb-3 mt-3 mx-3">
                                 <div class="col-lg-12">
                                     <div class="form-group">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" v-model="form.name" class="form-control" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
                                         <label class="form-label">Project</label>
                                         <select v-model="form.project_id" class="form-control" name="project_id" required>
                                             <option v-for="project in projects" :key="project.id" :value="project.id">
                                                 {{ project.name }}
                                             </option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Slug</label>
+                                        <input type="text" v-model="form.slug" class="form-control" name="slug" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -60,7 +72,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, nextTick , watch} from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import Base from '../layouts/Base.vue';
@@ -72,6 +84,8 @@ import 'summernote/dist/summernote-lite.min.js';
 // Form state
 const form = ref({
     project_id: '',
+    name:'',
+    slug:'',
     logo1: null,
     logo2: null,
     description: '',
@@ -81,7 +95,10 @@ const form = ref({
 const projects = ref([]);
 const router = useRouter();
 
-// Fetch projects from API
+// Watch for changes in the name field and auto-generate the slug
+watch(() => form.value.name, (newName) => {
+    form.value.slug = slugify(newName, { lower: true });
+});
 const fetchProjects = async () => {
     try {
         const response = await axios.get('/api/admin/projects');
@@ -102,6 +119,8 @@ const handleFileUpload = (field, event) => {
 // Submit form data
 const submitForm = async () => {
     const formData = new FormData();
+    formData.append('name', form.value.name);
+    formData.append('slug', form.value.slug);
     formData.append('project_id', form.value.project_id);
     formData.append('logo1', form.value.logo1);
     formData.append('logo2', form.value.logo2);

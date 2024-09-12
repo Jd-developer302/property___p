@@ -21,7 +21,12 @@
             <div class="card-body">
               <form @submit.prevent="submitForm">
                 <div class="row mb-3 mt-3 mx-3">
-                  <!-- Project Field -->
+                  <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" v-model="form.name" class="form-control" name="name" required>
+                                    </div>
+                                </div>
                   <div class="col-lg-12 mb-3">
                     <div class="form-group">
                       <label for="project" class="form-label">Project</label>
@@ -33,8 +38,12 @@
                       </select>
                     </div>
                   </div>
-  
-                  <!-- Logo 1 Field -->
+                  <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Slug</label>
+                                        <input type="text" v-model="form.slug" class="form-control" name="slug" required>
+                                    </div>
+                                </div>
                   <div class="col-lg-12 mb-3">
                     <div class="form-group">
                       <label for="logo1" class="form-label">Logo 1</label>
@@ -83,6 +92,8 @@
   // Reactive form state
   const form = ref({
     project_id: '',
+    name:'',
+    slug:'',
     logo1: null,
     logo2: null,
     description: '',
@@ -90,9 +101,9 @@
   
   const projects = ref([]);
   const router = useRouter();
-  const route = useRoute(); // to get the overview ID from the route params
+  const route = useRoute(); 
+
   
-  // Fetch projects from API
   const fetchProjects = async () => {
     try {
       const { data } = await axios.get('/api/admin/projects');
@@ -113,6 +124,8 @@
   // Submit form data
   const submitForm = async () => {
     const formData = new FormData();
+    formData.append('name', form.value.name);
+    formData.append('slug', form.value.slug);
     formData.append('project_id', form.value.project_id);
     if (form.value.logo1) formData.append('logo1', form.value.logo1);
     if (form.value.logo2) formData.append('logo2', form.value.logo2);

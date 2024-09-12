@@ -11,7 +11,7 @@ class ProjectsController extends Controller
     public function index(Request $request)
     {
         $projects = Project::with(['community', 'developer'])->paginate(10);
-return response()->json($projects);
+        return response()->json($projects);
 
     }
     public function getTotalProjectsByCommunity()
@@ -35,15 +35,18 @@ return response()->json($projects);
         return response()->json($developerProjectCounts);
     }
     public function getProjectBySlug($slug)
-{
-    $project = Project::where('slug', $slug)->first();
-
-    if (!$project) {
-        return response()->json(['message' => 'Project not found'], 404);
+    {
+      
+        $project = Project::with(['community', 'developer'])->where('slug', $slug)->first();
+    
+        if (!$project) {
+            return response()->json(['message' => 'Project not found'], 404);
+        }
+    
+        return response()->json($project, 200);
     }
 
-    return response()->json($project, 200);
-}
+
 
     }
 

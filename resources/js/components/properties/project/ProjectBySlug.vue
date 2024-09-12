@@ -1,100 +1,104 @@
 <template>
-<Header/>
-<section class="main-slider">
-            <div id="projBannerId"><div id="proslider" class="carousel"><img class="img-banner" src="https://manage.goldpillars.ae/Banner/820/Large/4658.webp" alt="Luxury Living at Ellington Art Bay East"></div></div>
-            <div class="pro-summary">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block">
-                            <figure class="wow animated fadeInUp" data-wow-duration="2s">
-                                <img src="https://manage.goldpillars.ae/Developer/Developer_Logo/15/Thumb/15.webp" width="243" height="177" alt="Ellington Group" class="img-fluid">
-                            </figure>
-                        </div>
-                        <div class="col-md-9" itemprop="offers" itemscope="" itemtype="https://schema.org/Offer">
-                            <header class="wow animated fadeInUp" data-wow-duration="2s">
-                                <h1 title="Ellington Art Bay East Tower"><span itemprop="name">Ellington Art Bay East Tower</span> </h1>
-                                <div class="pro-info">
-                                    <table class="table">
-                                        <tbody><tr>
-                                            <td>
-                                                <div class="pro-info-warp">
-                                                    <img src="https://www.goldpillars.ae/project/images/icon/Bedroom.svg" width="48" height="48" alt="Unit Type"><span>Apartments</span>
-                                                    <p>Studio, 1, 2 &amp; 3 Bedrooms</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="pro-info-warp">
-                                                    <img src="https://www.goldpillars.ae/project/images/icon/Area.svg" width="48" height="48" alt="Size">
-                                                    <span>Size</span>
-                                                    <p>430 to 2,459 sq. ft. <i id="sizehsid" class="fa fa-info-circle" aria-hidden="true" data-toggle="modal" data-target="#Sizeinfo"></i></p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="pro-info-warp">
-                                                    <img src="https://www.goldpillars.ae/project/images/icon/Handover.svg" width="48" height="48" alt="Ellington Art Bay EastAnticipated Handover - Q3 - 2026">
-                                                    <span>Handover</span>
-                                                    <p>Q3 - 2026</p>
-                                                </div>
-                                            </td>
-                                            <td class="text-md-right pb-3 price">
-                                                <div class="sp" for="pStartingPriceID">Starting Price</div>
-                                                <p id="pStartingPriceID" itemprop="price">AED 1,814,828 (1 BR) <i id="pricehsid" class="fa fa-info-circle" aria-hidden="true" data-toggle="modal" data-target="#Priceinfo" onclick="fnbindPriceCurrency();"></i></p>
-                                            </td>
-                                    </tr></tbody></table>
-                                </div>
-                                <nav aria-label="breadcrumb" class="mt-2 d-none d-md-block d-lg-block d-xl-block">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="https://www.goldpillars.ae/">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="/communities">Al Jadaf</a> </li>
-                                        <li class="breadcrumb-item"><a href="https://www.goldpillars.ae/developer/ellington-group">Ellington Group</a> </li>
-                                        <li aria-current="page" class="breadcrumb-item active">Ellington Art Bay East</li>
-                                    </ol>
-                                </nav>
-                            </header>
-                        </div>
-                    </div>
-                </div>
+    <Header/>
+    <section class="main-slider" v-if="project">
+      <div id="projBannerId">
+        <div id="proslider" class="carousel">
+          <img class="img-banner" :src="project.image ? `/storage/${project.image}` : '/images/default-image.png'" :alt="project.name">
+        </div>
+      </div>
+      <div class="pro-summary">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block">
+              <figure class="wow animated fadeInUp" data-wow-duration="2s">
+                <img :src="project.developer.logo" width="243" height="177" :alt="project.developer.name" class="img-fluid">
+              </figure>
             </div>
-        </section>
-        <Overview/>
-        <SummaryFloor/>
-        <Amenities/>
-        <LatestProject/>
-        <Footer/>
+            <div class="col-md-9" itemprop="offers" itemscope="" itemtype="https://schema.org/Offer">
+              <header class="wow animated fadeInUp" data-wow-duration="2s">
+                <h1 title="project.name"><span itemprop="name">{{ project.name }}</span></h1>
+                <div class="pro-info">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="pro-info-warp">
+                            <img src="https://www.goldpillars.ae/project/images/icon/Bedroom.svg" width="48" height="48" alt="Unit Type">
+                            <span>Apartments</span>
+                            <p>{{ project.apartments }}</p>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="pro-info-warp">
+                            <img src="https://www.goldpillars.ae/project/images/icon/Area.svg" width="48" height="48" alt="Size">
+                            <span>Size</span>
+                            <p>{{ project.size }} sq. ft.</p>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="pro-info-warp">
+                            <img src="https://www.goldpillars.ae/project/images/icon/Handover.svg" width="48" height="48" :alt="`Anticipated Handover - ${project.handover}`">
+                            <span>Handover</span>
+                            <p>{{ project.handover }}</p>
+                          </div>
+                        </td>
+                        <td class="text-md-right pb-3 price">
+                          <div class="sp" for="pStartingPriceID">Starting Price</div>
+                          <p id="pStartingPriceID" itemprop="price">{{ project.starting_price }}</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <nav aria-label="breadcrumb" class="mt-2 d-none d-md-block d-lg-block d-xl-block">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a :href="`/communities/${project.community.slug}`">{{ project.community.name }}</a></li>
+                    <li class="breadcrumb-item"><a :href="`/developer/${project.developer.slug}`">{{ project.developer.name }}</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">{{ project.name }}</li>
+                  </ol>
+                </nav>
+              </header>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <Overview/>
+    <SummaryFloor/>
+    <Amenities/>
+    <LatestProject/>
+    <Footer/>
   </template>
   
   <script setup>
-    import { ref, onMounted } from 'vue';
-    import axios from 'axios';
-    import Header from './Header.vue'
-    import { useRoute } from 'vue-router';
-    import Footer from '../home/Footer.vue';
-import Overview from './Component/Overview.vue';
-import SummaryFloor from './Component/SummaryFloor.vue';
-import Amenities from './Component/Amenities.vue';
-import LatestProject from './Component/LatestProject.vue';
-
-const route = useRoute();
-const project = ref(null);
-const fetchCommunityData = async () => {
-        const slug = route.params.slug;
-        try {
-            const response = await axios.get(`/api/projects/${slug}`);
-            project.value = response.data;
-        } catch (error) {
-            console.error('Error fetching project data:', error);
-        }
-    };
-
-    onMounted(() => {
-        fetchCommunityData();
-    });
-
-    function getImageUrl(image) {
-        return image ? `/storage/${image}` : '/images/default-image.png';
-
+  import { ref, onMounted } from 'vue'
+  import { useRoute } from 'vue-router'
+  import axios from 'axios'
+  
+  import Header from './Header.vue'
+  import Footer from '../home/Footer.vue';
+  import Overview from './Component/Overview.vue';
+  import SummaryFloor from './Component/SummaryFloor.vue';
+  import Amenities from './Component/Amenities.vue';
+  import LatestProject from './Component/LatestProject.vue';
+  
+  // Get route and slug from URL
+  const route = useRoute();
+  const project = ref(null);
+  
+  onMounted(async () => {
+    const slug = route.params.slug;
+    try {
+      const response = await axios.get(`/api/projects/${slug}`);
+      project.value = response.data;
+    } catch (error) {
+      console.error("Error fetching project data:", error);
     }
+  });
   </script>
+  
 <style scoped>
 @font-face {
     font-family: FontAwesome;

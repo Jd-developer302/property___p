@@ -5,7 +5,9 @@
         <p class="paragraph">
             Looking for best buy - here is the well compiled information out of several developers and locations for you.
         </p>
-        <button class="view-more-button">VIEW MORE</button>
+        <a class="view-more-button" href="/projects">VIEW MORE</a>
+        
+        
       </div>
     </div>
   </template>
@@ -65,16 +67,18 @@
     background-color: #9C3133;
     color: #fff;
     border: none;
-    padding: 0px 30px;
+    padding: 5px 30px;
     font-size: 1.7rem;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none;
 
   }
   
   .view-more-button:hover {
     background-color: #7a2526;
+    text-decoration: none;
   }
   </style>
   

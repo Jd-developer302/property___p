@@ -2,147 +2,114 @@
     <section class="property-single">
         <div class="container">
             <div class="row">
+              
                 <div class="col-lg-4 order-md-2 pb-4" id="enqs">
-                    <div class="card new_form border-0 bg-white d-none d-md-block mb-4">
-                        <div class="card-header bg-white">Register your interest</div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <input type="text" id="txtName" class="form-control" placeholder="Name *">
-                                <small class="text-danger d-none" id="spName"></small>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="txtEmail" class="form-control" placeholder="Email Id *">
-                                <small class="text-danger d-none" id="spEmail"></small>
-                            </div>
-                            <div class="form-group">
-                                <select name="ddlQueryType" id="ddlQueryType" class="form-control">
-                                    <option value="I am">I am</option>
-                                    <option value="1">Individual</option>
-                                    <option value="2">Agent</option>
-                                    <option value="3">Investor</option>
-                                    <option value="5">Do not want to disclose</option>
-                                    <option value="4">Others</option>
-
-                                </select>
-                                <small class="text-danger d-none" id="spQueryType"></small>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <select id="ddlCountryCode" class="form-control">
-                                                    <option value="119" selected="selected">ARE +971</option>
-                                                    <option value="15">BHR +973</option>
-
-                                                    <option value="127">Other</option>
-                                                </select>
-                                            </div>
-
-                                            <input type="text" id="txtContactNo" class="form-control"
-                                                placeholder="Contact No *"
-                                                onkeypress="if((event.keyCode < 48 || event.keyCode > 57) &amp;&amp; (event.keyCode < 43 || event.keyCode > 45)) event.returnValue=false;"
-                                                onblur="fnphoneqcHome();" maxlength="15" oninput="fnchkbtnqcHome();">
-                                        </div>
-                                        <small class="text-danger d-none" id="spContactno"></small>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <textarea id="txtMessage" class="form-control" placeholder="Message"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button id="btntempsubmit" type="button" class="btn btn-primary btn-block d-block"
-                                    onclick="return saveprojqcHome();">
-                                    Send Message</button>
-                                <button id="btnsubmit" type="button" class="btn btn-primary btn-block d-none"
-                                    onclick="return saveprojqcHome();">
-                                    Send Message</button>
-                            </div>
-                            <div class="loader d-none" id="loaderproj">
-                            </div>
-                            <div class="send d-none" id="SendProjId">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card download-new border-0">
+                   <Contact/>
+                    <!-- <div class="card download-new border-0">
                         <input type="hidden" name="hdnBrchPathId" id="hdnBrchPathId">
                         <div class="card-header">
                             Download<img src="" width="18" height="18" alt="Download">
                         </div>
                         <div class="card-body p-0">
                             <ul>
-                                <li><a href="Ellington-Art-Bay-East-brochure-download" id="BrochureId">
-                                        <img src="" alt="ellington-art-bay-east Brochure" width="25" height="25"
+                                <li><a href="" id="BrochureId">
+                                        <img src="" alt="address-residences-dhe Brochure" width="25" height="25"
                                             class="mr-2">
                                         Brochure</a></li>
-                                <li><a href="Ellington-Art-Bay-East-payment-plan-brochure-download" id="FPBrochureId">
-                                        <img src="" alt="ellington-art-bay-east Floor Plan Brochure" width="25"
+                                <li><a href="" id="FPBrochureId">
+                                        <img src="" alt="address-residences-dhe Floor Plan Brochure" width="25"
                                             height="25" class="mr-2">
                                         Floor Plan</a></li>
-                                <li><a href="Ellington-Art-Bay-East-floor-plan-brochure-download" id="PPBrochureId">
-                                        <img src="" alt="ellington-art-bay-east Payment Plan Brochure" width="25"
+                                <li><a href="" id="PPBrochureId">
+                                        <img src="" alt="address-residences-dhe Payment Plan Brochure" width="25"
                                             height="25" class="mr-2">
                                         Payment Plan</a></li>
-                                <li><a href="/project/ellington-art-bay-east-mortgage-calculator">
+                                <li><a href="">
                                         <img src="" alt="Mortgage Calculator" width="25" height="25" class="mr-2">
                                         Mortgage EMI Calculator</a></li>
                                 <li id="walkthroughId"></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="col-lg-8 order-md-1 wow animated fadeInUp" data-wow-duration="1s">
-                    <div class="property-single-description">
+
+                <!-- Overview Content -->
+                <div class="col-lg-8 order-md-1 wow animated fadeInUp">
+                    <div v-if="overview" class="property-single-description">
                         <h2 class="h4 has-line">Overview</h2>
                         <div id="OverviewContent">
-                            <p>The <strong>Art Bay East</strong> is one of a kind residential tower by <strong>Ellington
-                                    Properties</strong> &amp; <strong>Dutco Group</strong> in <strong>Culture
-                                    Village</strong>, <strong>Al Jaddaf</strong>, <strong>Dubai</strong>. This 12-story
-                                building maintains the perfect blend of modern design and cultural elegance while
-                                overlooking the dynamic Dubai Creek. A collaboration of two eminent developers ensures a
-                                residential address that is nothing but quality in each minute detail, from architecture
-                                to fittings and fixtures.</p>
-                            <p>The assigned parking spaces will surely be a convenience to the residents of the East
-                                Tower, with one spot given to studios and 1- and 2-bedroom units, while 3-bedroom
-                                apartments have been allotted two spots. With both a passenger and service elevator,
-                                this building assures easy and quick access to any floor.</p>
-                            <p>Situated in the heritage yet newly developed Al Jaddaf area, the project enjoys a
-                                privileged address. It is very well-connected to major highways and transportation
-                                arteries, which makes moving around the city quite easy. Close proximity to Al Khail
-                                Road and Al Jaddaf Metro Station ensures an easy commute to any corner. Be it a short
-                                trip to Royal Zabeel Palace, a shopping spree to Wafi Mall, or an evening to Downtown
-                                Dubai, everything is within 5-7 minutes.</p>
-                            <p>From the fitness studio to the pool deck and from the Hot Yoga Studio to wellness
-                                corners, there is something to enthrall everyone at this complex. The Art Club is at the
-                                core of the development and features a workshop corner, an arts and performances stage,
-                                down to a rooftop bar with an outdoor lounge and viewing deck. The other recreational
-                                areas for residents include a club lounge, a lobby library, and various others like the
-                                game corner, BBQ area, and leisure pool.</p>
-                            <h3>Project Highlights</h3>
-                            <ul>
-                                <li>Art Bay East is an exceptionally unique upcoming project in Al Jaddaf.</li>
-                                <li>The development will combine modern design with a range of cultural aspects.</li>
-                                <li>From <strong>studios to 3-bedroom units</strong>, the apartments have plenty of
-                                    natural light and ventilation.</li>
-                                <li>Well-located, with easy access to major highways, and many attractions, such as
-                                    Downtown Dubai, Palm Jumeirah, and Burj Khalifa.</li>
-                                <li>Fully equipped with world-class amenities like top-of-the-line fitness and wellness
-                                    facilities, recreational areas, and an exclusive Art Club.</li>
-                                <li>Located within easy reach of Dubai's best retail, dining, and entertainment options.
-                                </li>
-                                <li>Jointly developed by the reputed Dutco Group and Ellington Properties, assuring high
-                                    standards of quality.</li>
-                            </ul>
+                            <p v-html="overview.description"></p>
                         </div>
-                        <div id="divprojconfigId"></div>
+                        <h3>Project Highlights</h3>
+                        <ul>
+                            <li v-for="(highlight, index) in overview.highlights" :key="index">{{ highlight }}</li>
+                        </ul>
                     </div>
+                    <div v-else class="alert alert-danger">Overview not found</div>
                 </div>
             </div>
         </div>
     </section>
 </template>
+
+<script>
+    import axios from 'axios';
+   import Contact from './Contact.vue'
+    export default {
+        components: {
+            Contact
+        },
+        data() {
+            return {
+                overview: null,
+                formData: {
+                    name: '',
+                    email: '',
+                    queryType: 'I am',
+                    message: ''
+                },
+                errors: {}
+            };
+        },
+        created() {
+            this.fetchOverview();
+        },
+        methods: {
+            fetchOverview() {
+                const slug = this.$route.params.slug;
+                axios.get(`/api/overviews/${slug}`)
+                    .then(response => {
+                        this.overview = response.data;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching overview:', error);
+                        this.overview = null;
+                    });
+            },
+            sendMessage() {
+                // Example form submission logic (adjust as necessary)
+                axios.post('/api/send-message', this.formData)
+                    .then(response => {
+                        alert('Message sent successfully!');
+                        this.formData = {
+                            name: '',
+                            email: '',
+                            queryType: 'I am',
+                            message: ''
+                        };
+                    })
+                    .catch(error => {
+                        if (error.response && error.response.data.errors) {
+                            this.errors = error.response.data.errors;
+                        }
+                    });
+            }
+        }
+    };
+</script>
+
+
+
 <style scoped>
     @font-face {
         font-family: FontAwesome;

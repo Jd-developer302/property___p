@@ -58,7 +58,7 @@
                 </div>
                 <div class="btn-container mb-5">
                     <div class="btn btn-primary">
-                      <a href="#">VIEW MORE</a>
+                      <a href="/location">VIEW MORE</a>
                     </div>
                   </div>
             </div>

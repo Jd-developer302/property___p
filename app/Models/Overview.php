@@ -9,6 +9,8 @@ class Overview extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'name',
+        'slug',
         'logo1',
         'logo2',
         'description',

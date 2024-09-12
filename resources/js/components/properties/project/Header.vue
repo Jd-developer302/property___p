@@ -59,7 +59,7 @@
                 <a :href="`/projects/project/${project.slug}`" class="nav-link">Overview</a>
               </li>
               <li class="nav-item">
-                <a :href="`/Feature/project/${project.slug}`" class="nav-link">Features</a>
+                <a :href="`/Feature/${project.slug}`" class="nav-link">Features</a>
               </li>
               <li class="nav-item">
                 <a :href="`/FloorPlan/project/${project.slug}`" class="nav-link">Floor Plan</a>
