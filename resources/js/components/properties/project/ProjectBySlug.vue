@@ -1,5 +1,31 @@
+<script setup>
+  import { ref, onMounted } from 'vue'
+  import { useRoute } from 'vue-router'
+  import axios from 'axios'
+  
+  import Header from './Header.vue'
+  import Footer from '../home/Footer.vue';
+  import Overview from './Component/Overview.vue';
+  import SummaryFloor from './Component/SummaryFloor.vue';
+  import Amenities from './Component/Amenities.vue';
+  import LatestProject from './Component/LatestProject.vue';
+  
+  // Get route and slug from URL
+  const route = useRoute();
+  const project = ref(null);
+  
+  onMounted(async () => {
+    const slug = route.params.slug;
+    try {
+      const response = await axios.get(`/api/projects/${slug}`);
+      project.value = response.data;
+    } catch (error) {
+      console.error("Error fetching project data:", error);
+    }
+  });
+  </script>
 <template>
-    <Header/>
+    <Header v-if="project" :featureSlug="project.feature?.slug" :floorplanSlug="project.floorplan?.slug" :masterplanSlug="project.masterplan?.slug" :locationsSlug="project.location?.slug"/>
     <section class="main-slider" v-if="project">
       <div id="projBannerId">
         <div id="proslider" class="carousel">
@@ -72,32 +98,7 @@
     <Footer/>
   </template>
   
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  import { useRoute } from 'vue-router'
-  import axios from 'axios'
   
-  import Header from './Header.vue'
-  import Footer from '../home/Footer.vue';
-  import Overview from './Component/Overview.vue';
-  import SummaryFloor from './Component/SummaryFloor.vue';
-  import Amenities from './Component/Amenities.vue';
-  import LatestProject from './Component/LatestProject.vue';
-  
-  // Get route and slug from URL
-  const route = useRoute();
-  const project = ref(null);
-  
-  onMounted(async () => {
-    const slug = route.params.slug;
-    try {
-      const response = await axios.get(`/api/projects/${slug}`);
-      project.value = response.data;
-    } catch (error) {
-      console.error("Error fetching project data:", error);
-    }
-  });
-  </script>
   
 <style scoped>
 @font-face {

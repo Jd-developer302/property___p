@@ -93,7 +93,8 @@ import ProjectPropertiesIndex from '../components/properties/project/index.vue';
 import ProjectBySlugIndex from '../components/properties/project/ProjectBySlug.vue';
 import FeatureIndex from '../components/properties/project/Feature/index.vue';
 import FloorPlanIndex from '../components/properties/project/FloorPlan/index.vue';
-import MasterPlanIndex from '../components/properties/project/MasterPlan/index.vue'
+import MasterPlanIndex from '../components/properties/project/MasterPlan/index.vue';
+import LocationsIndex from '../components/properties/project/locations/index.vue';
 import DeveloperPropertiesIndex from '../components/properties/developer/index.vue';
 import DeveloperProjectBySlug from '../components/properties/developer/DeveloperProjectBySlug.vue';
 
@@ -203,11 +204,31 @@ const routes = [
     },
     {path: '/projects',component: ProjectPropertiesIndex
     },
-    {path: '/projects/:slug',name:'ProjectBySlugIndex',component: ProjectBySlugIndex},
-    { path: '/Feature/:slug', name: 'FeatureIndex', component: FeatureIndex },
-    { path: '/FloorPlan/:slug', name: 'FloorPlanIndex', component: FloorPlanIndex },
-    { path: '/MasterPlan/:slug', name: 'MasterPlanIndex', component: MasterPlanIndex },
-    
+    {
+      path: '/projects/:slug',
+      name: 'ProjectBySlugIndex',
+      component: ProjectBySlugIndex,
+    },
+    {
+      path: '/Feature/:slug',
+      name: 'FeatureIndex',
+      component: FeatureIndex,
+    },
+    {
+      path: '/FloorPlan/:slug',
+      name: 'FloorPlanIndex',
+      component: FloorPlanIndex,
+    },
+    {
+      path: '/MasterPlan/:slug',
+      name: 'MasterPlanIndex',
+      component: MasterPlanIndex,
+    },
+    {
+      path: '/Locations/:slug',
+      name: 'LocationsIndex',
+      component: LocationsIndex,
+    },
     
     {path: '/developer',component: DeveloperPropertiesIndex
     },

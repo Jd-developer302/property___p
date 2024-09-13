@@ -42,4 +42,20 @@ class Project extends Model
     {
         return $this->hasMany(Overview::class, 'project_id');
     }
+    public function feature()
+    {
+        return $this->hasOne(Feature::class);
+    }
+    public function floorplan()
+    {
+        return $this->hasOne(FloorPlan::class);
+    }
+    public function masterplan()
+    {
+        return $this->hasOne(MasterPlan::class);
+    }
+    public function location()
+    {
+        return $this->hasOne(ProjectLocation::class);
+    }
 }

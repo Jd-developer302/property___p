@@ -4,19 +4,19 @@ import { useRoute } from 'vue-router'
 import axios from 'axios'
 import thumb1 from '@/assets/img/p-type.png';
 import thumb2 from '@/assets/img/bed.png';
-// Get route and slug from URL
+
 const route = useRoute();
-const feature = ref({}); // Initialize as an empty object
+const location = ref({}); 
 
 onMounted(async () => {
   const slug = route.params.slug;
   console.log("Fetching data for slug:", slug);
   try {
-    const response = await axios.get(`/api/features/${slug}`);
+    const response = await axios.get(`/api/location/${slug}`);
     console.log("API response:", response.data);
-    feature.value = response.data;
+    location.value = response.data;
   } catch (error) {
-    console.error("Error fetching feature data:", error);
+    console.error("Error fetching location data:", error);
   }
 });
 
@@ -25,7 +25,7 @@ onMounted(async () => {
 
 <template>
     <section class="main-slider h-auto">
-      <div v-if="feature && feature.project">
+      <div v-if="location && location.project">
         <div class="inner-banner">
           <img class="img-bnr" width="1264" height="360" src="https://www.goldpillars.ae/project/images/DefaultHeader.jpg" alt="Ellington Art Bay East Features">
         </div>
@@ -34,12 +34,12 @@ onMounted(async () => {
             <div class="row">
               <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block">
                 <figure>
-                  <img :src="feature.logo1" width="243" height="117" alt="Ellington Group" class="img-fluid">
+                  <img :src="location.logo1" width="243" height="117" alt="Ellington Group" class="img-fluid">
                 </figure>
               </div>
               <div class="col-md-9">
                 <header>
-                  <h1>{{ feature.name }} Key Features</h1>
+                  <h1>{{ location.name }}</h1>
                   <div class="pro-info">
                     <table class="table">
                       <tbody>
@@ -47,19 +47,19 @@ onMounted(async () => {
                           <td>
                             <div class="pro-info-warp">
                               <img :src="thumb2" width="32" height="32" alt="Unit Type"><span>Apartments</span>
-                              <p>{{ feature.project.apartments }}</p>
+                              <p>{{ location.project.apartments }}</p>
                             </div>
                           </td>
                           <td>
                             <div class="pro-info-warp">
                               <img :src="thumb1" width="32" height="32" alt="Handover">
                               <span>Handover</span>
-                              <p>{{ feature.project.handover }}</p>
+                              <p>{{ location.project.handover }}</p>
                             </div>
                           </td>
                           <td class="text-md-right pb-3 price">
                             <label for="pStartingPriceID">Starting Price</label>
-                            <h3 id="pStartingPriceID" itemprop="price">{{ feature.project.starting_price }}</h3>
+                            <h3 id="pStartingPriceID" itemprop="price">{{ location.project.starting_price }}</h3>
                           </td>
                         </tr>
                       </tbody>
@@ -69,8 +69,8 @@ onMounted(async () => {
                   <nav aria-label="breadcrumb" class="mt-3 d-none d-md-block d-lg-block d-xl-block">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="/">Home</a></li>
-                      <li class="breadcrumb-item"><a href="">{{ feature.project.name }}</a></li>
-                      <li aria-current="page" class="breadcrumb-item active">Features</li>
+                      <li class="breadcrumb-item"><a href="">{{ location.project.name }}</a></li>
+                      <li aria-current="page" class="breadcrumb-item active">Location</li>
                     </ol>
                   </nav>
                 </header>
@@ -84,416 +84,7 @@ onMounted(async () => {
       </div>
     </section>
   </template>
-  
-
-
-
-
 <style scoped>
-/* Minification failed. Returning unminified contents.
-(1,25): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,41): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,59): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,77): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,93): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,108): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,126): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,144): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,161): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,177): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,193): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,207): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,223): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,244): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,263): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,284): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,303): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,319): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,338): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,356): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,373): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,389): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,408): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,431): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,454): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,477): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,501): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,667): run-time error CSS1062: Expected semicolon or closing curly-brace, found '-'
-(1,78051): run-time error CSS1060: Expected closing curly-brace, found '0'
-(1,78172): run-time error CSS1019: Unexpected token, found '}'
-(1,78173): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,78193): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,82659): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,82692): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,82728): run-time error CSS1019: Unexpected token, found '@-moz-keyframes'
-(1,82758): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,82794): run-time error CSS1019: Unexpected token, found '@-ms-keyframes'
-(1,82823): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,82859): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,82884): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,82920): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,82952): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,82987): run-time error CSS1019: Unexpected token, found '@-moz-keyframes'
-(1,83016): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,83051): run-time error CSS1019: Unexpected token, found '@-ms-keyframes'
-(1,83079): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,83114): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,83138): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,83679): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,83721): run-time error CSS1062: Expected semicolon or closing curly-brace, found '100%'
-(1,83789): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,83823): run-time error CSS1062: Expected semicolon or closing curly-brace, found '100%'
-(1,83891): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,83918): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,84631): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,84650): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,85363): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,85389): run-time error CSS1062: Expected semicolon or closing curly-brace, found '50%'
-(1,85436): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,85454): run-time error CSS1062: Expected semicolon or closing curly-brace, found '50%'
-(1,85501): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,85532): run-time error CSS1035: Expected colon, found '{'
-(1,85744): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,85767): run-time error CSS1035: Expected colon, found '{'
-(1,85979): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,86015): run-time error CSS1035: Expected colon, found '{'
-(1,86523): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,86551): run-time error CSS1035: Expected colon, found '{'
-(1,87059): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,87089): run-time error CSS1035: Expected colon, found ','
-(1,87354): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,87376): run-time error CSS1035: Expected colon, found ','
-(1,87641): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,87671): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,88197): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,88219): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,88745): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,88771): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,89163): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,89181): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,89573): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,89603): run-time error CSS1035: Expected colon, found '{'
-(1,90113): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,90135): run-time error CSS1035: Expected colon, found '{'
-(1,90645): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,90677): run-time error CSS1035: Expected colon, found '{'
-(1,91431): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,91455): run-time error CSS1035: Expected colon, found '{'
-(1,92209): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,92235): run-time error CSS1062: Expected semicolon or closing curly-brace, found '11.1%'
-(1,93070): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,93088): run-time error CSS1062: Expected semicolon or closing curly-brace, found '11.1%'
-(1,93923): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,93953): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,94230): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,94252): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,94529): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,94558): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,95187): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,95208): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,95837): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,95870): run-time error CSS1062: Expected semicolon or closing curly-brace, found '60%'
-(1,96434): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,96459): run-time error CSS1062: Expected semicolon or closing curly-brace, found '60%'
-(1,97023): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,97056): run-time error CSS1062: Expected semicolon or closing curly-brace, found '60%'
-(1,97620): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,97645): run-time error CSS1062: Expected semicolon or closing curly-brace, found '60%'
-(1,98209): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,98243): run-time error CSS1062: Expected semicolon or closing curly-brace, found '60%'
-(1,98810): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,98836): run-time error CSS1062: Expected semicolon or closing curly-brace, found '60%'
-(1,99403): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,99434): run-time error CSS1062: Expected semicolon or closing curly-brace, found '60%'
-(1,100001): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,100024): run-time error CSS1062: Expected semicolon or closing curly-brace, found '60%'
-(1,100591): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,100621): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,100869): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,100891): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,101139): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,101173): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,101445): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,101471): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,101743): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,101777): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,101965): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,101991): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,102179): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,102214): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,102402): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,102429): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,102617): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,102649): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,102923): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,102947): run-time error CSS1062: Expected semicolon or closing curly-brace, found '20%'
-(1,103221): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,103253): run-time error CSS1035: Expected colon, found '{'
-(1,103283): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,103307): run-time error CSS1035: Expected colon, found '{'
-(1,103337): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,103373): run-time error CSS1035: Expected colon, found '{'
-(1,103547): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,103575): run-time error CSS1035: Expected colon, found '{'
-(1,103749): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,103788): run-time error CSS1035: Expected colon, found '{'
-(1,103966): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,103997): run-time error CSS1035: Expected colon, found '{'
-(1,104175): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,104211): run-time error CSS1035: Expected colon, found '{'
-(1,104385): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,104413): run-time error CSS1035: Expected colon, found '{'
-(1,104587): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,104626): run-time error CSS1035: Expected colon, found '{'
-(1,104804): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,104835): run-time error CSS1035: Expected colon, found '{'
-(1,105013): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,105050): run-time error CSS1035: Expected colon, found '{'
-(1,105222): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,105251): run-time error CSS1035: Expected colon, found '{'
-(1,105423): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,105463): run-time error CSS1035: Expected colon, found '{'
-(1,105639): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,105671): run-time error CSS1035: Expected colon, found '{'
-(1,105847): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,105881): run-time error CSS1035: Expected colon, found '{'
-(1,106053): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,106079): run-time error CSS1035: Expected colon, found '{'
-(1,106251): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,106288): run-time error CSS1035: Expected colon, found '{'
-(1,106464): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,106493): run-time error CSS1035: Expected colon, found '{'
-(1,106669): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,106702): run-time error CSS1035: Expected colon, found '{'
-(1,106732): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,106757): run-time error CSS1035: Expected colon, found '{'
-(1,106787): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,106824): run-time error CSS1035: Expected colon, found '{'
-(1,106928): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,106957): run-time error CSS1035: Expected colon, found '{'
-(1,107061): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,107101): run-time error CSS1035: Expected colon, found '{'
-(1,107209): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,107241): run-time error CSS1035: Expected colon, found '{'
-(1,107349): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,107386): run-time error CSS1035: Expected colon, found '{'
-(1,107492): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,107521): run-time error CSS1035: Expected colon, found '{'
-(1,107627): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,107667): run-time error CSS1035: Expected colon, found '{'
-(1,107777): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,107809): run-time error CSS1035: Expected colon, found '{'
-(1,107919): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,107957): run-time error CSS1035: Expected colon, found '{'
-(1,108061): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,108091): run-time error CSS1035: Expected colon, found '{'
-(1,108195): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,108236): run-time error CSS1035: Expected colon, found '{'
-(1,108344): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,108377): run-time error CSS1035: Expected colon, found '{'
-(1,108485): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,108520): run-time error CSS1035: Expected colon, found '{'
-(1,108626): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,108653): run-time error CSS1035: Expected colon, found '{'
-(1,108759): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,108797): run-time error CSS1035: Expected colon, found '{'
-(1,108907): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,108937): run-time error CSS1035: Expected colon, found '{'
-(1,109047): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,109077): run-time error CSS1035: Expected colon, found '{'
-(1,110421): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,110443): run-time error CSS1035: Expected colon, found '{'
-(1,111787): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,111820): run-time error CSS1035: Expected colon, found '{'
-(1,112542): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,112567): run-time error CSS1035: Expected colon, found '{'
-(1,113289): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,113322): run-time error CSS1035: Expected colon, found '{'
-(1,114044): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,114069): run-time error CSS1035: Expected colon, found '{'
-(1,114791): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,114825): run-time error CSS1035: Expected colon, found '{'
-(1,115155): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,115181): run-time error CSS1035: Expected colon, found '{'
-(1,115511): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,115545): run-time error CSS1035: Expected colon, found '{'
-(1,115875): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,115901): run-time error CSS1035: Expected colon, found '{'
-(1,116231): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,116269): run-time error CSS1035: Expected colon, found '{'
-(1,116593): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,116623): run-time error CSS1035: Expected colon, found '{'
-(1,116947): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,116986): run-time error CSS1035: Expected colon, found '{'
-(1,117116): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,117147): run-time error CSS1035: Expected colon, found '{'
-(1,117277): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,117311): run-time error CSS1035: Expected colon, found '{'
-(1,117603): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,117629): run-time error CSS1035: Expected colon, found '{'
-(1,117921): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,117963): run-time error CSS1035: Expected colon, found '{'
-(1,118273): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,118307): run-time error CSS1035: Expected colon, found '{'
-(1,118617): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,118660): run-time error CSS1035: Expected colon, found '{'
-(1,118972): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,119007): run-time error CSS1035: Expected colon, found '{'
-(1,119319): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,119359): run-time error CSS1035: Expected colon, found '{'
-(1,119667): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,119699): run-time error CSS1035: Expected colon, found '{'
-(1,120007): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,120048): run-time error CSS1035: Expected colon, found '{'
-(1,120362): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,120395): run-time error CSS1035: Expected colon, found '{'
-(1,120709): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,120744): run-time error CSS1035: Expected colon, found '{'
-(1,120966): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,120993): run-time error CSS1035: Expected colon, found '{'
-(1,121215): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,121258): run-time error CSS1035: Expected colon, found '{'
-(1,121498): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,121533): run-time error CSS1035: Expected colon, found '{'
-(1,121773): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,121817): run-time error CSS1035: Expected colon, found '{'
-(1,122063): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,122099): run-time error CSS1035: Expected colon, found '{'
-(1,122345): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,122386): run-time error CSS1035: Expected colon, found '{'
-(1,122628): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,122661): run-time error CSS1035: Expected colon, found '{'
-(1,122903): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,122945): run-time error CSS1035: Expected colon, found '{'
-(1,123189): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,123223): run-time error CSS1035: Expected colon, found '{'
-(1,123467): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,123493): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,124213): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,124231): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,124951): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,124989): run-time error CSS1035: Expected colon, found '{'
-(1,125345): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,125375): run-time error CSS1035: Expected colon, found '{'
-(1,125731): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,125763): run-time error CSS1035: Expected colon, found '{'
-(1,125985): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,126009): run-time error CSS1035: Expected colon, found '{'
-(1,126231): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,126264): run-time error CSS1035: Expected colon, found '{'
-(1,126414): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,126439): run-time error CSS1035: Expected colon, found '{'
-(1,126589): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,126621): run-time error CSS1035: Expected colon, found '{'
-(1,126718): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,126742): run-time error CSS1035: Expected colon, found '{'
-(1,126839): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,126875): run-time error CSS1035: Expected colon, found '{'
-(1,127392): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,127420): run-time error CSS1035: Expected colon, found '{'
-(1,127937): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,127973): run-time error CSS1035: Expected colon, found '{'
-(1,128490): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,128518): run-time error CSS1035: Expected colon, found '{'
-(1,129035): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,129072): run-time error CSS1035: Expected colon, found '{'
-(1,129589): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,129618): run-time error CSS1035: Expected colon, found '{'
-(1,130135): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,130169): run-time error CSS1035: Expected colon, found '{'
-(1,130686): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,130712): run-time error CSS1035: Expected colon, found '{'
-(1,131229): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,131262): run-time error CSS1035: Expected colon, found '{'
-(1,131375): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,131400): run-time error CSS1035: Expected colon, found '{'
-(1,131513): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,131545): run-time error CSS1062: Expected semicolon or closing curly-brace, found '40%'
-(1,132137): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,132161): run-time error CSS1062: Expected semicolon or closing curly-brace, found '40%'
-(1,132753): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,132785): run-time error CSS1062: Expected semicolon or closing curly-brace, found '40%'
-(1,133109): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,133133): run-time error CSS1062: Expected semicolon or closing curly-brace, found '40%'
-(1,133457): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,133490): run-time error CSS1062: Expected semicolon or closing curly-brace, found '40%'
-(1,133816): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,133841): run-time error CSS1062: Expected semicolon or closing curly-brace, found '40%'
-(1,134167): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,134197): run-time error CSS1062: Expected semicolon or closing curly-brace, found '40%'
-(1,134789): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,134811): run-time error CSS1062: Expected semicolon or closing curly-brace, found '40%'
-(1,135403): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,135440): run-time error CSS1035: Expected colon, found '{'
-(1,135612): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,135641): run-time error CSS1035: Expected colon, found '{'
-(1,135813): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,135850): run-time error CSS1035: Expected colon, found '{'
-(1,136022): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,136051): run-time error CSS1035: Expected colon, found '{'
-(1,136223): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,136261): run-time error CSS1035: Expected colon, found '{'
-(1,136431): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,136461): run-time error CSS1035: Expected colon, found '{'
-(1,136631): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,136666): run-time error CSS1035: Expected colon, found '{'
-(1,136836): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,136863): run-time error CSS1035: Expected colon, found '{'
-(1,137033): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,137071): run-time error CSS1035: Expected colon, found '{'
-(1,137240): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,137270): run-time error CSS1035: Expected colon, found '{'
-(1,137439): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,137477): run-time error CSS1035: Expected colon, found '{'
-(1,137648): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,137678): run-time error CSS1035: Expected colon, found '{'
-(1,137849): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,137888): run-time error CSS1035: Expected colon, found '{'
-(1,138057): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,138088): run-time error CSS1035: Expected colon, found '{'
-(1,138257): run-time error CSS1019: Unexpected token, found '@-webkit-keyframes'
-(1,138293): run-time error CSS1035: Expected colon, found '{'
-(1,138464): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,138492): run-time error CSS1035: Expected colon, found '{'
-(1,152977): run-time error CSS1019: Unexpected token, found '@keyframes'
-(1,153002): run-time error CSS1062: Expected semicolon or closing curly-brace, found '0'
-(1,166300): run-time error CSS1046: Expect comma, found '0'
-(1,166304): run-time error CSS1046: Expect comma, found '/'
-(1,166916): run-time error CSS1046: Expect comma, found '0'
-(1,166920): run-time error CSS1046: Expect comma, found '/'
-(1,167094): run-time error CSS1046: Expect comma, found '0'
-(1,167098): run-time error CSS1046: Expect comma, found '/'
- */
- @charset "UTF-8";:root {
-    --blue: #007bff;
-    --indigo: #6610f2;
-    --purple: #6f42c1;
-    --pink: #e83e8c;
-    --red: #dc3545;
-    --orange: #fd7e14;
-    --yellow: #ffc107;
-    --green: #28a745;
-    --teal: #20c997;
-    --cyan: #17a2b8;
-    --white: #fff;
-    --gray: #6c757d;
-    --gray-dark: #343a40;
-    --primary: #007bff;
-    --secondary: #6c757d;
-    --success: #28a745;
-    --info: #17a2b8;
-    --warning: #ffc107;
-    --danger: #dc3545;
-    --light: #f8f9fa;
-    --dark: #343a40;
-    --breakpoint-xs: 0;
-    --breakpoint-sm: 576px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 992px;
-    --breakpoint-xl: 1200px;
-    --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace
-}
 
 *, ::after, ::before {
     box-sizing: border-box

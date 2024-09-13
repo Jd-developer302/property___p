@@ -37,7 +37,7 @@ class ProjectsController extends Controller
     public function getProjectBySlug($slug)
     {
       
-        $project = Project::with(['community', 'developer'])->where('slug', $slug)->first();
+        $project = Project::with(['community', 'developer','feature','floorplan'])->where('slug', $slug)->first();
     
         if (!$project) {
             return response()->json(['message' => 'Project not found'], 404);

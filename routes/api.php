@@ -36,6 +36,9 @@ use App\Http\Controllers\API\FrontEnd\DevelopersController;
 use App\Http\Controllers\API\FrontEnd\CommunitiesController;
 use App\Http\Controllers\API\FrontEnd\OverviewsController;
 use App\Http\Controllers\API\FrontEnd\FeaturesController;
+use App\Http\Controllers\API\FrontEnd\FloorPlansController;
+use App\Http\Controllers\API\FrontEnd\MasterplansController;
+use App\Http\Controllers\API\FrontEnd\locationsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -125,3 +128,9 @@ Route::get('/overviews', [OverviewsController::class, 'index']);
 Route::get('projects/{slug}', [ProjectsController::class, 'getProjectBySlug']);
 Route::get('/overviews/{slug}', [OverviewsController::class, 'showBySlug']);
 Route::get('/features/{slug}', [FeaturesController::class, 'showBySlug']);
+Route::get('/floorplan/{slug}', [FloorPlansController::class, 'showBySlug']);
+Route::get('/masterplan/{slug}', [MasterplansController::class, 'showBySlug']);
+Route::get('/location/{slug}', [locationsController::class, 'showBySlug'])->name('location');
+
+
+

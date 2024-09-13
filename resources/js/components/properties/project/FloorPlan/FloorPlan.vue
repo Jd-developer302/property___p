@@ -1,71 +1,89 @@
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import axios from 'axios'
+import thumb1 from '@/assets/img/p-type.png';
+import thumb2 from '@/assets/img/bed.png';
+
+const route = useRoute();
+const floorplan = ref({}); 
+
+onMounted(async () => {
+  const slug = route.params.slug;
+  console.log("Fetching data for slug:", slug);
+  try {
+    const response = await axios.get(`/api/floorplan/${slug}`);
+    console.log("API response:", response.data);
+    floorplan.value = response.data;
+  } catch (error) {
+    console.error("Error fetching FloorPlan data:", error);
+  }
+});
+
+
+</script>
+
 <template>
     <section class="main-slider h-auto">
+      <div v-if="floorplan && floorplan.project">
         <div class="inner-banner">
-            <img class="img-bnr" width="1264" height="360" src="https://www.goldpillars.ae/project/images/DefaultHeader.jpg" alt="Ellington Art Bay East Features">
+          <img class="img-bnr" width="1264" height="360" src="https://www.goldpillars.ae/project/images/DefaultHeader.jpg" alt="Ellington Art Bay East Features">
         </div>
         <div class="pro-summary">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block">
-                        <figure>
-                            <img src="https://manage.goldpillars.ae/Developer/Developer_Logo/15/Thumb/15.webp" width="243" height="117" alt="Ellington Group" class="img-fluid">
-                        </figure>
-                    </div>
-                    <div class="col-md-9">
-                        <header>
-                            <h1>Ellington Art Bay East Key Features</h1>
-                            <div class="pro-info">
-                                    <table class="table">
-                                        <tbody><tr>
-                                            <td>
-                                                <div class="pro-info-warp">
-                                                    <img src="" width="32" height="32" alt="Unit Type"><span>Apartments</span>
-                                                    <p>Studio, 1, 2 &amp; 3 Bedrooms</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="pro-info-warp">
-                                                    <img src="" width="32" height="32" alt="Size">
-                                                    <span>Size</span>
-                                                    <p>
-                                                        430 to 2,459 sq. ft. <i id="ContentPlaceHolder1_sizehsid" class="fa fa-info-circle" aria-hidden="true" data-toggle="modal" data-target="#Sizeinfo"></i>
-                                                    </p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="pro-info-warp">
-                                                    <img src="" width="32" height="32" alt="Ellington Art Bay EastAnticipated Handover - Q3 - 2026">
-                                                    <span>Handover</span>
-                                                    <p>Q3 - 2026</p>
-                                                </div>
-                                            </td>
-                                            <td class="text-md-right pb-3 price">
-                                                <label for="pStartingPriceID">Starting Price</label>
-                                                <h3 id="pStartingPriceID" itemprop="price">AED 1,814,828 (1 BR)
-                                                    <i id="ContentPlaceHolder1_pricehsid" class="fa fa-info-circle" aria-hidden="true" data-toggle="modal" data-target="#Priceinfo" onclick="fnbindPriceCurrency();"></i>
-                                                </h3>
-                                            </td>
-                                    </tr></tbody></table>
-                                </div>
-
-                            <nav aria-label="breadcrumb" class="mt-3 d-none d-md-block d-lg-block d-xl-block">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="https://www.goldpillars.ae/">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="/communities">Al Jadaf</a></li>
-                                    <li class="breadcrumb-item" style="display: block"><a href="https://www.goldpillars.ae/developer/ellington-group">Ellington Group</a></li>
-                                    <li class="breadcrumb-item"><a href="/project/ellington-art-bay-east">Ellington Art Bay East</a></li>
-                                    <li aria-current="page" class="breadcrumb-item active">Features</li>
-                                </ol>
-                            </nav>
-                            <input name="ctl00$ContentPlaceHolder1$hdnOffer" type="hidden" id="ContentPlaceHolder1_hdnOffer" value="0">
-
-                        </header>
-                    </div>
-                </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-2 d-none d-md-block d-lg-block d-xl-block">
+                <figure>
+                  <img :src="floorplan.logo1" width="243" height="117" alt="Ellington Group" class="img-fluid">
+                </figure>
+              </div>
+              <div class="col-md-9">
+                <header>
+                  <h1>{{ floorplan.name }}</h1>
+                  <div class="pro-info">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div class="pro-info-warp">
+                              <img :src="thumb2" width="32" height="32" alt="Unit Type"><span>Apartments</span>
+                              <p>{{ floorplan.project.apartments }}</p>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="pro-info-warp">
+                              <img :src="thumb1" width="32" height="32" alt="Handover">
+                              <span>Handover</span>
+                              <p>{{ floorplan.project.handover }}</p>
+                            </div>
+                          </td>
+                          <td class="text-md-right pb-3 price">
+                            <label for="pStartingPriceID">Starting Price</label>
+                            <h3 id="pStartingPriceID" itemprop="price">{{ floorplan.project.starting_price }}</h3>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+  
+                  <nav aria-label="breadcrumb" class="mt-3 d-none d-md-block d-lg-block d-xl-block">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="/">Home</a></li>
+                      <li class="breadcrumb-item"><a href="">{{ floorplan.project.name }}</a></li>
+                      <li aria-current="page" class="breadcrumb-item active">Floor Plan</li>
+                    </ol>
+                  </nav>
+                </header>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      <div v-else>
+        <p>Loading...</p>
+      </div>
     </section>
-</template>
+  </template>
 <style scoped>
 
 *, ::after, ::before {
