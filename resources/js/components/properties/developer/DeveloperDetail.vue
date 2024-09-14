@@ -9,8 +9,8 @@
             <!-- Use slug in href instead of id -->
             <a :href="`/developer/${developer.slug}`" style="text-decoration: none;">
               <figure class="shadow text-center">
-                <!-- Use the logo image from the storage folder -->
-                <img width="122" height="129" :src="getImageUrl(developer.logos)" alt="Developer Logo" class="img-fluid">
+                <!-- Display developer logo using the correct path -->
+                <img :src="`/storage/${developer.logo}`" width="122" height="129" alt="Developer Logo" class="img-fluid">
               </figure>
               <h4 class="card-title">{{ developer.name }}</h4>
               <p class="card-text">Total Projects: <span>{{ developer.projects_count }}</span></p>
@@ -37,24 +37,21 @@ const developers = ref([]);
 // Fetch developers from the backend
 const fetchDevelopers = async () => {
   try {
-    const response = await axios.get('/api/all_developers'); // Ensure this API endpoint returns developers with slugs
+    const response = await axios.get('/api/all_developers'); // API endpoint for developers with logos
     developers.value = response.data.data;
-    console.log(developers.value); // Check for logos and slugs in console
+    console.log(developers.value); // Log to verify logos and slugs
   } catch (error) {
     console.error('Error fetching developers:', error);
   }
 };
-
-// Function to get the image URL for logos
-function getImageUrl(logo) {
-  return logo ? `${import.meta.env.VITE_APP_BASE_URL}/storage/logos/${logo}` : '/images/default-image.png'; 
-}
 
 // Fetch developers on component mount
 onMounted(() => {
   fetchDevelopers();
 });
 </script>
+
+
 
   
 

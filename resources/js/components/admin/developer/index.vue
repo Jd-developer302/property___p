@@ -30,7 +30,7 @@
                       <td>{{ developer.slug }}</td>
                       <td>{{ stripHtmlTags(developer.description).slice(0, 100) }}...</td>
                       <td>
-                        <img :src="getImageUrl(developer.logo)"  alt="Developer Logo" width="100">
+                        <img :src="`/storage/${developer.logo}`" width="122" height="129" alt="Developer Logo" class="img-fluid">
                       </td>
                       <td>
                         <router-link :to="`/admin/developers/${developer.id}/edit`" class="btn btn-sm btn-primary">

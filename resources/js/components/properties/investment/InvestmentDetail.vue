@@ -11,7 +11,7 @@
                 
                         <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
                         <div class="event-grid-wrap">
-                            <a href="https://summer-offers.goldpillars.ae" target="_blank">
+                            <a href="" target="_blank">
                                 <div class="event-grid-header offes">
                                     <img width="585" height="417" src="https://manage.goldpillars.ae/Project/OfferType/1/Thumb/1.jpg" class="img-fluid mx-auto" alt="Summer Offers">
                                     <span class="event-grid-cat">Summer Offers</span>
@@ -22,7 +22,7 @@
                     
                         <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
                         <div class="event-grid-wrap">
-                            <a href="https://ramadan-offers.goldpillars.ae" target="_blank">
+                            <a href="" target="_blank">
                                 <div class="event-grid-header offes">
                                     <img width="585" height="417" src="https://manage.goldpillars.ae/Project/OfferType/2/Thumb/2.jpg" class="img-fluid mx-auto" alt="Ramadan Offers">
                                     <span class="event-grid-cat">Ramadan Offers</span>
@@ -33,7 +33,7 @@
                     
                         <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
                         <div class="event-grid-wrap">
-                            <a href="https://exclusive-offers.goldpillars.ae" target="_blank">
+                            <a href="" target="_blank">
                                 <div class="event-grid-header offes">
                                     <img width="585" height="417" src="https://manage.goldpillars.ae/Project/OfferType/3/Thumb/3.jpg" class="img-fluid mx-auto" alt="Exclusive Offers">
                                     <span class="event-grid-cat">Exclusive Offers</span>
@@ -44,7 +44,7 @@
                     
                         <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
                         <div class="event-grid-wrap">
-                            <a href="https://eid-offers.goldpillars.ae" target="_blank">
+                            <a href="" target="_blank">
                                 <div class="event-grid-header offes">
                                     <img width="585" height="417" src="https://manage.goldpillars.ae/Project/OfferType/4/Thumb/4.jpg" class="img-fluid mx-auto" alt="Eid Offers">
                                     <span class="event-grid-cat">Eid Offers</span>
@@ -55,7 +55,7 @@
                     
                         <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
                         <div class="event-grid-wrap">
-                            <a href="https://national-day-offers.goldpillars.ae" target="_blank">
+                            <a href="" target="_blank">
                                 <div class="event-grid-header offes">
                                     <img width="585" height="417" src="https://manage.goldpillars.ae/Project/OfferType/5/Thumb/5.jpg" class="img-fluid mx-auto" alt="National Day Offers">
                                     <span class="event-grid-cat">National Day Offers</span>
@@ -66,7 +66,7 @@
                     
                         <div class="col-lg-3 col-md-3 col-sm-6 mb-4">
                         <div class="event-grid-wrap">
-                            <a href="https://diwali-offers.goldpillars.ae" target="_blank">
+                            <a href="" target="_blank">
                                 <div class="event-grid-header offes">
                                     <img width="585" height="417" src="https://manage.goldpillars.ae/Project/OfferType/6/Thumb/6.jpg" class="img-fluid mx-auto" alt="Diwali Offers">
                                     <span class="event-grid-cat">Diwali Offers</span>

@@ -72,9 +72,9 @@
             <li><router-link to="/foreign-investors">
               <span class="fa-solid fa-right-to-bracket mr-3 icon_side_menu"></span>Foreign Investors
             </router-link></li>
-            <li><router-link to="/property-investment-offers">
+            <!-- <li><router-link to="/property-investment-offers">
               <span class="fa-solid fa-right-to-bracket mr-3 icon_side_menu"></span>Investment Offers
-            </router-link></li>
+            </router-link></li> -->
             <li><router-link to="/news-articles">
               <span class="fa-solid fa-right-to-bracket mr-3 icon_side_menu"></span>News & Articles
             </router-link></li>
