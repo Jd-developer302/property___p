@@ -6,17 +6,17 @@
     // import thumb2 from '@/assets/img/pdf.jpg';
     
     const route = useRoute();
-    const location = ref({}); // Initialize as an empty object
+    const special = ref({}); 
     
     onMounted(async () => {
       const slug = route.params.slug;
       console.log("Fetching data for slug:", slug);
       try {
-        const response = await axios.get(`/api/location/${slug}`);
+        const response = await axios.get(`/api/special/${slug}`);
         console.log("API response:", response.data);
-        location.value = response.data;
+        special.value = response.data;
       } catch (error) {
-        console.error("Error fetching location data:", error);
+        console.error("Error fetching special data:", error);
       }
     });
     </script>
@@ -29,50 +29,9 @@
                 <div v-if="error" class="alert alert-danger">{{ error }}</div>
                 <div v-else>
                   <div class="property-single-features card block mb-3">
-                    <h2 class="h4 has-line">Location Map</h2>
-                    <p v-html="location.description"></p>
+                    <h2 class="h4 has-line">Best Deals on Properties</h2> 
+                    <p v-html="special.description"></p>
                   </div>
-                  <section class="similar-properties card mt-md-5 block">
-                    <h2 class="h4 has-line">
-                      Recent Projects by {{ location.project?.name || 'Loading...' }}
-                    </h2>
-      
-                    <div class="row">
-                      <!-- Check if feature.project is defined -->
-                      <div v-if="location.project" class="col-md-4">
-                        <div class="property mb-lg-0">
-                          <div class="image">
-                            <!-- Use feature.project.image safely -->
-                            <img
-                              :src="location.project.image ? `/storage/${location.project.image}` : '/images/default-image.png'"
-                              width="800"
-                              height="450"
-                              :alt="location.project.name"
-                              class="img-fluid cover"
-                            />
-                            <div class="overlay d-flex align-items-center justify-content-center">
-                              <a :href="`/projects/${location.project.id}`" class="btn btn-light btn-sm">View Details</a>
-                            </div>
-                          </div>
-                          <div class="info">
-                            <a :href="`/projects/${location.project.id}`" class="no-anchor-style">
-                              <h3 class="text-thin mb-1">{{ location.project.name }}</h3>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Display a message if no project is available -->
-                      <div v-if="!location.project" class="col-md-12">
-                        <p>No projects available at the moment.</p>
-                      </div>
-                    </div>
-      
-                    <div class="row justify-content-center">
-                      <div class="col-lg-4">
-                        <a href="/projects" class="btn btn-dark btn-block border mt-md-3 float-md-right">More Projects</a>
-                      </div>
-                    </div>
-                  </section>
                 </div>
               </div>
               <div class="col-lg-4 pb-3" id="enqs">

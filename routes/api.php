@@ -39,6 +39,7 @@ use App\Http\Controllers\API\FrontEnd\FeaturesController;
 use App\Http\Controllers\API\FrontEnd\FloorPlansController;
 use App\Http\Controllers\API\FrontEnd\MasterplansController;
 use App\Http\Controllers\API\FrontEnd\locationsController;
+use App\Http\Controllers\API\FrontEnd\SpecialOffersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -130,7 +131,8 @@ Route::get('/overviews/{slug}', [OverviewsController::class, 'showBySlug']);
 Route::get('/features/{slug}', [FeaturesController::class, 'showBySlug']);
 Route::get('/floorplan/{slug}', [FloorPlansController::class, 'showBySlug']);
 Route::get('/masterplan/{slug}', [MasterplansController::class, 'showBySlug']);
-Route::get('/location/{slug}', [locationsController::class, 'showBySlug'])->name('location');
+Route::get('/location/{slug}', [locationsController::class, 'showBySlug']);
+Route::get('/special/{slug}', [SpecialOffersController::class, 'showBySlug']);
 
 
 

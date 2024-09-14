@@ -25,7 +25,7 @@
   });
   </script>
 <template>
-    <Header v-if="project" :featureSlug="project.feature?.slug" :floorplanSlug="project.floorplan?.slug" :masterplanSlug="project.masterplan?.slug" :locationsSlug="project.location?.slug"/>
+    <Header v-if="project" :featureSlug="project.feature?.slug" :floorplanSlug="project.floorplan?.slug" :masterplanSlug="project.masterplan?.slug" :locationsSlug="project.location?.slug" :specialSlug="project.special?.slug"/>
     <section class="main-slider" v-if="project">
       <div id="projBannerId">
         <div id="proslider" class="carousel">

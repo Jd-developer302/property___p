@@ -54,7 +54,7 @@
           </div>
           <div class="btn-container">
             <div class="btn btn-primary">
-              <a href="#">VIEW MORE</a>
+              <a href="/Projects">VIEW MORE</a>
             </div>
           </div>
         </div>

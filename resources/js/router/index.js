@@ -97,6 +97,7 @@ import MasterPlanIndex from '../components/properties/project/MasterPlan/index.v
 import LocationsIndex from '../components/properties/project/locations/index.vue';
 import DeveloperPropertiesIndex from '../components/properties/developer/index.vue';
 import DeveloperProjectBySlug from '../components/properties/developer/DeveloperProjectBySlug.vue';
+import SpecialOfferIndex from '../components/properties/project/specialoffer/index.vue';
 
 import CommunityPropertiesIndex from '../components/properties/communties/index.vue';
 import CityPropertiesIndex from '../components/properties/cities/index.vue';
@@ -228,6 +229,11 @@ const routes = [
       path: '/Locations/:slug',
       name: 'LocationsIndex',
       component: LocationsIndex,
+    },
+    {
+      path: '/SpecialOffer/:slug',
+      name: 'SpecialOfferIndex',
+      component: SpecialOfferIndex,
     },
     
     {path: '/developer',component: DeveloperPropertiesIndex

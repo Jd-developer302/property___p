@@ -3,6 +3,7 @@
     import { useRoute } from 'vue-router';
     import axios from 'axios';
     import Contact from '../Component/Contact.vue'; 
+       // import thumb2 from '@/assets/img/pdf.jpg';
     
     const route = useRoute();
     const feature = ref({}); // Initialize as an empty object
@@ -76,34 +77,34 @@
               </div>
               <div class="col-lg-4 pb-3" id="enqs">
                 <Contact />
-                <div class="card download-new border-0">
-                  <input type="hidden" name="ctl00$ContentPlaceHolder1$enquiryform$hdnBrchPathId" id="hdnBrchPathId" value="1614/Ellington_Art_Bay_East_FloorPlan.pdf" />
+<!-- <div class="card download-new border-0">
+                  <input type="hidden" name=""  value="" />
                   <div class="card-header">
                     Download
-                    <img src="" width="18" height="18" alt="Download" />
+                    <img :src="thumb2" width="18" height="18" alt="Download" />
                   </div>
                   <div class="card-body p-0">
                     <ul>
-                      <li><a href="" id="ContentPlaceHolder1_enquiryform_BrochureId">
-                          <img src="" alt="Brochure" width="25" height="25" class="mr-2" />
+                      <li><a href="" >
+                          <img :src="thumb2" alt="Brochure" width="25" height="25" class="mr-2" />
                           Brochure
                         </a></li>
-                      <li><a href="" id="ContentPlaceHolder1_enquiryform_FPBrochureId">
-                          <img src="" alt="Floor Plan" width="25" height="25" class="mr-2" />
+                      <li><a href="">
+                          <img :src="thumb2" alt="Floor Plan" width="25" height="25" class="mr-2" />
                           Floor Plan
                         </a></li>
-                      <li><a href="" id="ContentPlaceHolder1_enquiryform_PPBrochureId">
-                          <img src="" alt="Payment Plan" width="25" height="25" class="mr-2" />
+                      <li><a href="">
+                          <img :src="thumb2" alt="Payment Plan" width="25" height="25" class="mr-2" />
                           Payment Plan
                         </a></li>
-                      <li><a href="/project/ellington-art-bay-east-mortgage-calculator">
-                          <img src="" alt="Mortgage EMI Calculator" width="25" height="25" class="mr-2" />
+                      <li><a href="">
+                          <img :src="thumb2" alt="Mortgage EMI Calculator" width="25" height="25" class="mr-2" />
                           Mortgage Calculator
                         </a></li>
-                      <li id="ContentPlaceHolder1_enquiryform_walkthroughId" class="d-none"></li>
+                      <li  class="d-none"></li>
                     </ul>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

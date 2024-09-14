@@ -58,7 +58,7 @@
           <div :class="['navbar-collapse', { collapse: !isMobileMenuOpen }]">
             <ul class="navbar-nav mx-auto mr-0" style="margin-right: 0 !important;">
               <li class="nav-item">
-                <a :href="`/projects/project/${props.overviewSlug}`" class="nav-link">Overview</a>
+                <a :href="`/projects/${props.overviewSlug}`" class="nav-link">Overview</a>
               </li>
               <li class="nav-item">
                 <a :href="`/Feature/${props.featureSlug}`" class="nav-link">Feature</a>
@@ -73,7 +73,7 @@
                 <a :href="`/Locations/${props.locationsSlug}`" class="nav-link">Location</a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">Special Offer</a>
+                <a :href="`/SpecialOffer/${props.specialSlug}`" class="nav-link">Special Offer</a>
               </li>
             </ul>
           </div>
@@ -109,9 +109,17 @@
     type: String,
     default: "burj-azizi-location",
   },
+  specialSlug:{
+    type: String,
+    default: "burj-azizi-property-offer",
+  },
 });
+
     // Feature and project references
+    const location = ref({slug:''});
+    const special = ref({ slug: '' });
     const feature = ref({ slug: '' });
+    const masterplan = ref({ slug: '' });
     const project = ref({ slug: '' });
     const overview = ref({});
 
@@ -127,8 +135,40 @@
             .catch(error => {
                 console.error('Error fetching overview:', error);
             });
+            axios.get('/api/masterplan')
+            .then(response => {
+                console.log('API response:', response.data);
+                if (response.data.length > 0) {
+                    masterplan.value = response.data[0];
+                    project.value.slug = masterplan.value.slug || '';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching special:', error);
+            });
+            axios.get('/api/special')
+            .then(response => {
+                console.log('API response:', response.data);
+                if (response.data.length > 0) {
+                    special.value = response.data[0];
+                    project.value.slug = special.value.slug || '';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching special:', error);
+            });
+            axios.get('/api/location')
+            .then(response => {
+                console.log('API response:', response.data);
+                if (response.data.length > 0) {
+                    location.value = response.data[0];
+                    project.value.slug = location.value.slug || '';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching special:', error);
+            });
 
-        // Fetch feature slug separately
         axios.get('/api/features')
             .then(response => {
                 if (response.data.length > 0) {

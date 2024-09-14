@@ -58,4 +58,8 @@ class Project extends Model
     {
         return $this->hasOne(ProjectLocation::class);
     }
+    public function special()
+    {
+        return $this->hasOne(SpecialOffer::class);
+    }
 }
