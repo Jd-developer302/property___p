@@ -12,44 +12,11 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="image-container">
-            <div class="image-group">
-              <div class="image-wrapper">
-                <img :src="image1" alt="Image 1" class="image">
-                <div class="overlay">
-                  <p class="overlay-text">Golf Point Emaar South</p>
-                  <p class="overlay-text1">Madinat Al Mataar</p>
-                  <a href="#" class="overlay-button">VIEW DETAILS</a>
-                </div>
-              </div>
-              <div class="image-wrapper">
-                <img :src="image2" alt="Image 2" class="image">
-                <div class="overlay">
-                  <p class="overlay-text">Dubai Harbour Residences</p>
-                  <p class="overlay-text1">Marsa Dubai</p>
-                  <a href="#" class="overlay-button">VIEW DETAILS</a>
-                </div>
-              </div>
-              <div class="image-wrapper">
-                <img :src="image3" alt="Image 3" class="image">
-                <div class="overlay">
-                  <p class="overlay-text">Binghatti Valley</p>
-                  <p class="overlay-text1">Al Jadaf</p>
-                  <a href="#" class="overlay-button">VIEW DETAILS</a>
-                </div>
-              </div>
-              <div class="image-wrapper">
-                <img :src="image4" alt="Image 4" class="image">
-                <div class="overlay">
-                  <p class="overlay-text">Cove Edition by IMTIAZ</p>
-                  <p class="overlay-text1">Wadi Al Safa 5</p>
-                  <a href="#" class="overlay-button">VIEW DETAILS</a>
-                </div>
-              </div>
-            </div>
+            <Imagegroup/>
       
             <div class="extra-images">
-              <img :src="extraImage1" alt="Extra Image 1" class="extra-image">
-              <img :src="extraImage2" alt="Extra Image 2" class="extra-image">
+              <ExtraImage1/>
+              <ExtraImage2/>
             </div>
           </div>
           <div class="btn-container">
@@ -71,8 +38,16 @@
   import image2Path from '@/assets/img/5.jpg';
   import image3Path from '@/assets/img/3.jpg';
   import image4Path from '@/assets/img/4.jpg';
+import ExtraImage1 from './newlounch/extraImage1.vue';
+import ExtraImage2 from './newlounch/extraImage2.vue';
+import Imagegroup from './newlounch/imagegroup.vue';
 
   export default {
+    components: {
+      ExtraImage1,
+      ExtraImage2,
+      Imagegroup
+        },
     name: 'SectionNew',
     setup() {
       const extraImage1 = ref(extraImage1Path);
@@ -179,7 +154,9 @@
     margin-top: -30%;
     transform: translateY(-50%);
     max-width: 600px;
-    /* Same as .image-group max-width */
+  }
+  .extra-images a {
+    display: block;
   }
 
   .extra-image {

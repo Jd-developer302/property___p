@@ -1,11 +1,11 @@
 <template>
     <div class="background-card">
       <div class="content">
-        <h1 class="heading">Project Offers</h1>
+        <h1 class="heading">{{ $t("projectOffers") }}</h1>
         <p class="paragraph">
-            Looking for best buy - here is the well compiled information out of several developers and locations for you.
+          {{ $t("projectDescription") }}
         </p>
-        <a class="view-more-button" href="/projects">VIEW MORE</a>
+        <a class="view-more-button" href="/projects">{{ $t("viewMore") }}</a>
         
         
       </div>

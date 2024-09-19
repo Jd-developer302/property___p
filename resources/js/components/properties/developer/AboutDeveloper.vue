@@ -9,7 +9,7 @@
             <div class="card border-0 contact-box text-left">
               <div class="card-body p-lg-4 pl-lg-5">
                 <img
-                  :src="developer.logo_url"
+                  :src="`/storage/${developer.logo}`"
                   :alt="developer.name"
                   class="img-fluid border float-right ml-lg-2"
                 />

@@ -40,6 +40,7 @@ use App\Http\Controllers\API\FrontEnd\FloorPlansController;
 use App\Http\Controllers\API\FrontEnd\MasterplansController;
 use App\Http\Controllers\API\FrontEnd\locationsController;
 use App\Http\Controllers\API\FrontEnd\SpecialOffersController;
+use App\Http\Controllers\API\FrontEnd\SearchController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -103,7 +104,8 @@ Route::prefix('admin')->group(function () {
 Route::get('frontend/about', [FrontendAboutController::class, 'index']);
 Route::get('/articles', [NewsArticleController::class, 'index']);
 Route::get('/articles/{slug}', [NewsArticleController::class, 'show']);
-Route::get('/articles/top', [NewsArticleController::class, 'topArticles']);
+Route::get('/top-articles', [NewsArticleController::class, 'topArticles']);
+Route::get('/articles/{slug}/similar', [NewsArticleController::class, 'similarArticles']);
 Route::post('/contact', [ContactController::class, 'submitContactForm']);
 Route::get('cities', [city::class, 'index']);
 Route::get('cities/{slug}', [city::class, 'show']);
@@ -120,6 +122,9 @@ Route::get('/develope/{slug}', [DevelopersController::class, 'findDeveloperBySlu
 
 Route::get('developers/{slug}/new-launches', [DevelopersController::class, 'getNewLaunchesByDeveloper']);
 Route::get('{slug}/near-completion', [DevelopersController::class, 'getNearCompletionProjectsByDeveloper']);
+Route::get('near-completion', [DevelopersController::class, 'getNearCompletionProjectsByDeveloperAll']);
+Route::get('/developers/{slug}/project-status', [DevelopersController::class, 'countProjectStatusByDeveloper']);
+
 Route::get('/all_developers', [DevelopersController::class, 'index']);
 Route::get('all_communities', [CommunitiesController::class, 'index']);
 Route::get('top-communities', [CommunitiesController::class, 'topCommunities']);
@@ -133,6 +138,6 @@ Route::get('/floorplan/{slug}', [FloorPlansController::class, 'showBySlug']);
 Route::get('/masterplan/{slug}', [MasterplansController::class, 'showBySlug']);
 Route::get('/location/{slug}', [locationsController::class, 'showBySlug']);
 Route::get('/special/{slug}', [SpecialOffersController::class, 'showBySlug']);
-
+Route::get('search', [SearchController::class, 'search']);
 
 

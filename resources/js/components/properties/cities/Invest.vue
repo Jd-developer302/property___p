@@ -54,20 +54,7 @@
                         <ContactArticle />
                     </div>
                     <div class="widget-boxed d-none d-xl-block">
-                        <div class="widget-boxed-header">
-                            <h4>Top Communities</h4>
-                        </div>
-                        <div class="widget-boxed-body">
-                            <div class="side-list">
-                                <ul id="ContentPlaceHolder1_TopCommunityId" class="category-list">
-                                    <li><a href="">JVC<span>101 <small>Projects</small></span></a></li>
-                                    <li><a href="">Business Bay<span>62 <small>Projects</small></span></a></li>
-                                    <li><a href="">Dubailand<span>44 <small>Projects</small></span></a></li>
-                                    <li><a href="">Downtown Dubai<span>43 <small>Projects</small></span></a></li>
-                                    <li><a href="">Dubai Hills Estate<span>38 <small>Projects</small></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <TopCommunities/>
                     </div>
                 </div>
             </div>
@@ -78,10 +65,12 @@
 <script>
 import axios from 'axios';
 import ContactArticle from '../articles/ContactArticle.vue';
+import TopCommunities from '../communties/TopCommunities.vue';
 
 export default {
     components: {
         ContactArticle,
+        TopCommunities
     },
     data() {
         return {

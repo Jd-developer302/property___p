@@ -21,17 +21,13 @@
     "src": "resources/css/app.css"
   },
   "resources/js/app.css": {
-    "file": "assets/app-967620a2.css",
+    "file": "assets/app-41f765bd.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "assets": [
       "assets/undraw_profile-b1150fda.svg",
       "assets/Insha-icon-14473f7c.png",
-      "assets/55-4c6b33d9.jpg",
-      "assets/44-1472bf29.jpg",
-      "assets/22-c64397f4.jpg",
-      "assets/11-61272f80.jpg",
       "assets/fr-99ad4e82.webp",
       "assets/sp-2f85f9aa.webp",
       "assets/cn-7bed1dc9.webp",
@@ -47,17 +43,15 @@
       "assets/4-b4314cc1.jpg",
       "assets/background-40eab8f8.jpg",
       "assets/lady-c0e3c481.png",
+      "assets/11-61272f80.jpg",
+      "assets/44-1472bf29.jpg",
+      "assets/22-c64397f4.jpg",
+      "assets/55-4c6b33d9.jpg",
       "assets/33-3856dd67.jpg",
-      "assets/1.1-a1856d16.jpg",
-      "assets/2.2-e5fab8d2.jpg",
-      "assets/3.3-11aac1ac.jpg",
-      "assets/INSha-Updated-logo-b89b8129.jpg",
-      "assets/444-606cfef1.jpg",
-      "assets/111-4895f5ee.jpg",
-      "assets/333-5426856d.jpg",
-      "assets/2.22-81602287.jpg",
       "assets/world-gate-property-2-c22854aa.png",
       "assets/search-bg-887f471e.jpg",
+      "assets/p-type-39abc078.png",
+      "assets/bed-bf229eae.png",
       "assets/dev-bg-f3300c35.jpg",
       "assets/defaultloc-9551de5b.webp",
       "assets/bnn1-3f9d0586.jpg",
@@ -68,15 +62,11 @@
       "assets/summernote-2a5c8f9c.ttf"
     ],
     "css": [
-      "assets/app-967620a2.css"
+      "assets/app-41f765bd.css"
     ],
-    "file": "assets/app-52533c34.js",
+    "file": "assets/app-8cf71588.js",
     "isEntry": true,
     "src": "resources/js/app.js"
-  },
-  "resources/js/assets/img/1.1.jpg": {
-    "file": "assets/1.1-a1856d16.jpg",
-    "src": "resources/js/assets/img/1.1.jpg"
   },
   "resources/js/assets/img/1.jpg": {
     "file": "assets/1-b065a727.jpg",
@@ -85,18 +75,6 @@
   "resources/js/assets/img/11.jpg": {
     "file": "assets/11-61272f80.jpg",
     "src": "resources/js/assets/img/11.jpg"
-  },
-  "resources/js/assets/img/111.jpg": {
-    "file": "assets/111-4895f5ee.jpg",
-    "src": "resources/js/assets/img/111.jpg"
-  },
-  "resources/js/assets/img/2.2.jpg": {
-    "file": "assets/2.2-e5fab8d2.jpg",
-    "src": "resources/js/assets/img/2.2.jpg"
-  },
-  "resources/js/assets/img/2.22.jpg": {
-    "file": "assets/2.22-81602287.jpg",
-    "src": "resources/js/assets/img/2.22.jpg"
   },
   "resources/js/assets/img/2.jpg": {
     "file": "assets/2-469226a5.jpg",
@@ -110,10 +88,6 @@
     "file": "assets/2nd-Banner-819be958.jpg",
     "src": "resources/js/assets/img/2nd-Banner.jpg"
   },
-  "resources/js/assets/img/3.3.jpg": {
-    "file": "assets/3.3-11aac1ac.jpg",
-    "src": "resources/js/assets/img/3.3.jpg"
-  },
   "resources/js/assets/img/3.jpg": {
     "file": "assets/3-5f085607.jpg",
     "src": "resources/js/assets/img/3.jpg"
@@ -122,10 +96,6 @@
     "file": "assets/33-3856dd67.jpg",
     "src": "resources/js/assets/img/33.jpg"
   },
-  "resources/js/assets/img/333.jpg": {
-    "file": "assets/333-5426856d.jpg",
-    "src": "resources/js/assets/img/333.jpg"
-  },
   "resources/js/assets/img/4.jpg": {
     "file": "assets/4-b4314cc1.jpg",
     "src": "resources/js/assets/img/4.jpg"
@@ -133,10 +103,6 @@
   "resources/js/assets/img/44.jpg": {
     "file": "assets/44-1472bf29.jpg",
     "src": "resources/js/assets/img/44.jpg"
-  },
-  "resources/js/assets/img/444.jpg": {
-    "file": "assets/444-606cfef1.jpg",
-    "src": "resources/js/assets/img/444.jpg"
   },
   "resources/js/assets/img/5.jpg": {
     "file": "assets/5-250cca61.jpg",
@@ -154,10 +120,6 @@
     "file": "assets/Articles-Banners-44ca70a9.png",
     "src": "resources/js/assets/img/Articles-Banners.png"
   },
-  "resources/js/assets/img/INSha-Updated-logo.jpg": {
-    "file": "assets/INSha-Updated-logo-b89b8129.jpg",
-    "src": "resources/js/assets/img/INSha-Updated-logo.jpg"
-  },
   "resources/js/assets/img/Insha-icon.png": {
     "file": "assets/Insha-icon-14473f7c.png",
     "src": "resources/js/assets/img/Insha-icon.png"
@@ -165,6 +127,10 @@
   "resources/js/assets/img/background.jpg": {
     "file": "assets/background-40eab8f8.jpg",
     "src": "resources/js/assets/img/background.jpg"
+  },
+  "resources/js/assets/img/bed.png": {
+    "file": "assets/bed-bf229eae.png",
+    "src": "resources/js/assets/img/bed.png"
   },
   "resources/js/assets/img/bnn1.jpg": {
     "file": "assets/bnn1-3f9d0586.jpg",
@@ -197,6 +163,10 @@
   "resources/js/assets/img/logo-insha.png": {
     "file": "assets/logo-insha-0dd74051.png",
     "src": "resources/js/assets/img/logo-insha.png"
+  },
+  "resources/js/assets/img/p-type.png": {
+    "file": "assets/p-type-39abc078.png",
+    "src": "resources/js/assets/img/p-type.png"
   },
   "resources/js/assets/img/ru.webp": {
     "file": "assets/ru-7ac74330.webp",

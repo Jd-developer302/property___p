@@ -28,7 +28,7 @@
                 <div v-if="error" class="alert alert-danger">{{ error }}</div>
                 <div v-else>
                   <div class="property-single-features card block mb-3">
-                    <h2 class="h4 has-line">Features &amp; Amenities</h2>
+                    <h2 class="h4 has-line">Floor Plan</h2>
                     <p v-html="floorplan.description"></p>
                   </div>
                   <section class="similar-properties card mt-md-5 block">

@@ -10,9 +10,9 @@
 
                   <div v-html="homeLoans.description"></div>
                   <div class="row my-3 justify-content-center">
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                       <a href="#" class="btn btn-primary btn-lg rounded text-white">Mortgage Calculator</a>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>

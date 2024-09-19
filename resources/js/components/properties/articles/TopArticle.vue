@@ -5,7 +5,9 @@
   <div class="widget-boxed-body">
     <div class="side-list">
       <ul id="topArticles" class="category-list top-articles">
-        <li v-for="article in topArticles" :key="article.slug">
+        <!-- Check if topArticles array has items before rendering the list -->
+        <li v-if="topArticles.length === 0">No articles available.</li>
+        <li v-else v-for="article in topArticles" :key="article.slug">
           <i class="fa fa-arrow-right mr-2"></i>
           <a :href="`/news-articles/${article.slug}`">{{ article.title }}</a>
         </li>
@@ -18,27 +20,31 @@
 export default {
   data() {
     return {
-      topArticles: []
+      topArticles: []  // Array to store top articles
     };
   },
   mounted() {
-    this.fetchtopArticles();
+    this.fetchTopArticles();  // Fetch articles when component is mounted
   },
   methods: {
-    async fetchtopArticles() {
+    async fetchTopArticles() {
       try {
-        const response = await fetch('/api/articles/top');
+        const response = await fetch('/api/top-articles');  // Adjust to match your endpoint
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        this.topArticles = await response.json();
+        const data = await response.json();
+        this.topArticles = data.length ? data : [];  // Update topArticles data
       } catch (error) {
         console.error('Error fetching top articles:', error);
       }
     }
   }
 };
-</script>  
+</script>
+
+
+ 
   <style scoped>
   .form-group,p,ul {
   margin-bottom: 1rem

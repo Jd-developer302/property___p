@@ -7,8 +7,7 @@
                     <div class="sec-heading mx-auto">
                         <h2>POPULAR CITIES WORTH INVESTING IN THE UAE</h2>
                         <p>Know More about the popular and investment-friendly residential properties in and around Dubai.</p>
-                    </div>
-                    
+                    </div>    
                     <div class="row">
                         <!-- Loop through the cities and display each city -->
                         <div v-for="city in cities.data" :key="city.id" class="col-sm-6 mb-4">
@@ -47,20 +46,7 @@
                         <ContactArticle />
                     </div>
                     <div class="widget-boxed d-none d-xl-block">
-                        <div class="widget-boxed-header">
-                            <h4>Top Communities</h4>
-                        </div>
-                        <div class="widget-boxed-body">
-                            <div class="side-list">
-                                <ul id="ContentPlaceHolder1_TopCommunityId" class="category-list">
-                                    <li><a href="/properties-for-sale-at-jvc">JVC<span>101 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-business-bay">Business Bay<span>62 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-dubailand">Dubailand<span>44 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-downtown-dubai">Downtown Dubai<span>43 <small>Projects</small></span></a></li>
-                                    <li><a href="/properties-for-sale-at-dubai-hills-estate">Dubai Hills Estate<span>38 <small>Projects</small></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <TopCommunities/>
                     </div>
                 </div>
 
@@ -72,10 +58,12 @@
 <script>
 import axios from 'axios';
 import ContactArticle from '../articles/ContactArticle.vue';
+import TopCommunities from '../communties/TopCommunities.vue';
 
 export default {
     components: {
         ContactArticle,
+        TopCommunities,
     },
     data() {
         return {

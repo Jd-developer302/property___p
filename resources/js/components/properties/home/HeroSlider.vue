@@ -12,10 +12,7 @@
                             <img :src="Image" width="400" height="500" alt="French" class="img-fluid">
                         </div>
                         <h1 class="heading">LET'S BUILD A LEGACY</h1>
-                        <form action="#" class="narrow-w form-search d-flex mb-3">
-                            <input type="text" class="form-control px-4" placeholder="Explore Top Selling Properties..." />
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </form>
+                        <Search/>
                     </div>
                 </div>
             </div>
@@ -24,48 +21,78 @@
 </template>
 
 <script>
-    import { ref, onMounted, onUnmounted } from 'vue';
-    import ImagePath from '@/assets/img/logo-insha.png';
-    export default {
-        name: 'HeroSlider',
-        setup() {
-            const Image = ref(ImagePath);
-            const images = ref([
-                new URL('@/assets/img/last-banner.jpg', import.meta.url).href,
-                new URL('@/assets/img/2nd-Banner.jpg', import.meta.url).href,
-                new URL('@/assets/img/last-banner.jpg', import.meta.url).href,
-                new URL('@/assets/img/last-banner.jpg', import.meta.url).href,
-            ]);
-            const currentSlide = ref(0);
+import { ref, onMounted, onUnmounted } from 'vue';
+import axios from 'axios';
+import ImagePath from '@/assets/img/logo-insha.png';
 
-            const nextSlide = () => {
-                currentSlide.value = (currentSlide.value + 1) % images.value.length;
-            };
+import Search from './Search.vue';
 
-            let slideInterval;
+export default {
+    components:{
+        Search
+    },
+    name: 'HeroSlider',
+    setup() {
+        const Image = ref(ImagePath);
+        const images = ref([
+            new URL('@/assets/img/last-banner.jpg', import.meta.url).href,
+            new URL('@/assets/img/2nd-Banner.jpg', import.meta.url).href,
+            new URL('@/assets/img/last-banner.jpg', import.meta.url).href,
+            new URL('@/assets/img/last-banner.jpg', import.meta.url).href,
+        ]);
+        const currentSlide = ref(0);
+        const searchQuery = ref('');
+        const searchType = ref('projects'); // Default search type
 
-            onMounted(() => {
-                slideInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
-            });
+        const nextSlide = () => {
+            currentSlide.value = (currentSlide.value + 1) % images.value.length;
+        };
 
-            onUnmounted(() => {
-                clearInterval(slideInterval);
-            });
+        let slideInterval;
 
-            return {
-                images,
-                currentSlide,
-                Image,
-            };
-        },
-        
-    };
+        onMounted(() => {
+            slideInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        });
+
+        onUnmounted(() => {
+            clearInterval(slideInterval);
+        });
+
+        const handleSearch = async () => {
+            if (searchQuery.value.trim() === '') return;
+
+            try {
+                const response = await axios.get('/api/search', {
+                    params: {
+                        query: searchQuery.value,
+                        type: searchType.value
+                    }
+                });
+                console.log('Search results:', response.data);
+                // Handle search results (e.g., update UI, navigate to results page)
+            } catch (error) {
+                console.error('Search error:', error);
+            }
+        };
+
+        return {
+            images,
+            currentSlide,
+            Image,
+            searchQuery,
+            searchType,
+            handleSearch
+        };
+    },
+};
 </script>
+
+
 
 <style scoped>
     .hero {
         position: relative;
-        z-index: -1;
+        z-index: 1;
         margin-top: -70px;
         height: 100vh;
         display: flex;
@@ -83,6 +110,9 @@
         right: 0;
         bottom: 0;
     }
+    .input-field{
+        z-index: 99;
+    }
 
     .hero-content {
         position: absolute;
@@ -94,7 +124,7 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        z-index: 1; /* Ensure content is above the slider images */
+        
         color: #fff; /* Text color to stand out against the background */
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow for better readability */
     }
@@ -110,7 +140,8 @@
     .form-search {
         max-width: 600px;
         width: 100%;
-        margin: 0 auto; /* Center the form */
+        margin: 0 auto; 
+        
     }
 
     .form-control {

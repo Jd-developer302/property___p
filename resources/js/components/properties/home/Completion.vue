@@ -1,89 +1,71 @@
 <template>
-    <section>
-      <div class="container-xxl mb-3">
-        <div class="row">
-          <div class="col">
-            <div class="sec-heading mx-auto">
-              <h1>NEAR COMPLETION PROJECTS</h1>
-              <p>Looking for immediate possession - Here are some of newly built proper</p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4" v-for="(image, index) in images" :key="index">
-            <div class="image-with-logo">
-              <img :src="image.imageSrc" :alt="'Image ' + (index + 1)" class="main-image" />
-              <div class="overlay">
-                <img :src="image.logoSrc" alt="Logo" class="logo" />
-                <div class="text-content">
-                  <h2 class="heading">{{ image.heading }}</h2>
-                  <p class="paragraph">{{ image.paragraph }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="info-text d-flex justify-content-between">
-              <h1>{{ image.text1 }}</h1>
-              <h2>{{ image.text2 }}</h2>
-            </div>
-            <div class="info-text2 d-flex justify-content-between">
-              <h1>{{ image.text3 }}</h1>
-              <h2>{{ image.text4 }}</h2>
-            </div>
+  <section>
+    <div class="container-xxl mb-3">
+      <div class="row">
+        <div class="col">
+          <div class="sec-heading mx-auto">
+            <h1>NEAR COMPLETION PROJECTS</h1>
+            <p>Looking for immediate possession - Here are some of the newly built properties</p>
           </div>
         </div>
       </div>
-    </section>
-  </template>
-  
-  <script>
-  import { ref } from 'vue';
-  import imageSrcPath1 from '@/assets/img/1.1.jpg';
-  import imageSrcPath2 from '@/assets/img/2.2.jpg';
-  import imageSrcPath3 from '@/assets/img/3.3.jpg';
-  import logoSrcPath from '@/assets/img/INSha-Updated-logo.jpg';
-  
-  export default {
-    name: 'ImageWithLogoSection',
-    setup() {
-      const images = ref([
-        {
-          imageSrc: imageSrcPath1,
-          logoSrc: logoSrcPath,
-          heading: 'Damac Golf Gate',
-          paragraph: 'Al Hebiah Third',
-          text1: '50/50',
-          text2: 'Q4 - 2004',
-          text3: 'Payment Plan',
-          text4: 'Handover'
-        },
-        {
-          imageSrc: imageSrcPath2,
-          logoSrc: logoSrcPath,
-          heading: 'EBH',
-          paragraph: 'Palm Jumeirah',
-          text1: '50/50',
-          text2: 'Q4 - 2004',
-          text3: 'Payment Plan',
-          text4: 'Handover'
-        },
-        {
-          imageSrc: imageSrcPath3,
-          logoSrc: logoSrcPath,
-          heading: 'Oakley Square',
-          paragraph: 'Al Barsha South Fourth',
-          text1: '50/50',
-          text2: 'Q4 - 2004',
-          text3: 'Payment Plan',
-          text4: 'Handover'
-        },
-      ]);
-  
-      return {
-        images,
-      };
-    },
-  };
-  </script>
+      <div class="row">
+        <div class="col-md-4" v-for="(project, index) in projects" :key="index">
+          <a :href="`/projects/${project.slug}`">
+            <div class="image-with-logo">
+              <img :src="`/storage/${project.image}`" :alt="project.name" class="main-image" />
+              <div class="overlay">
+                <img :src="`/storage/${project.developer.logo}`" alt="Logo" class="logo" />
+                <div class="text-content">
+                  <h2 class="heading">{{ project.name }}</h2>
+                  <p class="paragraph">{{ project.community.name }}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+          <div class="info-text d-flex justify-content-between">
+            <h1>{{ project.payment_plan }}</h1>
+            <h2>{{ project.handover }}</h2>
+          </div>
+          <div class="info-text2 d-flex justify-content-between">
+            <h1>Payment Plan</h1>
+            <h2>Handover</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
+export default {
+  name: 'NearCompletionProjects',
+  setup() {
+    const projects = ref([]);
+
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get('/api/near-completion');
+        projects.value = response.data.projects;
+      } catch (error) {
+        console.error('Error fetching near-completion projects:', error);
+      }
+    };
+
+    onMounted(() => {
+      fetchProjects();
+    });
+
+    return {
+      projects,
+    };
+  },
+};
+</script>
+
   
   
   <style scoped>
@@ -145,6 +127,7 @@
   .logo {
     width: 100px;
     height: 100px;
+    margin-top: -100px;
     position: relative;
     z-index: 1;
   }
@@ -156,8 +139,8 @@
   }
   
   .heading {
-    font-size: 1.2rem;
-    margin: 0;
+    font-size: 1rem;
+    margin-top: -90px;
   }
   
   .paragraph {

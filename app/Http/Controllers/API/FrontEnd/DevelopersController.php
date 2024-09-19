@@ -27,7 +27,7 @@ class DevelopersController extends Controller
 
 public function getAllProjectsByDeveloper($slug)
     {
-        // Fetch developer by slug
+        
         $developer = Developer::where('slug', $slug)->first();
 
         if (!$developer) {
@@ -48,21 +48,21 @@ public function getAllProjectsByDeveloper($slug)
         return response()->json($projects);
     }
 
-// Fetch new launches for a developer by slug
-public function getNewLaunchesByDeveloper($slug)
+    public function getNewLaunchesByDeveloper($slug)
     {
         $developer = Developer::where('slug', $slug)->firstOrFail();
-        $projects = $developer->projects()->orderBy('created_at', 'desc')->get();
-
+        
+        // Fetch new launches for this developer, including the community relationship
+        $projects = $developer->projects()
+            ->with('community') // Include community data
+            ->orderBy('created_at', 'desc')
+            ->get();
+    
         return response()->json([
             'developer' => $developer,
             'projects' => $projects
         ]);
     }
-
-
-// Fetch near completion projects for a developer by slug
-// Fetch near completion projects for a developer by slug
 public function getNearCompletionProjectsByDeveloper($slug)
 {
     $developer = Developer::where('slug', $slug)->first();
@@ -94,6 +94,54 @@ public function getNearCompletionProjectsByDeveloper($slug)
     ]);
 }
 
+public function getNearCompletionProjectsByDeveloperAll()
+{
+    $nearCompletionDate = Carbon::now()->addMonths(6);
 
+    $nearCompletionProjects = Project::where('apartments', '<=', $nearCompletionDate)
+        ->with(['developer', 'community'])  // Include developer and community
+        ->orderBy('created_at', 'desc')
+        ->take(3)
+        ->get();
+
+    if ($nearCompletionProjects->isEmpty()) {
+        Log::info("No near-completion projects found.");
+        return response()->json(['message' => 'No near-completion projects found'], 404);
+    }
+
+    return response()->json([
+        'projects' => $nearCompletionProjects
+    ]);
+}
+
+public function countProjectStatusByDeveloper($slug)
+    {
+        $developer = Developer::where('slug', $slug)->firstOrFail();
+
+        // Define the criteria for each project status
+        $now = Carbon::now();
+
+        // Count projects with status "New Launch" (for example, projects added within the last 3 months)
+        $newLaunchCount = Project::where('developer_id', $developer->id)
+            ->where('created_at', '>=', $now->subMonths(3)) // New launches in the last 3 months
+            ->count();
+
+        // Count projects "Under Construction" (where the handover date is in the future)
+        $underConstructionCount = Project::where('developer_id', $developer->id)
+            ->where('handover', '>', $now) // Projects that are still under construction
+            ->count();
+
+        // Count projects "Ready to Move" (projects where the handover date is in the past)
+        $readyToMoveCount = Project::where('developer_id', $developer->id)
+            ->where('handover', '<=', $now) // Projects that are ready to move in
+            ->count();
+
+        return response()->json([
+            'developer' => $developer->name,
+            'new_launch' => $newLaunchCount,
+            'under_construction' => $underConstructionCount,
+            'ready_to_move' => $readyToMoveCount,
+        ]);
+    }
 
 }

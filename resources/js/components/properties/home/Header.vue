@@ -12,21 +12,26 @@
               <a href="#" :style="{ color: youtubeColor }"><i class="fa-brands fa-youtube"></i></a>
             </div>
             <div class="act-buttons d-flex">
-              <a href="#" class="laung"  title="French">
+              <a @click.prevent="changeLanguage('fr')" class="laung"  title="French">
                 <img :src="frenchImage" width="30" height="30" alt="French" class="img-fluid">
                 <span :style="{ color: laungColor }">French</span>
               </a>
-              <a href="#" class="laung"  title="Spanish">
+              <a @click.prevent="changeLanguage('es')" class="laung"  title="Spanish">
                 <img :src="spanishImage" width="30" height="30" alt="Spanish" class="img-fluid">
                 <span :style="{ color: laungColor }">Spanish</span>
               </a>
-              <a href="#" class="laung"  title="Chinese">
+              
+              <a :href="`/lang/zh`" class="laung"  title="Chinese">
                 <img :src="chineseImage" width="30" height="30" alt="Chinese" class="img-fluid">
                 <span :style="{ color: laungColor }">Chinese</span>
               </a>
-              <a href="#" class="laung"  title="Russian">
+              <a :href="`/lang/ru`" class="laung"  title="Russian">
                 <img :src="russianImage" width="30" height="30" alt="Russian" class="img-fluid">
                 <span :style="{ color: laungColor }">Russian</span>
+              </a>
+              <a @click.prevent="changeLanguage('en')" class="laung"  title="English">
+                <img :src="englishImage" width="30" height="30" alt="French" class="img-fluid rounded">
+                <span :style="{ color: laungColor }">English</span>
               </a>
               <a id="whatsappenId" target="_blank" class="login p-1 pr-2 whatsapp ml-5 mr-5" :style="{ color: whatsappColor }" href="#">
                 <span class="d-md-none d-lg-none d-xl-none mr-1 whatsapp">
@@ -101,6 +106,7 @@ import frenchImagePath from '@/assets/img/fr.webp';
 import spanishImagePath from '@/assets/img/sp.webp';
 import chineseImagePath from '@/assets/img/cn.webp';
 import russianImagePath from '@/assets/img/ru.webp';
+import englishImagePath from '@/assets/img/UniteState.jpg';
 
 export default {
   name: 'HomePropertiesIndex',
@@ -114,6 +120,7 @@ export default {
     const spanishImage = ref(spanishImagePath);
     const chineseImage = ref(chineseImagePath);
     const russianImage = ref(russianImagePath);
+    const englishImage = ref(englishImagePath);
 
     const handleScroll = () => {
       isScrolled.value = window.scrollY > 50;
@@ -123,6 +130,10 @@ export default {
       isOpen.value = !isOpen.value;
     };
 
+    const changeLanguage = (locale) => {
+      localStorage.setItem('locale', locale); 
+      window.location.reload(); 
+    };
     // Dynamic colors based on scroll
     const toggleColor = computed(() => isScrolled.value ? '#000' : '#fff');
     const whatsappColor = computed(() => isScrolled.value ? '#25D366' : '#fff');
@@ -147,6 +158,7 @@ export default {
       spanishImage,
       chineseImage,
       russianImage,
+      englishImage,
       toggleSidebar,
       toggleColor,
       whatsappColor,
@@ -154,7 +166,8 @@ export default {
       facebookColor,
       instagramColor,
       linkedinColor,
-      youtubeColor
+      youtubeColor,
+      changeLanguage
     };
   },
 };

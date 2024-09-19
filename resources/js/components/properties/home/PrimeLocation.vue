@@ -10,85 +10,66 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div v-for="city in limitedCities" :key="city.id" class="col-12 col-md-6 col-lg-3 mb-4">
                     <div class="card">
-                        <a href=""><img class="card-img-top"
-                            :src="spanishImage"
-                            alt="Card image cap"></a>
+                        <a :href="`/${city.slug}`"><img class="card-img-top"
+                           :src="city.image ? '/storage/cities/' + city.image : 'default-image.jpg'"
+                           :alt="city.name"></a>
                         <div class="card-body">
-                            <a href="" style="text-decoration: none;"><p class="card-text">Al Barsha South Fourth, Dubai</p></a>
+                            <a href="" style="text-decoration: none;"><p class="card-text">{{ city.name }}</p></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-4">
-                    <div class="card">
-                        <a href="">
-                            <img class="card-img-top"
-                            :src="russianImage"
-                            alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <a href="" style="text-decoration: none;"><p class="card-text">Business Bay, Duba</p></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-4">
-                    <div class="card">
-                        <a href="">
-                            <img class="card-img-top"
-                            :src="chineseImage"
-                            alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <a href="" style="text-decoration: none;"><p class="card-text">Al Hebiah Third, Dubai</p></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-4">
-                    <div class="card">
-                        <a href="">
-                            <img class="card-img-top"
-                            :src="frenchImage"
-                            alt="Card image cap">
-                        </a>
-                        <div class="card-body">
-                            <a href="" style="text-decoration: none;"><p class="card-text">Al Merkadh, Dubai</p></a>
-                        </div>
-                    </div>
-                </div>
+          
                 <div class="btn-container mb-5">
                     <div class="btn btn-primary">
-                      <a href="/location">VIEW MORE</a>
+                        <a href="/location">VIEW MORE</a>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
     </section>
+
 </template>
 
 <script>
-    import { ref} from 'vue';
-    import frenchImagePath from '@/assets/img/444.jpg';
-    import spanishImagePath from '@/assets/img/111.jpg';
-    import chineseImagePath from '@/assets/img/333.jpg';
-    import russianImagePath from '@/assets/img/2.22.jpg';
-  
-    export default {
-      name: 'PrimeLocation',
-      setup() {
-        const frenchImage = ref(frenchImagePath);
-        const spanishImage = ref(spanishImagePath);
-        const chineseImage = ref(chineseImagePath);
-        const russianImage = ref(russianImagePath);  
+import axios from 'axios';
+
+
+export default {
+
+    data() {
         return {
-          frenchImage,
-          spanishImage,
-          chineseImage,
-          russianImage,
+            cities: {
+                data: [],
+                current_page: 1,
+                last_page: 1,
+                next_page_url: null,
+                prev_page_url: null,
+            },
         };
-      },
-    };
-  </script>
+    },
+    computed: {
+        limitedCities() {
+            return this.cities.data.slice(0, 4); // Only return the first 4 cities
+        }
+    },
+    created() {
+        this.fetchCities('/api/cities');  
+    },
+    methods: {
+        async fetchCities(url) {
+            try {
+                const response = await axios.get(url); 
+                this.cities = response.data; 
+            } catch (error) {
+                console.error('Error fetching city data:', error);
+            }
+        }
+    }
+};
+</script>
+
 <style scoped>
     .sec-heading {
 

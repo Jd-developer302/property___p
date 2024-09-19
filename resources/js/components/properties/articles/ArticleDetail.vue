@@ -137,102 +137,10 @@
 
                     </div>
                     <div class="widget-boxed">
-                        <div class="widget-boxed-header">
-                            <h4>360 <sup>o</sup> Virtual Tour </h4>
-                        </div>
-                        <div class="widget-boxed-body">
-                            <div id="walkthroughId" class="row walkthrough">
-                                <div class="col-md-6">
-                                    <div class="walk-warp"><a href="#"><span><img width="64" height="37"
-                                                    src="https://www.goldpillars.ae/images/360.png"
-                                                    alt="Villanova La Rosa Play"></span><img width="144" height="81"
-                                                src="https://manage.goldpillars.ae/Project/Project_Index/316/Thumb/316.jpg"
-                                                alt="Villanova La Rosa" class="img-fluid"></a></div><a href="#">
-                                        <h3>Villanova La Rosa</h3>
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="walk-warp"><a href="#"><span><img width="64" height="37"
-                                                    src="https://www.goldpillars.ae/images/360.png"
-                                                    alt="Madinat Jumeirah Living Play"></span><img width="144"
-                                                height="81"
-                                                src="https://manage.goldpillars.ae/Project/Project_Index/236/Thumb/236.jpg"
-                                                alt="Madinat Jumeirah Living" class="img-fluid"></a></div><a href="#">
-                                        <h3>Madinat Jumeirah Living</h3>
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="walk-warp"><a href="#"><span><img width="64" height="37"
-                                                    src="https://www.goldpillars.ae/images/360.png"
-                                                    alt="Sunrise Bay Play"></span><img width="144" height="81"
-                                                src="https://manage.goldpillars.ae/Project/Project_Index/170/Thumb/170.jpg"
-                                                alt="Sunrise Bay" class="img-fluid"></a></div><a href="#">
-                                        <h3>Sunrise Bay</h3>
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="walk-warp"><a href="#"><span><img width="64" height="37"
-                                                    src="https://www.goldpillars.ae/images/360.png"
-                                                    alt="BLVD Heights Play"></span><img width="144" height="81"
-                                                src="https://manage.goldpillars.ae/Project/Project_Index/223/Thumb/223.jpg"
-                                                alt="BLVD Heights" class="img-fluid"></a></div><a href="#">
-                                        <h3>BLVD Heights</h3>
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="walk-warp"><a href="#"><span><img width="64" height="37"
-                                                    src="https://www.goldpillars.ae/images/360.png"
-                                                    alt="La Rosa 2 Play"></span><img width="144" height="81"
-                                                src="https://manage.goldpillars.ae/Project/Project_Index/359/Thumb/359.webp"
-                                                alt="La Rosa 2" class="img-fluid"></a></div><a href="#">
-                                        <h3>La Rosa 2</h3>
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="walk-warp"><a href="#"><span><img width="64" height="37"
-                                                    src="https://www.goldpillars.ae/images/360.png"
-                                                    alt="La Rosa 3 Play"></span><img width="144" height="81"
-                                                src="https://manage.goldpillars.ae/Project/Project_Index/719/Thumb/719.jpg"
-                                                alt="La Rosa 3" class="img-fluid"></a></div><a href="#">
-                                        <h3>La Rosa 3</h3>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <a href="#" class="btn btn-primary btn-block">View
-                                All</a>
-                        </div>
+                       <Virtual/>
                     </div>
                     <div class="widget-boxed d-none d-xl-block">
-                        <div class="widget-boxed-header">
-                            <h4>Top Articles</h4>
-                        </div>
-                        <div class="widget-boxed-body">
-                            <div class="side-list">
-                                <ul id="TopArticles" class="category-list top-articles">
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="" target="_blank">The Strategic
-                                            Importance Of Cryptocurrency In Dubai Real Estate</a></li>
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="#" target="_blank">The Future of
-                                            Bitcoin Is the Real Estate Market Ready for Cryptocurrency</a></li>
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="#" target="_blank">Know what it
-                                            takes to buy homes with cryptocurrency in Dubai</a></li>
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="#" target="_blank">Benefits of
-                                            Using Cryptocurrency in Real Estate Market</a></li>
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="#" target="_blank">Use
-                                            Cryptocurrency To Buy Real Estate In Dubai</a></li>
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="#" target="_blank">How To Set Up
-                                            A Business In The UAE</a></li>
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="#" target="_blank">To Help UAE
-                                            Fight Covid 19 Pandemic 88 Indian Nurses Reach Dubai</a></li>
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="#" target="_blank">UAE Stem Cell
-                                            Centre On The Verge Of Finding A Potential Covid 19 Treatment</a></li>
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="" target="_blank">Is Real Estate
-                                            Indeed The Best Investment Option</a></li>
-                                    <li><i class="fa fa-arrow-right mr-2"></i><a href="#" target="_blank">5 Tips You Can
-                                            Use To Lower Your Monthly Rent</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <TopArticle/>
                     </div>
                 </div>
             </div>
@@ -241,8 +149,14 @@
 </template>
 <script>
     import axios from 'axios';
+import Virtual from './Virtual.vue';
+import TopArticle from './TopArticle.vue';
     
     export default {
+        components:{
+            Virtual,
+            TopArticle
+        },
         data() {
             return {
                 // For the articles component

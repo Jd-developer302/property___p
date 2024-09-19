@@ -2,6 +2,7 @@
     <Header />
     <DeveloperProject/>
     <NearLaunch/>
+    <Construction/>
     <CompletionProject/>
     <AboutDeveloper/>
     <Footer />
@@ -14,6 +15,7 @@
     import Header from '../home/Header.vue';
 import CompletionProject from './CompletionProject.vue';
 import AboutDeveloper from './AboutDeveloper.vue';
+import Construction from './Construction.vue';
 
 
 </script>

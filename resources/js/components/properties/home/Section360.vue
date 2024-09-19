@@ -1,46 +1,67 @@
 <template>
-    <section>
-      <div class="container-xxl mb-3">
-        <div class="row">
-          <div class="col">
-            <div class="sec-heading mx-auto">
-              <h1>360° View Walkthrough</h1>
-              <p>Get a better perspective of the properties with our 360 degree views</p>
-            </div>
-          </div>
-        </div>
-        <div class="row images-row">
-          <div class="col" v-for="(image, index) in images" :key="index">
-            <div class="image-container">
-              <img :src="image.src" :alt="image.alt" class="img-fluid" />
-              <p>{{ image.caption }}</p>
-            </div>
+  <section>
+    <div class="container-xxl mb-3">
+      <div class="row">
+        <div class="col">
+          <div class="sec-heading mx-auto">
+            <h1>360° View Walkthrough</h1>
+            <p>Get a better perspective of the properties with our 360 degree views</p>
           </div>
         </div>
       </div>
-    </section>
-  </template>
-  
-  <script>
-  import image1 from '@/assets/img/55.jpg';
-  import image2 from '@/assets/img/44.jpg';
-  import image3 from '@/assets/img/22.jpg';
-  import image4 from '@/assets/img/11.jpg';
-  
-  export default {
-    name: 'Section360',
-    data() {
+      <div class="row images-row">
+        <div class="col" v-for="project in limitedProjects" :key="project.id">
+          <div class="image-container">
+           <a :href="`/projects/${project.slug}`"> <img :src="project.image ? `/storage/${project.image}` : '/images/default-image.png'"
+            :alt="project.name" class="img-fluid" />
+            <p>{{ project.name }}</p></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
       return {
-        images: [
-          { src: image1, alt: 'Image 1', caption: 'Villanova La Rosa' },
-          { src: image2, alt: 'Image 2', caption: 'Madinat Jumeirah Living' },
-          { src: image3, alt: 'Image 3', caption: 'Sunrise Bay' },
-          { src: image4, alt: 'Image 4', caption: 'BLVD Heights' },
-        ],
+          projects: [],
+          totalProjects: 0,
+          currentPage: 1,
+          totalPages: 0,
       };
-    },
-  };
-  </script>
+  },
+  computed: {
+      limitedProjects() {
+          // Limit to only the first 4 projects
+          return this.projects.slice(0, 4);
+      }
+  },
+  created() {
+      this.fetchProjects(this.currentPage);
+  },
+  methods: {
+      fetchProjects(page) {
+          axios.get(`/api/projects?page=${page}`)
+              .then(response => {
+                  this.projects = response.data.data;
+                  this.totalProjects = response.data.total;
+                  this.totalPages = response.data.last_page;
+              })
+              .catch(error => {
+                  console.error("There was an error fetching the projects!", error);
+              });
+      },
+      handlePageChange(page) {
+          this.fetchProjects(page);
+      },
+  },
+};
+</script>
+
 
 <style scoped>
 body {

@@ -22,7 +22,7 @@
                 <div class="tp-author-detail-wrapper">
                   <div class="tp-author-detail-box">
                     <div class="tp-author">
-                      <img :src="project.developer.logo" class="img-responsive" :alt="project.developer.name" />
+                      <img :src="`/storage/${project.developer.logo}`" class="img-responsive" :alt="project.developer.name" />
                     </div>
                     <div class="tp-author-header">
                       <h4>{{ project.name }}</h4>

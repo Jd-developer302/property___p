@@ -28,8 +28,8 @@
                             </div>
                             <div class="grid-layout-info">
                                 <ul>
-                                    <li><i class="icon-bed"></i>{{ project.apartments }} Bedroom</li>
-                                    <li><i class="icon-calendar"></i> Handover : <strong>{{ project.handover }}</strong>
+                                    <li><i class="fa-solid fa-bed"></i>{{ project.apartments }} Bedroom</li>
+                                    <li><i class="fa-solid fa-calendar"></i> Handover : <strong>{{ project.handover }}</strong>
                                     </li>
                                     <li><i class="fa fa-money"></i> <strong>AED {{
                                             project.starting_price.toLocaleString() }}</strong></li>
@@ -44,33 +44,7 @@
             </div>
         </div>
     </section>
-    <section class="statics">
-        <div class="container">
-            <div id="ProjStatusId" class="row">
-                <div class="col-md-4 text-center wow  fadeIn animated" data-wow-duration="2s"
-                    style="visibility: visible; animation-duration: 2s; animation-name: fadeIn;">
-                    <div class="num_count">
-                        <h4><span class="counter">56</span>+</h4>
-                        <p>New Launch</p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center wow  fadeIn animated" data-wow-duration="2s"
-                    style="visibility: visible; animation-duration: 2s; animation-name: fadeIn;">
-                    <div class="num_count">
-                        <h4><span class="counter">27</span>+</h4>
-                        <p>Under Construction</p>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center wow  fadeIn animated" data-wow-duration="2s"
-                    style="visibility: visible; animation-duration: 2s; animation-name: fadeIn;">
-                    <div class="num_count">
-                        <h4><span class="counter">72</span>+</h4>
-                        <p>Ready to move</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     
 </template>
 

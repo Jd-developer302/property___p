@@ -24,15 +24,13 @@ class DeveloperController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $logoPath = null;
-        if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('developer', 'public');
-        }
+        $logoPath = $request->file('logo')->storeAs('logos', time().'_'.$request->file('logo')->getClientOriginalName(), 'public');
+        $finalPath = str_replace("logos/",  '' , $logoPath);
 
         $developer = Developer::create([
             'name' => $request->name,
             'description' => $request->description,
-            'logo' => $logoPath,
+            'logo' => $finalPath,
         ]);
 
         return response()->json(['message' => 'Developer created successfully', 'developer' => $developer]);

@@ -11,25 +11,15 @@
         </div>
         <div class="image-container">
           <div class="image-left-column">
-            <div class="image-left-top">
-              <img :src="LeftTop" alt="Left Top" />
-            </div>
-            <div class="image-left-bottom">
-              <img :src="LeftBottom" alt="Left Bottom" />
-            </div>
+          <ImageLeft/>
           </div>
   
           <div class="image-center">
-            <img :src="CenterImage" alt="Center" />
+            <CenterImage/>
           </div>
   
           <div class="image-right-column">
-            <div class="image-right-top">
-              <img :src="RightTop" alt="Right Top" />
-            </div>
-            <div class="image-right-bottom">
-              <img :src="RightBottom" alt="Right Bottom" />
-            </div>
+            <ImageRight/>
           </div>
         </div>
       </div>
@@ -38,13 +28,22 @@
   
   <script>
   import { ref } from 'vue';
+  import ImageLeft from './communities/image-left.vue';
   import LeftTopPath from '@/assets/img/11.jpg';
   import RightTopPath from '@/assets/img/44.jpg';
   import LeftBottomPath from '@/assets/img/22.jpg';
   import RightBottomPath from '@/assets/img/55.jpg';
   import CenterImagePath from '@/assets/img/33.jpg';
+import ImageRight from './communities/image-right.vue';
+import CenterImage from './communities/CenterImage.vue';
+
   
   export default {
+    components:{
+      ImageLeft,
+      ImageRight,
+      CenterImage
+    },
     setup() {
       const LeftTop = ref(LeftTopPath);
       const RightTop = ref(RightTopPath);
